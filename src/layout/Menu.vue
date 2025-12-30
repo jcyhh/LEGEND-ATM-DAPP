@@ -8,22 +8,22 @@
                 <img src="@/assets/common/close.png" class="img40" @click="show=false">
             </div>
             <Invite></Invite>
-            <div class="mt76">服务</div>
+            <div class="mt76">{{ $t('服务') }}</div>
             <div class="flex mt40 nav">
                 <div class="flex1 flex col ac" @click="goPath('/home/index')">
                     <img src="@/assets/menu/stakingHL.png" class="img56" v-if="$route.path=='/home/index'">
                     <img src="@/assets/menu/staking.png" class="img56" v-else>
-                    <div class="size26 mt20">质押</div>
+                    <div class="size26 mt20">{{ $t('质押') }}</div>
                 </div>
                 <div class="flex1 flex col ac" @click="goPath('/public/index')">
                     <img src="@/assets/menu/publicHL.png" class="img56" v-if="$route.path=='/public/index'">
                     <img src="@/assets/menu/public.png" class="img56" v-else>
-                    <div class="size26 mt20">公共联盟</div>
+                    <div class="size26 mt20">{{ $t('公共联盟') }}</div>
                 </div>
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/exchangeHL.png" class="img56" v-if="$route.path=='/exchange/index'">
                     <img src="@/assets/menu/exchange.png" class="img56" v-else>
-                    <div class="size26 mt20">交换</div>
+                    <div class="size26 mt20">{{ $t('交换') }}</div>
                 </div>
             </div>
             <div class="flex mt40 nav">
@@ -35,11 +35,11 @@
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/reportHL.png" class="img56" v-if="$route.path=='/report/index'">
                     <img src="@/assets/menu/report.png" class="img56" v-else>
-                    <div class="size26 mt20">安全审计</div>
+                    <div class="size26 mt20">{{ $t('安全审计') }}</div>
                 </div>
                 <div class="flex1"></div>
             </div>
-            <div class="mt76">联系我们</div>
+            <div class="mt76">{{ $t('联系我们') }}</div>
             <div class="flex mt40 nav">
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/x.png" class="img56">

@@ -11,23 +11,46 @@
         <div class="assetBox mt66">
             <div class="flex jb ac">
                 <div class="flex ac">
-                    <img src="@/assets/img/atm.png" class="atm mr10">
-                    <div class="size30 main font2">{{ $t('当前资产') }}</div>
+                    <img src="@/assets/img/atm.png" class="img64 mr10">
+                    <div class="size30 font2">{{ $t('参与额度') }}</div>
                 </div>
                 <Asset></Asset>
             </div>
-            <div class="btn size26 font2 flex jc ac mt32 rel" :class="walletAddress?'':'disableBtn'" @click="openpop">{{ $t('增加资产') }}</div>
+            <div class="btn size26 font2 flex jc ac mt32 rel" :class="walletAddress?'':'disableBtn'" @click="openpop">{{ $t('进入流动性协同协议') }}</div>
         </div>
 
-        <div class="desc mt30 mb30">
+        <!-- <div class="hash mt30 flex jb ac">
+            <div class="size26 bold">总算力</div>
+            <div class="size28 bold">
+                <span v-init="1000"></span>
+                <span>T</span>
+            </div>
+        </div> -->
+
+        <div class="desc mt40 mb40">
             <img src="@/assets/img/4.png" class="pic4">
-            <div class="size32 font2 rel">{{ $t('WEB做市商投资规划') }}</div>
-            <div class="size24 lh40 mt30 rel tips">{{ $t('按照投资...') }}</div>
+            <div class="mt30 size32">
+                <span class="green bold mr5">·</span>
+                <span>{{ $t('链上流动性协同协议') }}</span>
+            </div>
+            <div class="mt20 size28">{{ $t('基于去中心化交易流动性的协议级参与模型') }}</div>
+            <div class="blue size24 lh40 mt20">
+                {{ $t('本协议运行于链上规则与风险控制机制之上') }}<br>
+                {{ $t('通过流动性协同参与方式') }}<br>
+                {{ $t('使参与者在遵循协议约束的前提下') }}<br>
+                {{ $t('获取生态发展过程中产生的参与回报') }}
+            </div>
         </div>
 
         <List></List>
 
         <div class="gap100"></div>
+
+        <div class="flex jc">
+            <img src="@/assets/img/logo.png" class="botlogo">
+        </div>
+        <div class="pl30 pr30 tc size20 opc6 mt30">{{ $t('本协议为链上流动性参与机制，不构成任何形式的投资或收益承诺。') }}</div>
+        <div class="gap50"></div>
     </div>
 
     <CreateOrder ref="createOrderRef"></CreateOrder>
@@ -63,6 +86,11 @@ const openpop = () => {
     width: 290px;
     height: 290px;
     animation: float3d 5s ease-in-out infinite, glow 3s ease-in-out infinite;
+}
+.hash{
+    background: linear-gradient(to right, #1989F5, #0064C7);
+    border-radius: 20px;
+    padding: 30px;
 }
 
 @keyframes float3d {
@@ -111,19 +139,21 @@ const openpop = () => {
     }
 }
 .desc{
-    background: #053681;
-    padding: 40px 30px;
+    background: #152535CC;
+    border: 1px solid #FFFFFF1A;
+    padding: 30px;
     border-radius: 20px;
     position: relative;
     .pic4{
         width: 100%;
         height: auto;
-        position: absolute;
-        bottom: 0;
-        right: 0;
     }
     .tips{
         width: 500px;
     }
+}
+.botlogo{
+    width: 200px;
+    height: auto;
 }
 </style>

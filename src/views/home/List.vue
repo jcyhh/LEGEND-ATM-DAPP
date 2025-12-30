@@ -1,19 +1,10 @@
 <template>
-    <div class="list pt30">
-        <div class="flex ac pl30 size28">
-            <div class="flex ac mr20" :class="current==0?'act':'def'" @click="current=0">{{ $t('投资列表') }}</div>
-            <div class="flex ac" :class="current==1?'act':'def'" @click="current=1">{{ $t('赎回列表') }}</div>
-        </div>
-        <div class="th mt28 flex ac tc size24">
-            <div class="flex1">{{ $t('序号') }}</div>
-            <div class="flex2 pr5">{{ $t('日期') }}</div>
-            <div class="flex1 pr5">{{ $t('本金') }}</div>
-            <div class="flex2 pr5">{{ $t('盈利') }}</div>
-            <div class="flex2 pr5">{{ $t('赎回进展') }}</div>
-        </div>
-        <InvesmentList v-if="current==0"></InvesmentList>
-        <UnstakingList v-else></UnstakingList>
+    <div class="flex ac size28 mb40">
+        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('协议参与记录') }}</div>
+        <div class="flex ac line1" :class="current==1?'act':'def'" @click="current=1">{{ $t('结算记录') }}</div>
     </div>
+    <InvesmentList v-if="current==0"></InvesmentList>
+    <UnstakingList v-else></UnstakingList>
 </template>
 
 <script setup lang="ts">
@@ -79,35 +70,19 @@ onUnmounted(()=>{
 </script>
 
 <style lang="scss" scoped>
-.list{
-    background-color: #152535;
-    border-radius: 20px;
-    min-height: 500px;
-    .act{
-        height: 68px;
-        border-radius: 34px;
-        background: linear-gradient(#50D6FC, #1989F5);
-        padding: 0 40px;
-        color: #000000;
-    }
-    .def{
-        height: 68px;
-        border-radius: 34px;
-        background-color: #213446;
-        padding: 0 40px;
-    }
-    .th{
-        height: 88px;
-        background-color: #213446;
-        padding: 0 30px;
-        color: #A2A6B4;
-    }
-    .td{
-        padding: 30px 0;
-        border-bottom: 1px solid #FFFFFF1A;
-    }
-    .click{
-        text-decoration: underline;
-    }
+.act{
+    height: 68px;
+    line-height: 68px;
+    border-radius: 34px;
+    background: linear-gradient(#50D6FC, #1989F5);
+    padding: 0 40px;
+    color: #000000;
+}
+.def{
+    height: 68px;
+    line-height: 68px;
+    border-radius: 34px;
+    background-color: #213446;
+    padding: 0 40px;
 }
 </style>

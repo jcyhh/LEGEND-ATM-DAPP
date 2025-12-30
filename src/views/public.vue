@@ -22,7 +22,7 @@
         <van-list v-bind="props">
             <div class="card mb16" v-for="(item,index) in list" :key="index">
                 <div class="size28" v-init:address="item.address"></div>
-                <div class="grey size24 mt10">2025-02-22 12:22:45</div>
+                <div class="grey size24 mt10">{{ item.created_at }}</div>
                 <div class="line mt24"></div>
                 <div class="flex jb ac mt24">
                     <div class="grey size24">{{ $t('团队业绩') }}</div>
