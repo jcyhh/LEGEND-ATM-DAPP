@@ -1,0 +1,30 @@
+.pop{
+    width: 690px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: #152535;
+    border: 1px solid $main-color;
+    .inp{
+        height: 80px;
+        border-radius: 10px;
+        background-color: #213446;
+        padding: 0 30px;
+    }
+    .popbtn{
+        height: 88px;
+        border-radius: 20px;
+        background-color: $main-color;
+        color: #000000;
+        text-align: center;
+        line-height: 88px;
+    }
+    .popCancel{
+        height: 88px;
+        border-radius: 20px;
+        border: 1px solid $main-color;
+        color: $main-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
