@@ -59,6 +59,9 @@ const minCurrent = ref(0)
 const pickerRef = ref()
 const current = ref(0)
 const times = computed(()=>{
+    return [
+        { name: '30', value: '2', rate: '1.2%' }
+    ]
     let arr = [
         { name: '1', value: '0', rate: '0.3%' },
         { name: '15', value: '1', rate: '0.6%' },

@@ -9,12 +9,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Bg: typeof import('./src/components/Bg.vue')['default']
-    ColorBends: typeof import('./src/components/ColorBends.vue')['default']
     CusData: typeof import('./src/components/CusData/index.vue')['default']
     CusEmpty: typeof import('./src/components/CusEmpty/index.vue')['default']
-    'CusEmpty_副本': typeof import('./src/components/CusEmpty_副本/index.vue')['default']
     CusLang: typeof import('./src/components/CusLang/index.vue')['default']
-    CusList: typeof import('./src/components/CusList/index.vue')['default']
     CusLoading: typeof import('./src/components/CusLoading/index.vue')['default']
     CusNav: typeof import('./src/components/CusNav/index.vue')['default']
     CusPicker: typeof import('./src/components/CusPicker/index.vue')['default']
@@ -27,6 +24,5 @@ declare module 'vue' {
     VanList: typeof import('vant/es')['List']
     VanLoading: typeof import('vant/es')['Loading']
     VanPopup: typeof import('vant/es')['Popup']
-    VanRollingText: typeof import('vant/es')['RollingText']
   }
 }
