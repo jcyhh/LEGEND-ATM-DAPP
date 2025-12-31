@@ -29,40 +29,31 @@ const { readTeamKpi } = useStaking()
 const level = ref(0)
 
 const loadLevel = async () => {
+
     let kpi = await readTeamKpi()
+    // 转成小数字
     kpi = Number(formatEther(kpi))
 
-    switch (kpi) {
-        case kpi >= 10000 && kpi < 50000:
-            level.value = 1
-            break;
-        case kpi >= 50000 && kpi < 100000:
-            level.value = 2
-            break;
-        case kpi >= 100000 && kpi < 500000:
-            level.value = 3
-            break;
-        case kpi >= 500000 && kpi < 1000000:
-            level.value = 4
-            break;
-        case kpi >= 1000000 && kpi < 5000000:
-            level.value = 5
-            break;
-        case kpi >= 5000000 && kpi < 10000000:
-            level.value = 6
-            break;
-        case kpi >= 10000000 && kpi < 30000000:
-            level.value = 7
-            break;
-        case kpi >= 30000000 && kpi < 50000000:
-            level.value = 8
-            break;
-        case kpi >= 50000000:
-            level.value = 9
-            break;
-        default:
-            level.value = 0
-            break;
+    if (kpi >= 50000000) {
+        level.value = 9
+    } else if (kpi >= 30000000) {
+        level.value = 8
+    } else if (kpi >= 10000000) {
+        level.value = 7
+    } else if (kpi >= 5000000) {
+        level.value = 6
+    } else if (kpi >= 1000000) {
+        level.value = 5
+    } else if (kpi >= 500000) {
+        level.value = 4
+    } else if (kpi >= 100000) {
+        level.value = 3
+    } else if (kpi >= 50000) {
+        level.value = 2
+    } else if (kpi >= 10000) {
+        level.value = 1
+    } else {
+        level.value = 0
     }
 }
 
