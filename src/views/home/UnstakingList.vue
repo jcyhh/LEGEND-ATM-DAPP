@@ -8,7 +8,7 @@
                     <span class="size30">USDT</span>
                 </div>
             </div>
-            <div class="btn flex jc ac size26" v-if="item.status==2 || item.status==6" @click="restakeRef.open(item.index)">{{ $t('点击复投') }}</div>
+            <div class="btn flex jc ac size26" v-if="item.status==2" @click="restakeRef.open(item.index)">{{ $t('点击复投') }}</div>
             <div class="btn flex jc ac size26" v-else-if="item.status==3" @click="claimRef.open(item.index)">{{ $t('领取奖励') }}</div>
             <div class="opc6 size26" v-else-if="item.status==4">{{ $t('已复投') }}</div>
             <div class="opc6 size26" v-else-if="item.status==5">{{ $t('奖励已领取') }}</div>
