@@ -15,8 +15,9 @@
             <div class="size24 opc5">{{ $t('参与时间') }} {{ item.created_at }}</div>
             <van-count-down :time="item.djs * 1000" @finish="success" v-if="item.djs > 0">
                 <template #default="timeData">
-                    <span class="red size22">{{ timeData.hours }}h</span>
-                    <span class="red size22 ml5 mr5">{{ timeData.minutes }}m</span>
+                    <span class="red size22">{{ timeData.days }}d</span>
+                    <span class="red size22 ml5 mr5">{{ timeData.hours }}h</span>
+                    <span class="red size22 mr5">{{ timeData.minutes }}m</span>
                     <span class="red size22">{{ timeData.seconds }}s</span>
                 </template>
             </van-count-down>

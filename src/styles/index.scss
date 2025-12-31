@@ -10,23 +10,23 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
 }
-@font-face {
-    font-family: 'font1';
-    src: url('@/assets/font/poppins.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'font1';
+//     src: url('@/assets/font/poppins.woff2') format('woff2');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 .font1{
-    font-family: 'font1' !important;
+    // font-family: 'font1' !important;
 }
-@font-face {
-    font-family: 'font2';
-    src: url('@/assets/font/text.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'font2';
+//     src: url('@/assets/font/text.woff2') format('woff2');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 .font2{
-    font-family: 'font2' !important;
+    // font-family: 'font2' !important;
 }
 // 底部系统安全距离，meta标签里需设置viewport-fit=cover
 .safeArea{
