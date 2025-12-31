@@ -51,6 +51,8 @@ import { useReferral } from '@/dapp/contract/referral';
 import bus from '@/bus'
 import { t } from '@/locale';
 
+const emits = defineEmits(['success'])
+
 const { readMaxStakeAmount, writeStake, writeStakeWithInviter, readMinStakeAmount } = useStaking()
 
 const { writeApprove } = useErc20()
@@ -141,6 +143,7 @@ const submit = async () => {
     else await writeStakeWithInviter(amount, outMin, timesId, refAddress.value)
 
     show.value = false
+    emits('success')
     bus.emit('orderSuccess')
 }
 

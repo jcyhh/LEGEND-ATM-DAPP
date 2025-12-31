@@ -16,7 +16,8 @@
                 </div>
                 <Asset></Asset>
             </div>
-            <div class="btn size26 font2 flex jc ac mt32 rel" :class="walletAddress?'':'disableBtn'" @click="openpop">{{ $t('进入流动性协同协议') }}</div>
+            <div class="btn size26 font2 flex jc ac mt32 rel disableBtn" v-if="is_order">{{ $t('进入流动性协同协议') }}</div>
+            <div class="btn size26 font2 flex jc ac mt32 rel" @click="openpop" v-else>{{ $t('进入流动性协同协议') }}</div>
         </div>
 
         <!-- <div class="hash mt30 flex jb ac">
@@ -53,7 +54,7 @@
         <div class="gap50"></div>
     </div>
 
-    <CreateOrder ref="createOrderRef"></CreateOrder>
+    <CreateOrder ref="createOrderRef" @success="onSuccess"></CreateOrder>
 </template>
 
 <script setup lang="ts">
@@ -62,11 +63,23 @@ import { useDappStore } from '@/dapp/store';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import Bg from '@/components/Bg.vue';
+import { apiGet } from '@/utils/request';
 
 const dappStore = useDappStore()
 const { walletAddress } = storeToRefs(dappStore)
 
 const createOrderRef = ref()
+
+const is_order = ref(false)
+const loadData = () => apiGet('/api/index/check_daily_order').then((res:any)=>{
+    is_order.value = res.is_order
+})
+loadData()
+
+const onSuccess = () => {
+    is_order.value = true
+    loadData()
+}
 
 const openpop = () => {
     if(!walletAddress.value)return

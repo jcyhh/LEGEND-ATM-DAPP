@@ -17,3 +17,4 @@ export type Api =
 | '/api/users/my'
 | '/api/users/my/referrals'
 | '/api/index/reward_burned'
+| '/api/index/check_daily_order'

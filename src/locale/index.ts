@@ -53,15 +53,15 @@ const messages = {
  */
 export const langs = [
     { name: 'English', lang: 'en', value: 'en' }, // 英语
-    // { name:'french', lang: 'fr', value:'fr'},// 法语
-    // { name: '한국어', lang: 'ko', value: 'ko' }, // 韩语
-    // { name: '日本語', lang: 'ja', value: 'ja' }, // 日语
+    { name:'french', lang: 'fr', value:'fr'},// 法语
+    { name: '한국어', lang: 'ko', value: 'ko' }, // 韩语
+    { name: '日本語', lang: 'ja', value: 'ja' }, // 日语
     // { name: 'Русский', lang: 'ru', value: 'ru' }, // 俄语
-    // { name:'malaysia', lang: 'ma', value:'ma'},// 马来语
+    { name:'malaysia', lang: 'ma', value:'ma'},// 马来语
     // { name: 'Español', lang: 'es', value: 'es' }, // 西班牙语
-    // { name: 'Indonesian', lang: 'id', value: 'id' }, // 印尼语
+    { name: 'Indonesian', lang: 'id', value: 'id' }, // 印尼语
     // { name: 'Türkçe', lang: 'tr', value: 'tr' }, // 土耳其语
-    // { name: 'Tiếng Việt', lang: 'vi', value: 'vi' }, // 越南
+    { name: 'Tiếng Việt', lang: 'vi', value: 'vi' }, // 越南
     // { name: 'ภาษาไทย', lang: 'th', value: 'th' } // 泰国
     { name: '繁体中文', lang: 'hk', value: 'zh-Hant' }, // 繁体中文
     { name: '简体中文', lang: 'zh', value: 'zh-Hans' }, // 简体中文
