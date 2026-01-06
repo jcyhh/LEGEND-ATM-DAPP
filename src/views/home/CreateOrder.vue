@@ -70,8 +70,8 @@ const rootAddress = ref('')
 const pickerRef = ref()
 const current = ref(0)
 const times = [
-    // { name: '1', value: '0', rate: '0.2%' },
-    // { name: '15', value: '1', rate: '0.6%' },
+    { name: '1', value: '0', rate: '0.2%' },
+    { name: '15', value: '1', rate: '0.6%' },
     { name: '30', value: '2', rate: '1.3%' },
 ]
 
