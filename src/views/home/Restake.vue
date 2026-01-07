@@ -91,7 +91,8 @@ const open = (i:number) => {
     readUserStakeRecord(i).then((res:any)=>{
         console.log(res);
         min.value = Number(formatEther(res[1]))
-        minCurrent.value = res[3]
+        // minCurrent.value = res[3]
+        minCurrent.value = 2
     })
     if(timer){
         clearInterval(timer)

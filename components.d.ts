@@ -16,6 +16,7 @@ declare module 'vue' {
     CusNav: typeof import('./src/components/CusNav/index.vue')['default']
     CusPicker: typeof import('./src/components/CusPicker/index.vue')['default']
     Demo: typeof import('./src/components/CusPicker/demo.vue')['default']
+    Picker: typeof import('./src/components/CusPicker/Picker.vue')['default']
     Plasma: typeof import('./src/components/Plasma.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
