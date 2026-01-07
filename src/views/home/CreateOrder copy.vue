@@ -38,8 +38,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
-// import CusPicker from '@/components/CusPicker/index.vue';
-import CusPicker from '@/components/CusPicker/Picker.vue';
+import CusPicker from '@/components/CusPicker/index.vue';
 import { useStaking } from '@/dapp/contract/staking';
 import { formatEther, parseEther } from 'viem';
 import { showToast } from 'vant';
@@ -71,9 +70,9 @@ const rootAddress = ref('')
 const pickerRef = ref()
 const current = ref(0)
 const times = [
-    { name: '30', value: '2', rate: '1.3%' },
+    { name: '1', value: '0', rate: '0.2%' },
     { name: '15', value: '1', rate: '0.6%' },
-    { name: '1', value: '0', rate: '0.2%' }
+    { name: '30', value: '2', rate: '1.3%' },
 ]
 
 const inputAmount = ref()
