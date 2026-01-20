@@ -60,7 +60,7 @@ const { writeApprove } = useErc20()
 
 const { readGetAmountsOut } = useUniswapV2Router()
 
-const { readRootAddress, readIsBindReferrer } = useReferral()
+const { readIsBindReferrer } = useReferral()
 
 const isBindReferral = ref(true)
 
@@ -84,7 +84,8 @@ const loadRefAddress = async () => {
     if(isBindReferral.value)return;
     const storageRef = getRef()
     if(storageRef)rootAddress.value = storageRef
-    else rootAddress.value = await readRootAddress()
+    // else rootAddress.value = await readRootAddress()
+    else rootAddress.value = ''
 }
 
 /**
