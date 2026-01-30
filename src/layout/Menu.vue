@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="flex mt40 nav">
-                <div class="flex1 flex col ac">
-                    <img src="@/assets/menu/daoHL.png" class="img56" v-if="$route.path=='/dao/index'">
-                    <img src="@/assets/menu/dao.png" class="img56" v-else>
-                    <div class="size26 mt20">DAO</div>
+                <div class="flex1 flex col ac" @click="goPath('/node/index')">
+                    <img src="@/assets/menu/nodeHL.png" class="img56" v-if="$route.path=='/node/index'">
+                    <img src="@/assets/menu/node.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('节点') }}</div>
                 </div>
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/reportHL.png" class="img56" v-if="$route.path=='/report/index'">

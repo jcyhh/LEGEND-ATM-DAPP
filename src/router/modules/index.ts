@@ -28,6 +28,15 @@ export default [
         }]
     },
     {
+        path:'/node',
+        component: Layout,
+        redirect: '/node/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/node.vue')
+        }]
+    },
+    {
         path:'/ref/:ref([a-zA-Z0-9]+)', // 接收邀请码，需配置在常规路由的下方
         component: Start
     }
