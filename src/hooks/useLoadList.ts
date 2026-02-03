@@ -6,7 +6,7 @@ import { nextTick, ref, computed, type ComputedRef, type Ref } from "vue";
 export function useLoadList(api:Api, listName:string = 'list', params:Ref | ComputedRef | null = null, size:number = 10){
     let pageNo:number = 1
     let pageSize:number = size
-    const list = ref<any[]>()
+    const list = ref<any[]>([])
     const listData = ref()
     const loading = ref(false)
     const finished = ref(false)

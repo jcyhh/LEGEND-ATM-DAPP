@@ -62,7 +62,7 @@ const times = computed(()=>{
     let arr = [
         { name: '1', value: '0', rate: '0.3%' },
         { name: '15', value: '1', rate: '0.6%' },
-        { name: '30', value: '2', rate: '1.2%' },
+        { name: '30', value: '2', rate: '1.3%' },
     ]
     if(minCurrent.value==1)arr.splice(0,1)
     if(minCurrent.value==2)arr.splice(0,2)

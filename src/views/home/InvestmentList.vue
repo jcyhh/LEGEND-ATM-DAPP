@@ -13,7 +13,7 @@
         </div>
         <div class="flex jb ac mt30">
             <div class="size24 opc5">{{ $t('参与时间') }} {{ item.created_at }}</div>
-            <van-count-down :time="item.djs * 1000" @finish="success" v-if="item.djs > 0">
+            <van-count-down :time="item.countdown * 1000" @finish="success" v-if="item.countdown > 0">
                 <template #default="timeData">
                     <span class="red size22">{{ timeData.days }}d</span>
                     <span class="red size22 ml5 mr5">{{ timeData.hours }}h</span>

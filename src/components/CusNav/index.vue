@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="cusNav flex jb ac" :style="{backgroundColor: `rgba(18,18,18,${scrollProgress})`}">
+        <div class="cusNav flex jb ac" :style="{backgroundColor: `rgba(21,37,53,${scrollProgress})`}">
             <div class="flex1" @click="back">
                 <van-icon name="arrow-left" :color="currentColor" :size="20" />
             </div>

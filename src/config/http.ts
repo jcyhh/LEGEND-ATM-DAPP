@@ -18,3 +18,9 @@ export type Api =
 | '/api/users/my/referrals'
 | '/api/index/reward_burned'
 | '/api/index/check_daily_order'
+| '/api/users/my/balance_logs'
+| '/api/withdraw'
+| '/api/notices'                        // 公告列表
+| `/api/notices/${string}`              // 公告详情
+| '/api/notices/pop'                    // 弹窗公告
+| `/api/notices/${string}/read`         // 弹窗公告已读

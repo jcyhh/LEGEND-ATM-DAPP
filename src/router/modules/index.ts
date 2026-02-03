@@ -37,6 +37,14 @@ export default [
         }]
     },
     {
+        path:'/notices',
+        component: () => import('@/views/notice/index.vue')
+    },
+    {
+        path:'/notices/:id',
+        component: () => import('@/views/notice/detail.vue')
+    },
+    {
         path:'/ref/:ref([a-zA-Z0-9]+)', // 接收邀请码，需配置在常规路由的下方
         component: Start
     }

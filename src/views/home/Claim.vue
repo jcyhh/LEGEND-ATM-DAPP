@@ -21,6 +21,7 @@
 import { useStaking } from '@/dapp/contract/staking';
 import { ref } from 'vue';
 import bus from '@/bus'
+import { checkGasBalance } from '@/dapp';
 
 const { writeClaim } = useStaking()
 
@@ -34,6 +35,7 @@ const open = (i:number) => {
 }
 
 const submit = async () => {
+    await checkGasBalance()
     await writeClaim(index.value)
 
     show.value = false

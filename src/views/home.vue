@@ -8,7 +8,16 @@
             <img src="@/assets/img/1.png" class="pic1">
         </div>
 
-        <div class="assetBox mt66">
+        <div class="notice mt66 flex ac">
+            <img src="@/assets/img/9.png" class="img40 mr20">
+            <van-swipe :show-indicators="false" vertical :autoplay="3000" class="noticeSwi">
+                <van-swipe-item v-for="(item,index) in noticeList" :key="index">
+                    <div class="noticeSwi size26 line1" @click="routerPush(`/notices/${item.id}`)">{{ item.title }}</div>
+                </van-swipe-item>
+            </van-swipe>
+        </div>
+
+        <div class="assetBox mt30">
             <div class="flex jb ac">
                 <div class="flex ac">
                     <img src="@/assets/img/atm.png" class="img64 mr10">
@@ -19,14 +28,6 @@
             <div class="btn size26 font2 flex jc ac mt32 rel disableBtn" v-if="is_order">{{ $t('进入流动性协同协议') }}</div>
             <div class="btn size26 font2 flex jc ac mt32 rel" @click="openpop" v-else>{{ $t('进入流动性协同协议') }}</div>
         </div>
-
-        <!-- <div class="hash mt30 flex jb ac">
-            <div class="size26 bold">总算力</div>
-            <div class="size28 bold">
-                <span v-init="1000"></span>
-                <span>T</span>
-            </div>
-        </div> -->
 
         <div class="desc mt40 mb40">
             <img src="@/assets/img/4.png" class="pic4">
@@ -64,11 +65,16 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import Bg from '@/components/Bg.vue';
 import { apiGet } from '@/utils/request';
+import { useNotice } from '@/hooks/useNotice';
+import { routerPush } from '@/router';
 
 const dappStore = useDappStore()
 const { walletAddress } = storeToRefs(dappStore)
 
 const createOrderRef = ref()
+
+const { loadNotice, noticeList } = useNotice()
+loadNotice()
 
 const is_order = ref(false)
 const loadData = () => apiGet('/api/index/check_daily_order').then((res:any)=>{
@@ -88,6 +94,20 @@ const openpop = () => {
 </script>
 
 <style lang="scss" scoped>
+.notice{
+    height: 80px;
+    border-radius: 20px;
+    background-color: #FFFFFF1A;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0 20px;
+    .noticeSwi{
+        flex: 1;
+        height: 60px;
+        line-height: 60px;
+    }
+}
 .pic5{
     width: 100vw;
     height: 552px;

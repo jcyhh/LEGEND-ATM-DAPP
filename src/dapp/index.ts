@@ -14,7 +14,7 @@ import { message } from '@/utils/message'
 
 // 自定义测试网络配置
 const localTestnet = defineChain({
-    id: 1337,
+    id: 31337,
     name: 'Local Testnet',
     nativeCurrency: {
         decimals: 18,
@@ -23,7 +23,7 @@ const localTestnet = defineChain({
     },
     rpcUrls: {
         default: {
-            http: ['http://192.168.110.15:8545'],
+            http: ['http://192.168.110.111:8545'],
         },
     },
 })

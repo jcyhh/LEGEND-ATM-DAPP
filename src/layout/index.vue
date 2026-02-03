@@ -2,6 +2,7 @@
     <div class="head flex jb ac">
         <img src="@/assets/img/logo.png" class="logo" @click="routerReplace('/home/index')">
         <div class="flex ac">
+            <img src="@/assets/img/10.png" class="img52 mr20" @click="routerPush('/notices')">
             <img src="@/assets/common/lang.png" class="img52 mr20" @click="langRef?.open()">
             <Menu></Menu>
         </div>
@@ -18,7 +19,7 @@
 import CusLang from '@/components/CusLang/index.vue';
 import { ref } from 'vue';
 import Menu from './Menu.vue';
-import { routerReplace } from '@/router';
+import { routerPush, routerReplace } from '@/router';
 
 const langRef = ref()
 </script>

@@ -56,5 +56,7 @@
     "枚":"pcs",
     "义务贡献值":"Nilai Kontribusi Kewajiban",
     "差额":"Selisih Saldo",
-    "资产明细":"Detail Aset"
+    "资产明细":"Detail Aset",
+    "请输入领取额度":"Masukkan jumlah klaim",
+    "已失效":"Kedaluwarsa"
 }

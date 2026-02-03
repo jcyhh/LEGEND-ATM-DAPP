@@ -56,5 +56,7 @@
     "枚":"pcs",
     "义务贡献值":"Valeur de contribution obligatoire",
     "差额":"Différence de solde",
-    "资产明细":"Détails des actifs"
+    "资产明细":"Détails des actifs",
+    "请输入领取额度":"Veuillez saisir le montant à réclamer",
+    "已失效":"Expiré"
 }

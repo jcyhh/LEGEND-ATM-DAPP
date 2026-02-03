@@ -56,5 +56,7 @@
     "枚":"pcs",
     "义务贡献值":"Obligation Contribution Value",
     "差额":"Balance Difference",
-    "资产明细":"Asset Details"
+    "资产明细":"Asset Details",
+    "请输入领取额度":"Please enter claim amount",
+    "已失效":"Expired"
 }

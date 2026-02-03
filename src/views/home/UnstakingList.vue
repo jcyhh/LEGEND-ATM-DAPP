@@ -8,13 +8,22 @@
                     <span class="size30">USDT</span>
                 </div>
             </div>
-            <div class="btn flex jc ac size26" v-if="item.status==2" @click="restakeRef.open(item.index)">{{ $t('点击复投') }}</div>
-            <div class="btn flex jc ac size26" v-else-if="item.status==3" @click="claimRef.open(item.index)">{{ $t('领取奖励') }}</div>
-            <div class="opc6 size26" v-else-if="item.status==4">{{ $t('已复投') }}</div>
-            <div class="opc6 size26" v-else-if="item.status==5">{{ $t('奖励已领取') }}</div>
+            <div class="btn flex jc ac size26" v-if="item.status==2 && item.ft_reward_countdown>0" @click="restakeRef.open(item.index)">{{ $t('点击复投') }}</div>
+            <div class="opc6 size26" v-else-if="item.status==2 && item.ft_reward_countdown<=0">{{ $t('已失效') }}</div>
+            <div class="btn flex jc ac size26" v-if="item.status==3" @click="claimRef.open(item.index)">{{ $t('领取奖励') }}</div>
+            <div class="opc6 size26" v-if="item.status==4">{{ $t('已复投') }}</div>
+            <div class="opc6 size26" v-if="item.status==5">{{ $t('奖励已领取') }}</div>
         </div>
         <div class="flex jb ac mt30">
             <div class="size24 opc5">{{ $t('参与时间') }} {{ item.created_at }}</div>
+            <van-count-down :time="item.ft_reward_countdown * 1000" @finish="success" v-if="item.ft_reward_countdown > 0">
+                <template #default="timeData">
+                    <span class="red size22">{{ timeData.days }}d</span>
+                    <span class="red size22 ml5 mr5">{{ timeData.hours }}h</span>
+                    <span class="red size22 mr5">{{ timeData.minutes }}m</span>
+                    <span class="red size22">{{ timeData.seconds }}s</span>
+                </template>
+            </van-count-down>
         </div>
         <div class="line mt30"></div>
         <div class="flex jb ac mt20">
@@ -37,6 +46,7 @@ import { computed, ref } from 'vue';
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import Restake from './Restake.vue';
 import Claim from './Claim.vue';
+import bus from '@/bus'
 
 const userStore = useUserStore()
 const { orders } = storeToRefs(userStore)
@@ -44,6 +54,8 @@ const { orders } = storeToRefs(userStore)
 const restakeRef = ref()
 
 const claimRef = ref()
+
+const success = () => bus.emit('orderSuccess')
 
 const list = computed(()=>{
     if(orders.value.length===0)return []
