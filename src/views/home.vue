@@ -56,6 +56,20 @@
     </div>
 
     <CreateOrder ref="createOrderRef" @success="onSuccess"></CreateOrder>
+
+    <van-popup v-model:show="showNoticePop" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
+        <div class="pop">
+            <div class="size28 bold">{{ noticePopInfo.title }}</div>
+
+            <div class="size24 opc6 mt10">{{ noticePopInfo.updated_at }}</div>
+
+            <div class="noticecontent mt30" v-html="noticePopInfo.content"></div>
+
+            <div class="flex ac mt60 font2 size28">
+                <div class="popbtn flex1" @click="readNotice">{{ $t('知道了') }}</div>
+            </div>
+        </div>
+    </van-popup>
 </template>
 
 <script setup lang="ts">
@@ -73,8 +87,9 @@ const { walletAddress } = storeToRefs(dappStore)
 
 const createOrderRef = ref()
 
-const { loadNotice, noticeList } = useNotice()
+const { loadNotice, noticeList, loadNoticePop, showNoticePop, readNotice, noticePopInfo } = useNotice()
 loadNotice()
+loadNoticePop()
 
 const is_order = ref(false)
 const loadData = () => apiGet('/api/index/check_daily_order').then((res:any)=>{
@@ -106,6 +121,14 @@ const openpop = () => {
         flex: 1;
         height: 60px;
         line-height: 60px;
+    }
+}
+.noticecontent{
+    max-height: 60vh;
+    width: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
     }
 }
 .pic5{

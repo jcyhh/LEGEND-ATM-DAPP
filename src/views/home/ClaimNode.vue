@@ -58,7 +58,7 @@ const inputAll = () => {
 const submit = async () => {
     if(!inputAmount.value) return message(t('请输入领取额度'))
 
-    // await checkGasBalance()
+    await checkGasBalance()
 
     const signInfo = await getSign('Claim')
 
