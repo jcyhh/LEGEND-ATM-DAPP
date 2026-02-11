@@ -74,7 +74,7 @@ loadData()
 
 const total = computed(() => {
     if (info.value) {
-        const num = computedSub(info.value?.xq_kpi, info.value?.check_xq_kpi)
+        const num = computedSub(info.value?.check_xq_kpi,info.value?.xq_kpi)
         return num > 0 ? num : 0
     }
 })
