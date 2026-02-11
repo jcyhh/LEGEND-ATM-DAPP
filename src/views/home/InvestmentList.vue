@@ -8,8 +8,11 @@
                     <span class="size30">USDT</span>
                 </div>
             </div>
-            <div class="btn flex jc ac size26" v-if="!item.is_unstaking" @click="openpop(item.index)">{{ $t('发起结算') }}</div>
-            <div class="opc6 size26" v-else>{{ $t('已结算') }}</div>
+
+            <div class="btn flex jc ac size26" v-if="item.is_unstaking" @click="openpop(item.index)">{{ $t('发起结算') }}</div>
+            
+            <!-- <div class="opc6 size26" v-if="item.status == 0">{{ $t('已结算') }}</div> -->
+
         </div>
         <div class="flex jb ac mt30">
             <div class="size24 opc5">{{ $t('参与时间') }} {{ item.created_at }}</div>
