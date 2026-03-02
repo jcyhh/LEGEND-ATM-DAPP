@@ -1,4 +1,5 @@
 <template>
+    <div class="fastbtn flex jc ac size26 mb30" v-if="list.length>0" @click="fastUnstake">{{ $t('一键结算') }}</div>
     <div class="card mb24" v-for="(item,index) in list" :key="index">
         <div class="flex jb">
             <div>
@@ -59,6 +60,8 @@ import { computed, ref } from 'vue';
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import { useStaking } from '@/dapp/contract/staking';
 import bus from '@/bus'
+import { showToast } from 'vant';
+import { t } from '@/locale';
 // import { unstakeAndBurn } from '@/dapp/contract/batchInvoker'
 // import { apiGet } from '@/utils/request';
 
@@ -95,6 +98,15 @@ const submit = async () => {
     show.value = false
     success()
 }
+
+const fastUnstake = async () => {
+    const arr = list.value.filter(item=>item.is_unstaking)
+    if(arr.length==0)return showToast(t('没有可赎回的订单'))
+    for(const item of arr){
+        await writeUnstake(item.index)
+    }
+    setTimeout(() => bus.emit('orderSuccess'), 1000);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -115,5 +127,13 @@ const submit = async () => {
         height: 1px;
         background-color: #FFFFFF1A;
     }
+}
+.fastbtn{
+    height: 68px;
+    border-radius: 34px;
+    padding: 0 20px;
+    border: 1px solid #1989F5;
+    background-color: #1989F51A;
+    color: #1989F5;
 }
 </style>

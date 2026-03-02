@@ -59,5 +59,8 @@
     "资产明细":"Asset Details",
     "请输入领取额度":"Please enter claim amount",
     "已失效":"Expired",
-    "知道了":"Got it"
+    "知道了":"Got it",
+    "不能小于最小值":"Cannot be less than minimum value",
+    "没有可赎回的订单":"No redeemable orders",
+    "一键复投":"One-click Reinvest"
 }

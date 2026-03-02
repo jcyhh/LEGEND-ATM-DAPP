@@ -1,5 +1,5 @@
 <template>
-     <div class="card mb24" v-for="(item,index) in list" :key="index">
+    <div class="card mb24" v-for="(item,index) in list" :key="index">
         <div class="flex jb">
             <div>
                 <div class="mb12 size24 opc6">{{ $t('协议结算值') }}</div>
@@ -32,6 +32,7 @@
             <div class="size26 bold" v-init="item.reward" v-if="item.reward && item.reward > 0"></div>
             <van-loading v-else />
         </div>
+        <div class="fastbtn flex jc ac size26 mt30" v-if="item.stakeIndex==2 && item.status==2" @click="fastRestake(item)">{{ $t('一键复投') }}</div>
     </div>
     <CusEmpty v-if="list.length==0"></CusEmpty>
 
@@ -48,9 +49,20 @@ import CusEmpty from '@/components/CusEmpty/index.vue'
 import Restake from './Restake.vue';
 import Claim from './Claim.vue';
 import bus from '@/bus'
+import { useDappStore } from '@/dapp/store';
+import { parseEther } from 'viem';
+import { useErc20 } from '@/dapp/contract/erc20';
+import { useStaking } from '@/dapp/contract/staking';
 
 const userStore = useUserStore()
 const { orders } = storeToRefs(userStore)
+
+const dappStore = useDappStore()
+const { dappLoading } = storeToRefs(dappStore)
+
+const { writeApprove } = useErc20()
+
+const { writeRestake, writeClaim } = useStaking()
 
 const restakeRef = ref()
 
@@ -62,6 +74,26 @@ const list = computed(()=>{
     if(orders.value.length===0)return []
     return orders.value.filter((item:any)=>item.status!=1)
 })
+
+const fastRestake = async (data:any) => {
+    dappLoading.value = true // 加载中
+
+    const amount = parseEther(`${data.amount}`) // 复投金额
+
+    await writeApprove(import.meta.env.VITE_STAKING, amount)
+
+    const stakeIndex = 2 // 复投档位
+
+    console.log('复投', data.index, amount, stakeIndex);
+    
+    await writeRestake(data.index, amount, stakeIndex) // 复投
+
+    console.log('领奖', data.index);
+    
+    await writeClaim(data.index) // 领取奖励
+
+    setTimeout(() => bus.emit('orderSuccess'), 1000);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -82,5 +114,13 @@ const list = computed(()=>{
         height: 1px;
         background-color: #FFFFFF1A;
     }
+}
+.fastbtn{
+    height: 68px;
+    border-radius: 34px;
+    padding: 0 20px;
+    border: 1px solid #1989F5;
+    background-color: #1989F51A;
+    color: #1989F5;
 }
 </style>

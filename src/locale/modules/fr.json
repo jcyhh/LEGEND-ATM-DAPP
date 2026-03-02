@@ -59,5 +59,8 @@
     "资产明细":"Détails des actifs",
     "请输入领取额度":"Veuillez saisir le montant à réclamer",
     "已失效":"Expiré",
-    "知道了":"Compris"
+    "知道了":"Compris",
+    "不能小于最小值":"Ne peut pas être inférieur à la valeur minimale",
+    "没有可赎回的订单":"Aucune commande rachetable",
+    "一键复投":"Réinvestissement en un clic"
 }

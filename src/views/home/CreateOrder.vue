@@ -128,8 +128,8 @@ const getOutMin = async () => {
 
 const submit = async () => {
     if(!inputAmount.value)return showToast(t('请输入金额'))
-    if(Number(inputAmount.value) < min.value)return showToast(t('不能小于最大值'))
-    if(Number(inputAmount.value) > max.value)return showToast(t('不能超过最大值'))
+    if(Number(inputAmount.value) < min.value)return showToast(t('不能小于最小值'))
+    // if(Number(inputAmount.value) > max.value)return showToast(t('不能超过最大值'))
     if(!isBindReferral.value && !refAddress.value)return showToast(t('请输入邀请人地址'))
 
     await checkGasBalance()
@@ -139,12 +139,45 @@ const submit = async () => {
     const outMin = await getOutMin()
     const timesId = times[current.value].value
 
-    if(isBindReferral.value) await writeStake(amount, outMin, timesId)
-    else await writeStakeWithInviter(amount, outMin, timesId, refAddress.value)
+    if(inputAmount.value > max.value){
+        // 超过最大值时，按最大值拆解成多次合约
+        const arr = splitByA(max.value, inputAmount.value)
+        if(isBindReferral.value){
+            // 质押下单
+            for(const item of arr){
+                await writeStake(parseEther(`${item}`), outMin, timesId)
+            }
+        }else{
+            // 质押下单 && 绑定上级
+            for(const item of arr){
+                await writeStake(parseEther(`${item}`), outMin, timesId, refAddress.value)
+            }
+        }
+    }else{
+        // 如果没有超过最大值，走一遍下单合约即可
+        if(isBindReferral.value) await writeStake(amount, outMin, timesId)
+        else await writeStakeWithInviter(amount, outMin, timesId, refAddress.value)
+    }
 
+    
     show.value = false
     emits('success')
     bus.emit('orderSuccess')
+}
+
+const splitByA = (a:any, b:any) =>  {
+    const bnA = new BigNumber(a)
+    const total = bnA.plus(b)
+    const count = total.dividedToIntegerBy(bnA).toNumber()
+    const remainder = total.mod(bnA)
+
+    const result = new Array(count).fill(a)
+
+    if (remainder.gt(0)) {
+        result.push(remainder.toNumber())
+    }
+
+    return result
 }
 
 onMounted(()=>{

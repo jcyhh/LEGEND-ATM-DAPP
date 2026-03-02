@@ -59,5 +59,8 @@
     "资产明细":"Detail Aset",
     "请输入领取额度":"Masukkan jumlah klaim",
     "已失效":"Kedaluwarsa",
-    "知道了":"Mengerti"
+    "知道了":"Mengerti",
+    "不能小于最小值":"Tidak boleh kurang dari nilai minimum",
+    "没有可赎回的订单":"Tidak ada pesanan yang dapat ditebus",
+    "一键复投":"Investasi ulang sekali klik"
 }

@@ -59,5 +59,8 @@
     "资产明细":"Butiran Aset",
     "请输入领取额度":"Sila masukkan jumlah tuntutan",
     "已失效":"Tamat tempoh",
-    "知道了":"Faham"
+    "知道了":"Faham",
+    "不能小于最小值":"Tidak boleh kurang daripada nilai minimum",
+    "没有可赎回的订单":"Tiada pesanan boleh tebus",
+    "一键复投":"Pelaburan semula satu klik"
 }

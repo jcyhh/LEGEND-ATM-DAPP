@@ -59,5 +59,8 @@
     "资产明细":"Chi tiết tài sản",
     "请输入领取额度":"Vui lòng nhập số tiền nhận",
     "已失效":"Đã hết hiệu lực",
-    "知道了":"Đã hiểu"
+    "知道了":"Đã hiểu",
+    "不能小于最小值":"Không thể nhỏ hơn giá trị tối thiểu",
+    "没有可赎回的订单":"Không có đơn hàng có thể rút",
+    "一键复投":"Tái đầu tư một chạm"
 }
