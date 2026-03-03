@@ -25,11 +25,25 @@ const { walletAddress } = storeToRefs(dappStore)
 const userStore = useUserStore()
 const { orders, teamKpi } = storeToRefs(userStore)
 
-const { readRewardOfSlot } = useStaking()
+const { readRewardOfSlot, readUserStakeRecord } = useStaking()
 
 const current = ref(0)
 
-const loadReward = () => orders.value.forEach((item:any) => readRewardOfSlot(item.index).then((res:any)=>item['reward']=formatEther(res)))
+const loadReward = () => {
+    orders.value.forEach((item:any) => {
+        // 查奖励
+        readRewardOfSlot(item.index).then((res:any)=>{
+            item['reward']=formatEther(res)
+        })
+        // 复投列表需要的数据
+        if(item.status!=1){
+            // 复投数据差质押时选择的周期
+            readUserStakeRecord(item.index).then((res:any)=>{
+                item['stakeIndex'] = res[2]
+            })
+        }
+    })
+}
 
 const loadData = async () => {
     const res:any = await apiGet('/api/index')

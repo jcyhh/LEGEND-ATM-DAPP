@@ -4,6 +4,7 @@ import abi from './abi.json'
 import { approveAmount, getAddress } from '@/dapp/config';
 import { t } from '@/locale';
 import { message } from '@/utils/message';
+import { useDappStore } from '@/dapp/store';
 
 export function useErc20 () {
     const contract = useContract(import.meta.env.VITE_USDT, abi as Abi)
@@ -18,6 +19,8 @@ export function useErc20 () {
     const checkBalance = async (amount: bigint) => {
         const balance = await readBalanceOf()
         if (balance < amount) {
+            const dappStore = useDappStore()
+            dappStore.dappLoading = false
             message(t('余额不足'))
             throw new Error('余额不足')
         }
@@ -26,7 +29,16 @@ export function useErc20 () {
     // 检查授权余额，不足则授权
     const checkAllowance = async (spender: string, amount: bigint) => {
         const allowance = await readAllowance(spender)
-        if (allowance < amount)await contract.write('approve', [spender, approveAmount])
+        if (allowance < amount){
+            try {
+                await contract.write('approve', [spender, approveAmount])
+            } catch (error) {
+                const dappStore = useDappStore()
+                dappStore.dappLoading = false
+                message(t('授权失败'))
+                throw error
+            }
+        }
     }
 
     // 转账
@@ -37,6 +49,9 @@ export function useErc20 () {
 
     // 授权
     const writeApprove = async (spender: string, amount: bigint) => {
+        const dappStore = useDappStore()
+        dappStore.dappLoading = true
+        
         await checkBalance(amount)
         await checkAllowance(spender, amount)
     }

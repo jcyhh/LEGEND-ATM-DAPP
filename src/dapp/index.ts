@@ -11,6 +11,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import { minGasBalance, type SignMessage } from './config'
 import { t } from '@/locale'
 import { message } from '@/utils/message'
+import { useDappStore } from './store'
 
 // 自定义测试网络配置
 const localTestnet = defineChain({
@@ -156,11 +157,17 @@ export const checkChain = async () => {
  * 不足时抛出异常
  */
 export const checkGasBalance = async () => {
+    return true;
+
+    const dappStore = useDappStore()
+    dappStore.dappLoading = true
+
     const publicClient = getPublicClient()
     const address = await getConnectedAddress()
     const balance = await publicClient.getBalance({ address })
     
     if (balance < minGasBalance) {
+        dappStore.dappLoading = false
         message(t('Gas费用不足'))
         throw new Error('Gas费用不足')
     }

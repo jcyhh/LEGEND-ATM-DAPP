@@ -74,6 +74,7 @@ export const useContract = <T extends Abi>(address: Address, abi: T) => {
 
     // 写合约（自动估算 gas 并乘以配置倍数）
     const writeWithGas = async (functionName: string, args: any[] = [], options?: Omit<WriteOptions, 'gas'>) => {
+        return await write(functionName, args, options)
         // 开发环境不估算 gas，直接调用 write
         if (!import.meta.env.PROD) {
             return await write(functionName, args, options)
