@@ -32,7 +32,7 @@
             <div class="size26 bold" v-init="item.reward" v-if="item.reward && item.reward > 0"></div>
             <van-loading v-else />
         </div>
-        <div class="fastbtn flex jc ac size26 mt30" v-if="item.stakeIndex==2 && item.status==2" @click="fastRestake(item)">{{ $t('一键复投') }}</div>
+        <div class="fastbtn flex jc ac size26 mt30" v-if="item.stakeIndex==2 && item.status==2 && item.ft_reward_countdown>0" @click="fastRestake(item)">{{ $t('一键复投') }}</div>
     </div>
     <CusEmpty v-if="list.length==0"></CusEmpty>
 
@@ -53,6 +53,8 @@ import { useDappStore } from '@/dapp/store';
 import { parseEther } from 'viem';
 import { useErc20 } from '@/dapp/contract/erc20';
 import { useStaking } from '@/dapp/contract/staking';
+import { useUniswapV2Router } from '@/dapp/contract/uniswapV2Router';
+import { computedDiv } from '@/utils';
 
 const userStore = useUserStore()
 const { orders } = storeToRefs(userStore)
@@ -63,6 +65,8 @@ const { dappLoading } = storeToRefs(dappStore)
 const { writeApprove } = useErc20()
 
 const { writeRestake, writeClaim } = useStaking()
+
+const { readGetAmountsOut } = useUniswapV2Router()
 
 const restakeRef = ref()
 
@@ -75,18 +79,27 @@ const list = computed(()=>{
     return orders.value.filter((item:any)=>item.status!=1)
 })
 
+const getOutMin = async (amount:any) => {
+    const num = parseEther(`${computedDiv(amount, 2)}`)
+    const outMins = await readGetAmountsOut(num, [import.meta.env.VITE_USDT, import.meta.env.VITE_TOKEN])
+    return (outMins[1] as bigint) * 90n / 100n
+}
+
 const fastRestake = async (data:any) => {
     dappLoading.value = true // 加载中
 
     const amount = parseEther(`${data.amount}`) // 复投金额
+    console.log('复投金额', amount);
 
     await writeApprove(import.meta.env.VITE_STAKING, amount)
+    console.log('授权通过');
 
     const stakeIndex = 2 // 复投档位
 
-    console.log('复投', data.index, amount, stakeIndex);
+    const outMin = await getOutMin(data.amount)
+    console.log('复投', data.index, amount, outMin, stakeIndex);
     
-    await writeRestake(data.index, amount, stakeIndex) // 复投
+    await writeRestake(data.index, amount, outMin, stakeIndex) // 复投
 
     console.log('领奖', data.index);
     
