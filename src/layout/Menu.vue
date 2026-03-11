@@ -53,7 +53,7 @@
             </div>
 
             <div class="bottom">
-                <div class="tc size24">{{ $t('卡顿备用') }}</div>
+                <div class="tc size24">{{ $t('极速链接') }}</div>
                 <div class="flex jc">
                     <div class="link" @click="openLink('https://a.legend.rocks')">https://a.legend.rocks</div>
                 </div>
