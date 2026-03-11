@@ -17,7 +17,7 @@ import { VueAmazingUIResolver } from 'vue-amazing-ui'
 
 
 export default defineConfig({
-    base: '/test/',
+    base: '/h5/',
     server: {
         host: '0.0.0.0',
         port: 5171,

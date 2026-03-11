@@ -62,5 +62,7 @@
     "知道了":"Got it",
     "不能小于最小值":"Cannot be less than minimum value",
     "没有可赎回的订单":"No redeemable orders",
-    "一键复投":"One-click Reinvest"
+    "一键复投":"One-click Reinvest",
+    "C2C交易":"C2C Trading",
+    "卡顿备用":"Backup Access"
 }

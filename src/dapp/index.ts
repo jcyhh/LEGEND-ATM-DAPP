@@ -30,7 +30,7 @@ const localTestnet = defineChain({
 })
 
 // 正式环境BSC(币安链)、开发环境本地测试网络
-export const currentChain = import.meta.env.PROD ? bsc : bsc
+export const currentChain = import.meta.env.PROD ? bsc : localTestnet
 
 // viem读合约的实例
 let _publicClient: any = null

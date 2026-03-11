@@ -154,3 +154,7 @@ export function initTime(timestamp:string){
         }
     }
 }
+
+export function openLink (link:string) {
+    location.href = link
+}

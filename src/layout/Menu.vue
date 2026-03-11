@@ -20,10 +20,10 @@
                     <img src="@/assets/menu/public.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('公共联盟') }}</div>
                 </div>
-                <div class="flex1 flex col ac">
-                    <img src="@/assets/menu/exchangeHL.png" class="img56" v-if="$route.path=='/exchange/index'">
-                    <img src="@/assets/menu/exchange.png" class="img56" v-else>
-                    <div class="size26 mt20">{{ $t('交换') }}</div>
+                <div class="flex1 flex col ac" @click="openLink('http://bubc2c.legend.rocks')">
+                    <!-- <img src="@/assets/menu/exchangeHL.png" class="img56" v-if="$route.path=='/exchange/index'"> -->
+                    <img src="@/assets/menu/exchange.png" class="img56">
+                    <div class="size26 mt20">{{ $t('C2C交易') }}</div>
                 </div>
             </div>
             <div class="flex mt40 nav">
@@ -52,13 +52,20 @@
                 <div class="flex1"></div>
             </div>
 
-            <div class="lang flex jb ac" @click="langRef?.open()">
-                <div class="flex ac">
-                    <img src="@/assets/common/lang.png" class="img56 mr16">
-                    <div class="size26">{{ currentLang?.name }}</div>
+            <div class="bottom">
+                <div class="tc size24">{{ $t('卡顿备用') }}</div>
+                <div class="flex jc">
+                    <div class="link" @click="openLink('https://a.legend.rocks')">https://a.legend.rocks</div>
                 </div>
-                <van-icon name="arrow-down" color="#8396A7" />
+                <div class="lang flex jb ac" @click="langRef?.open()">
+                    <div class="flex ac">
+                        <img src="@/assets/common/lang.png" class="img56 mr16">
+                        <div class="size26">{{ currentLang?.name }}</div>
+                    </div>
+                    <van-icon name="arrow-down" color="#8396A7" />
+                </div>
             </div>
+            
         </div>
     </van-popup>
 
@@ -73,6 +80,7 @@ import { useAppStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { routerReplace } from '@/router';
 import Invite from '@/views/home/Invite.vue';
+import { openLink } from '@/utils';
 
 const useStore = useAppStore()
 const { lang } = storeToRefs(useStore)
@@ -103,15 +111,24 @@ const goPath = (path:string) => {
     .nav{
         color: #8396A7;
     }
-    .lang{
+    .bottom{
         width: 540px;
-        height: 80px;
-        border-radius: 40px;
-        background-color: #213446;
         position: absolute;
         bottom: 40px;
         left: 30px;
-        padding: 0 30px;
+        .link{
+            font-size: 24px;
+            text-decoration: underline;
+            color: $blue;
+            margin: 10px 0 20px 0;
+        }
+        .lang{
+            height: 80px;
+            border-radius: 40px;
+            background-color: #213446;
+            padding: 0 30px 0 10px;
+        }
     }
+    
 }
 </style>

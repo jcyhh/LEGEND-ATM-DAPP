@@ -73,7 +73,7 @@ if(import.meta.env.PROD){
 /**
  * 启用VConsole
  */
-import VConsole from 'vconsole'
-new VConsole()
+// import VConsole from 'vconsole'
+// new VConsole()
 
 app.mount('#app')
