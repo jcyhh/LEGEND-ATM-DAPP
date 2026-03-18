@@ -24,7 +24,7 @@ const localTestnet = defineChain({
     },
     rpcUrls: {
         default: {
-            http: ['http://192.168.110.111:8545'],
+            http: [import.meta.env.VITE_RPC_URL],
         },
     },
 })
