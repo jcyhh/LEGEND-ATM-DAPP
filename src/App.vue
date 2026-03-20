@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import detectEthereumProvider from '@metamask/detect-provider'
-import { checkChain, getConnectedAddress } from './dapp';
+import { checkChain, getConnectedAddress, resetClients } from './dapp';
 import { useDappStore } from './dapp/store';
 import { routerReplace } from './router';
 import { delToken, loginPath } from './dapp/config';
@@ -49,6 +49,7 @@ const detectProvider = async () => {
 const handlerChanged = async () => {
     delToken()
     dappStore.walletAddress = ''
+    resetClients()
     removeListener();
     routerReplace(loginPath)
     await init();

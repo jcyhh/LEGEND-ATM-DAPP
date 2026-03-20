@@ -1,17 +1,15 @@
 import {
-    createPublicClient,
     createWalletClient,
     custom,
-    http,
+    publicActions,
     type Address,
-    defineChain,
+    defineChain
 } from 'viem'
 import { bsc } from 'viem/chains'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { minGasBalance, type SignMessage } from './config'
 import { t } from '@/locale'
 import { message } from '@/utils/message'
-import { useDappStore } from './store'
 
 // 自定义测试网络配置
 const localTestnet = defineChain({
@@ -19,8 +17,8 @@ const localTestnet = defineChain({
     name: 'Local Testnet',
     nativeCurrency: {
         decimals: 18,
-        name: 'ETH',
-        symbol: 'ETH',
+        name: 'GO',
+        symbol: 'GO',
     },
     rpcUrls: {
         default: {
@@ -32,12 +30,12 @@ const localTestnet = defineChain({
 // 正式环境BSC(币安链)、开发环境本地测试网络
 export const currentChain = import.meta.env.PROD ? bsc : localTestnet
 
-// viem读合约的实例
-let _publicClient: any = null
-// viem写合约的实例
 let _walletClient: any = null
-// 钱包实例
 let _ethereum: any = null
+
+export const resetClients = () => {
+    _walletClient = null
+}
 
 // 检测并获取钱包
 export const detectProvider = async () => {
@@ -61,20 +59,7 @@ export const getEthereum = () => {
 }
 
 /**
- * viem读合约的实例
- */
-export const getPublicClient = () => {
-    if (!_publicClient) {
-        _publicClient = createPublicClient({
-            chain: currentChain,
-            transport: http()
-        })
-    }
-    return _publicClient
-}
-
-/**
- * viem写合约的实例
+ * 获取钱包客户端（读写统一）
  */
 export const getWalletClient = () => {
     if (!_walletClient) {
@@ -82,7 +67,7 @@ export const getWalletClient = () => {
         _walletClient = createWalletClient({
             chain: currentChain,
             transport: custom(ethereum)
-        })
+        }).extend(publicActions)
     }
     return _walletClient!
 }
@@ -113,6 +98,8 @@ export const checkChain = async () => {
     // 获取当前网络 chainId
     const currentChainId = await ethereum.request({ method: 'eth_chainId' })
     const targetChainId = `0x${currentChain.id.toString(16)}`
+    console.log(`当前网络${currentChainId}-${Number(currentChainId)}`, `需要切换到的网络${targetChainId}-${Number(targetChainId)}`);
+    
     
     // 已经是目标网络
     if (currentChainId === targetChainId) {
@@ -153,21 +140,15 @@ export const checkChain = async () => {
 }
 
 /**
- * 检查 ETH 余额是否足够支付 Gas
+ * 检查 ETH 余额是否至少 0.0004
  * 不足时抛出异常
  */
 export const checkGasBalance = async () => {
-    return true;
-
-    const dappStore = useDappStore()
-    dappStore.dappLoading = true
-
-    const publicClient = getPublicClient()
+    const walletClient = getWalletClient()
     const address = await getConnectedAddress()
-    const balance = await publicClient.getBalance({ address })
+    const balance = await walletClient.getBalance({ address })
     
     if (balance < minGasBalance) {
-        dappStore.dappLoading = false
         message(t('Gas费用不足'))
         throw new Error('Gas费用不足')
     }
@@ -192,9 +173,8 @@ export const getSign = async (message: SignMessage) => {
  */
 export const getClients = async () => {
         await detectProvider()
-        const publicClient = getPublicClient()
         const walletClient = getWalletClient()
         const address = await getConnectedAddress()
         const ethereum = getEthereum()
-        return { publicClient, walletClient, address, ethereum }
+        return { walletClient, address, ethereum }
 }

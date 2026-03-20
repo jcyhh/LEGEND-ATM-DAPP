@@ -64,5 +64,7 @@
     "没有可赎回的订单":"No redeemable orders",
     "一键复投":"One-click Reinvest",
     "C2C交易":"C2C Trading",
-    "卡顿备用":"Fast Link"
+    "卡顿备用":"Fast Link",
+    "操作成功":"Operation Successful",
+    "操作失败":"Operation Failed"
 }

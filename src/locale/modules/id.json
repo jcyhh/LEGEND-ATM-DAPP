@@ -64,5 +64,7 @@
     "没有可赎回的订单":"Tidak ada pesanan yang dapat ditebus",
     "一键复投":"Investasi ulang sekali klik",
     "C2C交易":"Trading C2C",
-    "卡顿备用":"Tautan cepat"
+    "卡顿备用":"Tautan cepat",
+    "操作成功":"Operasi berhasil",
+    "操作失败":"Operasi gagal"
 }

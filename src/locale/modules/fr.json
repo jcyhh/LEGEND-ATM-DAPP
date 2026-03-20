@@ -64,5 +64,7 @@
     "没有可赎回的订单":"Aucune commande rachetable",
     "一键复投":"Réinvestissement en un clic",
     "C2C交易":"Trading C2C",
-    "卡顿备用":"Lien rapide"
+    "卡顿备用":"Lien rapide",
+    "操作成功":"Opération réussie",
+    "操作失败":"Opération échouée"
 }

@@ -64,5 +64,7 @@
     "没有可赎回的订单":"Không có đơn hàng có thể rút",
     "一键复投":"Tái đầu tư một chạm",
     "C2C交易":"Giao dịch C2C",
-    "卡顿备用":"Liên kết tốc độ cao"
+    "卡顿备用":"Liên kết tốc độ cao",
+    "操作成功":"Thao tác thành công",
+    "操作失败":"Thao tác thất bại"
 }
