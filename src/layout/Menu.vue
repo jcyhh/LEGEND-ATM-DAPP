@@ -37,6 +37,19 @@
                     <img src="@/assets/menu/report.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('安全审计') }}</div>
                 </div>
+                <div class="flex1 flex col ac" @click="routerPush('/ball')">
+                    <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/ball'">
+                    <img src="@/assets/menu/ball.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('多人点球') }}</div>
+                </div>
+            </div>
+            <div class="flex mt40 nav">
+                <div class="flex1 flex col ac" @click="goPath('/pool/index')">
+                    <img src="@/assets/menu/poolHL.png" class="img56" v-if="$route.path=='/pool/index'">
+                    <img src="@/assets/menu/pool.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('池子') }}</div>
+                </div>
+                <div class="flex1"></div>
                 <div class="flex1"></div>
             </div>
             <div class="mt76">{{ $t('联系我们') }}</div>
@@ -78,7 +91,7 @@ import CusLang from '@/components/CusLang/index.vue';
 import { langs } from '@/locale'
 import { useAppStore } from '@/store';
 import { storeToRefs } from 'pinia';
-import { routerReplace } from '@/router';
+import { routerPush, routerReplace } from '@/router';
 import Invite from '@/views/home/Invite.vue';
 import { openLink } from '@/utils';
 

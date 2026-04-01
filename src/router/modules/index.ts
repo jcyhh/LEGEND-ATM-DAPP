@@ -37,6 +37,27 @@ export default [
         }]
     },
     {
+        path:'/pool',
+        component: Layout,
+        redirect: '/pool/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/pool.vue')
+        }]
+    },
+    {
+        path:'/ball',
+        component: () => import('@/views/ball.vue')
+    },
+    {
+        path:'/record',
+        component: () => import('@/views/ball/record.vue')
+    },
+    {
+        path:'/award',
+        component: () => import('@/views/ball/award.vue')
+    },
+    {
         path:'/notices',
         component: () => import('@/views/notice/index.vue')
     },
