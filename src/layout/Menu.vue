@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/common/menu.png" class="img52" @click="show=true">
+    <img src="@/assets/common/menu.png" class="img52" @click="openMenu">
 
     <van-popup v-model:show="show" position="right" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
         <div class="menu">
@@ -37,20 +37,11 @@
                     <img src="@/assets/menu/report.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('安全审计') }}</div>
                 </div>
-                <div class="flex1 flex col ac" @click="routerPush('/ball')">
+                <div class="flex1 flex col ac" @click="goBall">
                     <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/ball'">
                     <img src="@/assets/menu/ball.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('多人点球') }}</div>
                 </div>
-            </div>
-            <div class="flex mt40 nav">
-                <div class="flex1 flex col ac" @click="goPath('/pool/index')">
-                    <img src="@/assets/menu/poolHL.png" class="img56" v-if="$route.path=='/pool/index'">
-                    <img src="@/assets/menu/pool.png" class="img56" v-else>
-                    <div class="size26 mt20">{{ $t('池子') }}</div>
-                </div>
-                <div class="flex1"></div>
-                <div class="flex1"></div>
             </div>
             <div class="mt76">{{ $t('联系我们') }}</div>
             <div class="flex mt40 nav">
@@ -88,12 +79,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import CusLang from '@/components/CusLang/index.vue';
-import { langs } from '@/locale'
+import { langs, t } from '@/locale'
 import { useAppStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { routerPush, routerReplace } from '@/router';
 import Invite from '@/views/home/Invite.vue';
 import { openLink } from '@/utils';
+import { apiGet } from '@/utils/request';
+import { message } from '@/utils/message';
 
 const useStore = useAppStore()
 const { lang } = storeToRefs(useStore)
@@ -101,6 +94,22 @@ const { lang } = storeToRefs(useStore)
 const show = ref(false)
 
 const langRef = ref()
+
+const goBall = () => {
+    if(parent_id.value > 0){
+        routerPush('/ball')
+    }else{
+        message(t('请先绑定上级'))
+    }
+}
+
+const parent_id = ref(0)
+const openMenu = () => {
+    show.value = true
+    apiGet('/api/users/my').then((res:any)=>{
+        parent_id.value = res.parent_id
+    })
+}
 
 const currentLang = computed(()=>langs.find(item => item.lang === lang.value))
 

@@ -1,17 +1,16 @@
 <template>
     <van-popup v-model:show="show" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
         <div class="result">
-            <img src="@/assets/img/25.png" class="pic25">
+            <img :src="resultImage" class="pic25">
             <img src="@/assets/img/28.png" class="img32 pic32" @click="show=false">
             <div class="content">
                 <div class="pl30 pr30">
                     <div class="msg flex jc ac">
                         <div class="size26 br tc">
                             <span>本期投入</span>
-                            <span class="size32 bold ml5 mr5">100</span>
-                            <span>钻石</span>
-                            <span>获得</span>
-                            <span class="size32 bold ml5 mr5 red">100</span>
+                            <span class="size32 bold ml5 mr5">{{ investedText }}</span>
+                            <span>钻石，获得</span>
+                            <span class="size32 bold ml5 mr5 red">{{ receivedText }}</span>
                             <span>钻石</span>
                         </div>
                     </div>
@@ -27,12 +26,12 @@
                 </div>
 
                 <div class="marquee-wrap mt30">
-                    <div class="marquee-track size20">
-                        <span class="marquee-item" v-for="i in 10" :key="'a'+i">nb34***123s</span>
-                        <span class="marquee-item" v-for="i in 10" :key="'b'+i">nb34***123s</span>
+                    <div class="marquee-track size20" v-if="marqueePlayers.length">
+                        <span class="marquee-item" v-for="(item, index) in marqueePlayers" :key="'a'+index">{{ item }}</span>
+                        <span class="marquee-item" v-for="(item, index) in marqueePlayers" :key="'b'+index">{{ item }}</span>
                     </div>
+                    <div class="size20 tc opc5" v-else>--</div>
                 </div>
-
                 <div class="flex jc mt40">
                     <div class="btn flex jc ac">再来一局</div>
                 </div>
@@ -44,24 +43,64 @@
 
 <script setup lang="ts">
 import { useConfetti } from '@/hooks/useConfetti';
-import { ref } from 'vue';
+import winImage from '@/assets/img/25.png'
+import failImage from '@/assets/img/26.png'
+import { initNumber } from '@/utils'
+import { computed, ref } from 'vue';
+
+type ResultPlayer = {
+    user_id?: number
+    maddress?: string
+    result?: number
+}
 
 const { showConfetti } = useConfetti()
 
 const show = ref(false)
+const result = ref<1 | 2>(1)
+const invested = ref<string | number>('0')
+const received = ref<string | number>('0')
+const players = ref<ResultPlayer[]>([])
 
-const open = () => {
+const isWin = computed(() => result.value === 1)
+const resultImage = computed(() => (isWin.value ? winImage : failImage))
+const investedText = computed(() => initNumber(Number(invested.value) || 0))
+const receivedText = computed(() => initNumber(Number(received.value) || 0))
+const winnerPlayers = computed(() => {
+    return players.value.filter(item => Number(item?.result) === 1)
+})
+const marqueePlayers = computed(() => {
+    return winnerPlayers.value
+        .map(item => item.maddress || '--')
+        .filter(Boolean)
+})
+
+const open = (value?: number) => {
+    if (value === 1 || value === 2) result.value = value
     show.value = true
-    showConfetti()
+    if (isWin.value) showConfetti()
 }
 
 const close = () => {
     show.value = false
 }
 
+const setResult = (value: number) => {
+    if (value === 1 || value === 2) result.value = value
+}
+
+const setData = (data: any) => {
+    invested.value = data?.invested ?? '0'
+    received.value = data?.received ?? '0'
+    players.value = Array.isArray(data?.players) ? data.players : []
+    setResult(Number(data?.result))
+}
+
 defineExpose({
     open,
-    close
+    close,
+    setResult,
+    setData
 })
 </script>
 

@@ -38,12 +38,7 @@ export default [
     },
     {
         path:'/pool',
-        component: Layout,
-        redirect: '/pool/index',
-        children:[{
-            path:'index',
-            component: () => import('@/views/pool.vue')
-        }]
+        component: () => import('@/views/ball/pool.vue')
     },
     {
         path:'/ball',
@@ -60,6 +55,10 @@ export default [
     {
         path:'/notices',
         component: () => import('@/views/notice/index.vue')
+    },
+    {
+        path:'/ctlog',
+        component: () => import('@/views/ball/ctlog.vue')
     },
     {
         path:'/notices/:id',

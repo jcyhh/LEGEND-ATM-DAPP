@@ -9,3 +9,4 @@ export function setupStore(app: App<Element>) {
 
 export * from './modules/app';
 export * from './modules/user';
+export * from './modules/game';

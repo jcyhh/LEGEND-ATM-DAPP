@@ -24,3 +24,8 @@ export type Api =
 | `/api/notices/${string}`              // 公告详情
 | '/api/notices/pop'                    // 弹窗公告
 | `/api/notices/${string}/read`         // 弹窗公告已读
+
+| '/api/football'
+| '/api/football/config'
+| '/api/football/join'
+| '/api/football/result'

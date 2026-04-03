@@ -4,14 +4,18 @@
             <van-icon name="arrow-left" :size="20" />
             <div class="size36 bold ml10">足球点球</div>
         </div>
-        <div class="flex ac menu">
-            <img src="@/assets/coin.png" class="img32 mr10">
-            <div class="size24 mr12" v-init="1000"></div>
-            <div class="flex ac tag size24">
-                <div>购买</div>
-                <van-icon name="arrow" />
-            </div>
+        <div class="tag flex ac">
+            <img src="@/assets/img/15.png" class="img24 mr10">
+            <div class="size26">规则</div>
         </div>
+    </div>
+    <div class="recordMenu">
+        <div>点球</div>
+        <div>记录</div>
+    </div>
+    <div class="awardMenu">
+        <div>参与奖</div>
+        <div>记录</div>
     </div>
     <div class="content" ref="contentRef">
         <div class="list">
@@ -21,46 +25,36 @@
             <div class="container flex col jb">
 
                 <div class="pl30 pr30">
-                    <div class="flex jb ac">
-                        <div class="tag flex ac">
-                            <img src="@/assets/img/15.png" class="img24 mr10">
-                            <div class="size26">规则</div>
-                        </div>
+                    <div class="flex jb ac mb30">
                         <div class="flex ac">
-                            <div class="tag flex ac" @click="routerPush('/record')">
-                                <div class="size26">点球记录</div>
+                            <div class="asset size24 flex ac">
+                                <img src="@/assets/img/bub.png" class="img32 mr10">
+                                <div v-init="balance_bub"></div>
+                                <div>BUB</div>
                             </div>
-                            <div class="tag flex ac ml20" @click="routerPush('/award')">
-                                <div class="size26">参与奖记录</div>
+                            <div class="asset size24 flex ac ml24">
+                                <img src="@/assets/coin.png" class="img32 mr10">
+                                <div v-init="balance_diamond"></div>
                             </div>
+                        </div>
+                        <div class="tag flex ac" @click="routerPush('/ctlog')">
+                            <div class="size26">充提记录</div>
                         </div>
                     </div>
-                    <div class="reocrd mt30">
-                        <div class="top flex jb ac">
-                            <div class="size28 bold">第10期</div>
-                            <div class="size24">当前8/10人</div>
-                        </div>
-                        <div class="member">
-                            <div class="flex col ac" v-for="(item,index) in 10">
-                                <img src="@/assets/img/16.png" class="img48">
-                                <div class="size18 mt10">nb34***123s</div>
-                            </div>
-                        </div>
-                    </div>
+                    <Member></Member>
                 </div>
 
                 <div class="flex jc pt50">
-                    <div class="aniBox">
-                        <div class="aniItem" :class="{ aniHidden: activeAni !== 'success' }" ref="successAniRef"></div>
-                        <div class="aniItem" :class="{ aniHidden: activeAni !== 'fail' }" ref="failAniRef"></div>
-                        <div class="standby" :class="{ aniHidden: activeAni !== 'standby' }" ref="standbyAniRef"></div>
-                    </div>
+                    <Ani ref="aniRef" @complete="handleAniComplete" />
                 </div>
 
                 <div>
                     <div class="flex jc">
-                        <div class="btnbox flex jc ac size36 bold" v-scale @click="handleConfirm">
+                        <div class="btnbox flex jc ac size36 bold" v-if="canJoin" v-scale @click="handleConfirm">
                             <div class="btnEnable flex jc ac">确认参与</div>
+                        </div>
+                        <div class="btnbox flex jc ac size36 bold" v-else>
+                            <div class="btnDisable flex jc ac">{{ hasJoinedCurrentGame ? '已参与' : '确认参与' }}</div>
                         </div>
                     </div>
                     <div class="tc size24 opc5 mb30 mt26">10人参与完毕后开始游戏</div>
@@ -68,22 +62,29 @@
                         <div class="inp flex jb ac pl30">
                             <div class="size28 bold opc5">支付</div>
                             <div class="flex ac pr24">
-                                <div class="size30 bold" v-init="1000"></div>
+                                <div class="size30 bold" v-init="check?total_amount:game_amount"></div>
                                 <img src="@/assets/coin.png" class="img40 ml12">
                             </div>
                         </div>
                         <div class="btn flex jc ac" v-scale>
-                            <img src="@/assets/img/22.png" class="img50 mr10">
+                            <img src="@/assets/img/22.png" class="img50 mr10 animate__animated animate__zoomIn ani5" v-if="check" @click.stop="check=false">
+                            <img src="@/assets/img/38.png" class="img50 mr10" v-else @click.stop="check=true">
                             <div class="size28">购买保险</div>
                         </div>
                     </div>
-                    <div class="flex tabs mt30" ref="tabsRef">
-                        <div class="tabGap"></div>
-                        <div class="tabItem flex0 flex jc ac" :class="current==index?'tabAct':'tabDef'" v-for="(item,index) in prices" :key="index" @click="onPriceChange(index, $event)">
-                            <img src="@/assets/coin.png" class="img40 mr10">
-                            <div class="size28 bold">{{ item }}</div>
+                    <div class="flex jb tabs mt30 pl30 pr30">
+                        <div class="tabDef tabItem flex jc ac" @click="rechargeRef?.open()">
+                            <img src="@/assets/img/34.png" class="img40 mr10">
+                            <div>充值</div>
                         </div>
-                        <div class="tabGap1"></div>
+                        <div class="tabDef tabItem flex jc ac" @click="withdrawRef?.open()">
+                            <img src="@/assets/img/35.png" class="img40 mr10">
+                            <div>提现</div>
+                        </div>
+                        <div class="tabDef tabItem flex jc ac" @click="routerPush('/pool')">
+                            <img src="@/assets/img/36.png" class="img40 mr10">
+                            <div>池子</div>
+                        </div>
                     </div>
                 </div>
 
@@ -92,101 +93,179 @@
     </div>
 
     <Result ref="resultRef"></Result>
+
+    <Recharge ref="rechargeRef"></Recharge>
+
+    <Withdraw ref="withdrawRef"></Withdraw>
 </template>
 
 <script setup lang="ts">
-import lottie, { type AnimationItem } from 'lottie-web'
-import failData from '@/assets/ani/fail/data.json'
-import standbyData from '@/assets/ani/standby/data.json'
-import successData from '@/assets/ani/success/data.json'
 import { routerGo, routerPush } from '@/router';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import Ani from './ball/Ani.vue';
 import Result from './ball/Result.vue';
+import Recharge from './ball/Recharge.vue';
+import Withdraw from './ball/Withdraw.vue';
+import { apiGet, apiPost } from '@/utils/request';
+import { computedAdd } from '@/utils';
+import { useGameStore } from '@/store';
+import Member from './ball/Member.vue';
 
 const contentRef = ref<HTMLElement>()
-const successAniRef = ref<HTMLElement>()
-const failAniRef = ref<HTMLElement>()
-const standbyAniRef = ref<HTMLElement>()
+const aniRef = ref<InstanceType<typeof Ani>>()
 const resultRef = ref<InstanceType<typeof Result>>()
-const activeAni = ref<'success' | 'fail' | 'standby'>('standby')
-const current = ref(0)
-const prices = [100, 1000, 3000, 6000, 10000]
-const tabsRef = ref<HTMLElement>()
-let successAni: AnimationItem | null = null
-let failAni: AnimationItem | null = null
-let standbyAni: AnimationItem | null = null
-let isPlayingSuccess = false
+const gameStore = useGameStore()
+const settledFlowGameId = ref<number | null>(null)
+const currentResult = ref<1 | 2 | null>(null)
+const joinLoading = ref(false)
+const hasJoinedCurrentGame = computed(() => {
+    const currentUserId = gameStore.currentUserId
+    const players = gameStore.gameInfo?.players
 
-const handleSuccessComplete = () => {
-    isPlayingSuccess = false
-    resultRef.value?.open()
+    if (currentUserId === null || !Array.isArray(players)) return false
+
+    return players.some((item: any) => Number(item?.user_id) === currentUserId)
+})
+const canJoin = computed(() => gameStore.gameInfo?.status === 0 && !hasJoinedCurrentGame.value)
+
+const rechargeRef = ref()
+const withdrawRef = ref()
+
+// 余额
+const balance_diamond = ref()
+const balance_bub = ref()
+const loadData = () => {
+    apiGet('/api/users/my').then((res:any)=>{
+        balance_diamond.value = res.balance_diamond
+        balance_bub.value = res.balance_bub
+        gameStore.setCurrentUserId(res.id)
+    })
+}
+loadData()
+
+// 游戏配置
+const check = ref(true)
+const game_amount = ref()
+const insurance_amount = ref()
+const total_amount = computed(()=>{
+    if(game_amount.value && insurance_amount.value)return computedAdd(game_amount.value, insurance_amount.value)
+    else return 0
+})
+const loadGameConfig = () => {
+    apiGet('/api/football/config').then((res:any)=>{
+        game_amount.value = res.game_amount
+        insurance_amount.value = res.insurance_amount
+    })
+}
+loadGameConfig()
+
+const gameId = computed(() => {
+    const value = gameStore.gameInfo?.id
+    return value === undefined || value === null ? null : Number(value)
+})
+const gameStatus = computed(() => gameStore.gameInfo?.status ?? null)
+
+const playSettlementAni = async (targetGameId: number) => {
+    if (settledFlowGameId.value === targetGameId) return
+
+    // Socket 会持续推送，同一局结算流程只执行一次，直到 game id 变化。
+    settledFlowGameId.value = targetGameId
+    try {
+        const res: any = await apiGet('/api/football/result', { game_id: targetGameId })
+        if (gameId.value !== targetGameId) return
+
+        const result = Number(res?.result)
+        if (result !== 1 && result !== 2) return
+
+        currentResult.value = result
+        resultRef.value?.setData(res)
+
+        if (result === 1) aniRef.value?.playSuccess()
+        else aniRef.value?.playFail()
+    } catch (error) {
+        if (gameId.value === targetGameId) {
+            settledFlowGameId.value = null
+        }
+    }
 }
 
-onMounted(() => {
-    if (successAniRef.value) {
-        successAni = lottie.loadAnimation({
-            container: successAniRef.value,
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            animationData: successData
-        })
-        successAni.addEventListener('complete', handleSuccessComplete)
+const handleAniComplete = () => {
+    if (currentResult.value) {
+        resultRef.value?.open(currentResult.value)
     }
-    if (failAniRef.value) {
-        failAni = lottie.loadAnimation({
-            container: failAniRef.value,
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            animationData: failData
-        })
-    }
-    if (standbyAniRef.value) {
-        standbyAni = lottie.loadAnimation({
-            container: standbyAniRef.value,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: standbyData
-        })
-    }
+}
 
+watch(gameId, (newGameId, oldGameId) => {
+    if (newGameId !== oldGameId) {
+        settledFlowGameId.value = null
+        currentResult.value = null
+    }
+})
+
+watch(
+    [gameStatus, gameId, hasJoinedCurrentGame],
+    ([status, currentGameId, joined]) => {
+        if (!joined || status === 0 || status === 1) {
+            currentResult.value = null
+            aniRef.value?.showStandby()
+            return
+        }
+
+        if (status !== 2 || !currentGameId) return
+
+        playSettlementAni(currentGameId)
+    },
+    { immediate: true }
+)
+
+onMounted(() => {
+    gameStore.startSync()
     setTimeout(() => {
         contentRef.value?.scrollTo({ top: contentRef.value.scrollHeight, behavior: 'smooth' })
     }, 1000)
 })
 
 onUnmounted(() => {
-    successAni?.removeEventListener('complete', handleSuccessComplete)
-    successAni?.destroy()
-    failAni?.destroy()
-    standbyAni?.destroy()
+    gameStore.stopSync()
 })
 
-const handleConfirm = () => {
-    if (!successAni || isPlayingSuccess) return
+const handleConfirm = async () => {
+    const currentGameId = gameId.value
+    if (!currentGameId || !canJoin.value || joinLoading.value) return
 
-    isPlayingSuccess = true
-    activeAni.value = 'success'
-    standbyAni?.stop()
-    failAni?.stop()
-    successAni.goToAndPlay(0, true)
-}
-
-const onPriceChange = (index: number, e: Event) => {
-    if (index === current.value) return
-    const el = e.currentTarget as HTMLElement
-    const container = tabsRef.value!
-    const scrollLeft = index > current.value
-        ? el.offsetLeft - container.offsetLeft
-        : el.offsetLeft - container.offsetLeft - container.clientWidth + el.offsetWidth
-    current.value = index
-    container.scrollTo({ left: scrollLeft, behavior: 'smooth' })
+    joinLoading.value = true
+    try {
+        await apiPost('/api/football/join', {
+            game_id: currentGameId,
+            buy_insurance: check.value
+        })
+    } finally {
+        joinLoading.value = false
+    }
 }
 </script>
 
 <style lang="scss" scoped>
+.recordMenu{
+    background-color: #0000004D;
+    border: 1px solid #FFFFFF66;
+    border-radius: 20px;
+    position: fixed;
+    right: 30px;
+    bottom: 450px;
+    z-index: 10;
+    padding: 10px 16px;
+}
+.awardMenu{
+    background-color: #0000004D;
+    border: 1px solid #FFFFFF66;
+    border-radius: 20px;
+    position: fixed;
+    right: 30px;
+    bottom: 328px;
+    z-index: 10;
+    padding: 10px 16px;
+}
 .nav{
     height: 100px;
     width: 100vw;
@@ -201,12 +280,14 @@ const onPriceChange = (index: number, e: Event) => {
     height: 58px;
     border-radius: 29px;
     padding: 0 2px 0 20px;
-    .tag{
-        background-color: #FFFFFF4D;
-        height: 48px;
-        border-radius: 24px;
-        padding: 0 10px 0 16px;
-    }
+}
+
+.tag{
+    background-color: #00000033;
+    border: 1px solid #FFFFFF66;
+    height: 56px;
+    border-radius: 24px;
+    padding: 0 16px;
 }
 
 .content{
@@ -221,6 +302,12 @@ const onPriceChange = (index: number, e: Event) => {
         width: 100vw;
         height: 1624px;
         position: relative;
+        .asset{
+            height: 56px;
+            border-radius: 28px;
+            border: 1px solid #FFFFFF;
+            padding: 0 10px;
+        }
         .pic12{
             width: 100vw;
             height: 1132px;
@@ -257,56 +344,6 @@ const onPriceChange = (index: number, e: Event) => {
                 height: 56px;
                 border-radius: 20px;
             }
-            .reocrd{
-                background-color: #0000004D;
-                border: 2px solid #FFFFFF33;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border-radius: 20px;
-                position: relative;
-                padding-top: 60px;
-                .top{
-                    background-color: #464EDD;
-                    height: 62px;
-                    border: 2px solid #FFFFFF33;
-                    border-radius: 20px 20px 0 0;
-                    position: absolute;
-                    top: -2px;
-                    left: -2px;
-                    right: -4px;
-                    z-index: 1;
-                    padding: 0 30px 0 22px;
-                }
-                .member{
-                    display: grid;
-                    grid-template-columns: repeat(5, minmax(0, 1fr));
-                    gap: 20px;
-                    padding: 30px 20px;
-                }
-            }
-            .aniBox{
-                width: 560px;
-                height: 560px;
-                position: relative;
-            }
-            .aniItem{
-                width: 560px;
-                height: 560px;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            .standby{
-                width: 172px;
-                height: 172px;
-                position: absolute;
-                bottom: 0;
-                left: 200px;
-            }
-            .aniHidden{
-                opacity: 0;
-                pointer-events: none;
-            }
             .tabs{
                 height: 80px;
                 width: 100vw;
@@ -325,7 +362,7 @@ const onPriceChange = (index: number, e: Event) => {
                     flex-shrink: 0;
                 }
                 .tabItem{
-                    width: 200px;
+                    width: 220px;
                     height: 80px;
                     background-size: 100% 100%;
                     margin-right: 12px;
