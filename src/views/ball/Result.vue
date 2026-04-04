@@ -7,18 +7,18 @@
                 <div class="pl30 pr30">
                     <div class="msg flex jc ac">
                         <div class="size26 br tc">
-                            <span>本期投入</span>
+                            <span>{{ $t('本期投入') }}</span>
                             <span class="size32 bold ml5 mr5">{{ investedText }}</span>
-                            <span>钻石，获得</span>
+                            <span>{{ $t('钻石，获得') }}</span>
                             <span class="size32 bold ml5 mr5 red">{{ receivedText }}</span>
-                            <span>钻石</span>
+                            <span>{{ $t('钻石') }}</span>
                         </div>
                     </div>
                     <div class="flex jc ac mt40">
                         <img src="@/assets/img/29.png" class="img22 mr6">
                         <img src="@/assets/img/29.png" class="img22 mr6">
                         <img src="@/assets/img/29.png" class="img22 mr24">
-                        <div class="size26 bold title">幸运用户</div>
+                        <div class="size26 bold title">{{ $t('幸运用户') }}</div>
                         <img src="@/assets/img/29.png" class="img22 ml24">
                         <img src="@/assets/img/29.png" class="img22 ml6">
                         <img src="@/assets/img/29.png" class="img22 ml6">
@@ -33,7 +33,7 @@
                     <div class="size20 tc opc5" v-else>--</div>
                 </div>
                 <div class="flex jc mt40">
-                    <div class="btn flex jc ac">再来一局</div>
+                    <div class="btn flex jc ac" @click="close()">{{ $t('再来一局') }}</div>
                 </div>
                 
             </div>

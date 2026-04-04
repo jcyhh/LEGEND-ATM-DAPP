@@ -2,20 +2,33 @@
     <div class="nav flex jb ac">
         <div class="flex ac" @click="routerGo()">
             <van-icon name="arrow-left" :size="20" />
-            <div class="size36 bold ml10">足球点球</div>
+            <div class="size36 bold ml10">{{ $t('多人点球') }}</div>
         </div>
-        <div class="tag flex ac">
-            <img src="@/assets/img/15.png" class="img24 mr10">
-            <div class="size26">规则</div>
+        <div class="flex ac">
+            <div class="asset size24 flex ac">
+                <img src="@/assets/img/bub.png" class="img32 mr10">
+                <div v-init="balance_bub"></div>
+            </div>
+            <div class="asset size24 flex ac ml24">
+                <img src="@/assets/coin.png" class="img32 mr10">
+                <div v-init="balance_diamond"></div>
+            </div>
         </div>
     </div>
-    <div class="recordMenu">
-        <div>点球</div>
-        <div>记录</div>
+    <div class="recordMenu br" @click="routerPush('/record')">
+        <div>{{ $t('点球') }}</div>
+        <div>{{ $t('记录') }}</div>
     </div>
-    <div class="awardMenu">
-        <div>参与奖</div>
-        <div>记录</div>
+    <div class="awardMenu br" @click="routerPush('/award')">
+        <div>{{ $t('参与奖') }}</div>
+        <div>{{ $t('记录') }}</div>
+    </div>
+    <div class="countdownBox flex jc ac" v-if="showCountdown">
+        <div class="countdownText">{{ displayGameTimer }}</div>
+    </div>
+    <div class="spectatorBox flex col ac jc" v-if="showSpectatorTip">
+        <img src="@/assets/img/1.gif" class="spectatorBall">
+        <div class="spectatorText mt30">{{ $t('游戏正在进行中') }}</div>
     </div>
     <div class="content" ref="contentRef">
         <div class="list">
@@ -25,22 +38,6 @@
             <div class="container flex col jb">
 
                 <div class="pl30 pr30">
-                    <div class="flex jb ac mb30">
-                        <div class="flex ac">
-                            <div class="asset size24 flex ac">
-                                <img src="@/assets/img/bub.png" class="img32 mr10">
-                                <div v-init="balance_bub"></div>
-                                <div>BUB</div>
-                            </div>
-                            <div class="asset size24 flex ac ml24">
-                                <img src="@/assets/coin.png" class="img32 mr10">
-                                <div v-init="balance_diamond"></div>
-                            </div>
-                        </div>
-                        <div class="tag flex ac" @click="routerPush('/ctlog')">
-                            <div class="size26">充提记录</div>
-                        </div>
-                    </div>
                     <Member></Member>
                 </div>
 
@@ -50,17 +47,17 @@
 
                 <div>
                     <div class="flex jc">
-                        <div class="btnbox flex jc ac size36 bold" v-if="canJoin" v-scale @click="handleConfirm">
-                            <div class="btnEnable flex jc ac">确认参与</div>
+                        <div class="btnbox tc flex jc ac size36 bold" v-if="canJoin" v-scale @click="handleConfirm">
+                            <div class="btnEnable flex jc ac">{{ $t('确认参与') }}</div>
                         </div>
-                        <div class="btnbox flex jc ac size36 bold" v-else>
-                            <div class="btnDisable flex jc ac">{{ hasJoinedCurrentGame ? '已参与' : '确认参与' }}</div>
+                        <div class="btnbox tc flex jc ac size36 bold" v-else>
+                            <div class="btnDisable flex jc ac">{{ buttonText }}</div>
                         </div>
                     </div>
-                    <div class="tc size24 opc5 mb30 mt26">10人参与完毕后开始游戏</div>
+                    <div class="tc size24 opc5 mb30 mt26">{{ $t('10人参与完毕后开始游戏') }}</div>
                     <div class="flex jb ac pl30 pr30">
                         <div class="inp flex jb ac pl30">
-                            <div class="size28 bold opc5">支付</div>
+                            <div class="size28 bold opc5">{{ $t('支付') }}</div>
                             <div class="flex ac pr24">
                                 <div class="size30 bold" v-init="check?total_amount:game_amount"></div>
                                 <img src="@/assets/coin.png" class="img40 ml12">
@@ -69,21 +66,21 @@
                         <div class="btn flex jc ac" v-scale>
                             <img src="@/assets/img/22.png" class="img50 mr10 animate__animated animate__zoomIn ani5" v-if="check" @click.stop="check=false">
                             <img src="@/assets/img/38.png" class="img50 mr10" v-else @click.stop="check=true">
-                            <div class="size28">购买保险</div>
+                            <div class="size28">{{ $t('购买保险') }}</div>
                         </div>
                     </div>
                     <div class="flex jb tabs mt30 pl30 pr30">
                         <div class="tabDef tabItem flex jc ac" @click="rechargeRef?.open()">
                             <img src="@/assets/img/34.png" class="img40 mr10">
-                            <div>充值</div>
+                            <div>{{ $t('充值') }}</div>
                         </div>
                         <div class="tabDef tabItem flex jc ac" @click="withdrawRef?.open()">
                             <img src="@/assets/img/35.png" class="img40 mr10">
-                            <div>提现</div>
+                            <div>{{ $t('提现') }}</div>
                         </div>
                         <div class="tabDef tabItem flex jc ac" @click="routerPush('/pool')">
                             <img src="@/assets/img/36.png" class="img40 mr10">
-                            <div>池子</div>
+                            <div>{{ $t('池子') }}</div>
                         </div>
                     </div>
                 </div>
@@ -94,9 +91,9 @@
 
     <Result ref="resultRef"></Result>
 
-    <Recharge ref="rechargeRef"></Recharge>
+    <Recharge ref="rechargeRef" @submit="submitRecharge"></Recharge>
 
-    <Withdraw ref="withdrawRef"></Withdraw>
+    <Withdraw ref="withdrawRef" @submit="submitWithdraw"></Withdraw>
 </template>
 
 <script setup lang="ts">
@@ -110,6 +107,57 @@ import { apiGet, apiPost } from '@/utils/request';
 import { computedAdd } from '@/utils';
 import { useGameStore } from '@/store';
 import Member from './ball/Member.vue';
+import { useGameProject } from '@/dapp/contract/gameProject';
+import { checkGasBalance, getSign } from '@/dapp';
+import { useErc20 } from '@/dapp/contract/erc20';
+import { t } from '@/locale';
+
+const { writeRecharge, writeWithdraw } = useGameProject()
+
+const { writeApprove } = useErc20()
+
+// 充值
+const submitRecharge = async (data:any) => {
+    await checkGasBalance()
+
+    await writeApprove(import.meta.env.VITE_GAME_PROJECT, data)
+
+    const signInfo = await getSign('Recharge')
+
+    const res:any = await apiPost('/api/recharge', {
+        usdt_amount: data,
+        ...signInfo
+    })
+
+    const { id, usdt_amount, receiver, deadline, signature } = res
+    await writeRecharge(id, usdt_amount, receiver, deadline, signature)
+
+    rechargeRef.value?.close()
+
+    setTimeout(() => {
+        loadData()
+    }, 3000);
+}
+// 提现
+const submitWithdraw = async (data:any) => {
+    const { amount, ccy } = data
+    await checkGasBalance()
+
+    const signInfo = await getSign('Withdraw')
+
+    const res:any = await apiPost('/api/withdraw', {
+        amount,
+        ccy,
+        ...signInfo
+    })
+    const { id, token, sign_amount, expired_at, sign } = res.info
+    await writeWithdraw(id, token, sign_amount, expired_at, sign)
+
+    withdrawRef.value?.close()
+    setTimeout(() => {
+        loadData()
+    }, 3000);
+}
 
 const contentRef = ref<HTMLElement>()
 const aniRef = ref<InstanceType<typeof Ani>>()
@@ -127,6 +175,11 @@ const hasJoinedCurrentGame = computed(() => {
     return players.some((item: any) => Number(item?.user_id) === currentUserId)
 })
 const canJoin = computed(() => gameStore.gameInfo?.status === 0 && !hasJoinedCurrentGame.value)
+const buttonText = computed(() => {
+    if (hasJoinedCurrentGame.value) return t('已参与')
+    if (gameStore.gameInfo?.status === 1 || gameStore.gameInfo?.status === 2) return t('等待下一局')
+    return t('确认参与')
+})
 
 const rechargeRef = ref()
 const withdrawRef = ref()
@@ -164,6 +217,18 @@ const gameId = computed(() => {
     return value === undefined || value === null ? null : Number(value)
 })
 const gameStatus = computed(() => gameStore.gameInfo?.status ?? null)
+const gameTimer = computed(() => gameStore.gameInfo?.timer ?? null)
+const showCountdown = computed(() => {
+    return hasJoinedCurrentGame.value && gameStatus.value === 1 && gameTimer.value !== null && gameTimer.value !== undefined && gameTimer.value !== ''
+})
+const showSpectatorTip = computed(() => {
+    return !hasJoinedCurrentGame.value && (gameStatus.value === 1 || gameStatus.value === 2)
+})
+const displayGameTimer = computed(() => {
+    const value = Number(gameTimer.value)
+    if (Number.isNaN(value)) return gameTimer.value
+    return value + 1
+})
 
 const playSettlementAni = async (targetGameId: number) => {
     if (settledFlowGameId.value === targetGameId) return
@@ -247,6 +312,7 @@ const handleConfirm = async () => {
 
 <style lang="scss" scoped>
 .recordMenu{
+    max-width: 180px;
     background-color: #0000004D;
     border: 1px solid #FFFFFF66;
     border-radius: 20px;
@@ -257,6 +323,7 @@ const handleConfirm = async () => {
     padding: 10px 16px;
 }
 .awardMenu{
+    max-width: 180px;
     background-color: #0000004D;
     border: 1px solid #FFFFFF66;
     border-radius: 20px;
@@ -265,6 +332,48 @@ const handleConfirm = async () => {
     bottom: 328px;
     z-index: 10;
     padding: 10px 16px;
+}
+.countdownBox{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background-color: #00000080;
+    border-radius: 20px;
+    padding: 10px;
+    z-index: 20;
+    pointer-events: none;
+}
+.countdownText{
+    font-size: 120px;
+    line-height: 1;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.spectatorBox{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 300px;
+    background-color: #00000080;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    z-index: 20;
+    pointer-events: none;
+}
+.spectatorBall{
+    width: 140px;
+    height: 140px;
+}
+.spectatorText{
+    font-size: 28px;
+    font-weight: 500;
+    color: #FFFFFF;
 }
 .nav{
     height: 100px;
@@ -289,6 +398,12 @@ const handleConfirm = async () => {
     border-radius: 24px;
     padding: 0 16px;
 }
+.asset{
+    height: 56px;
+    border-radius: 28px;
+    border: 1px solid #FFFFFF;
+    padding: 0 12px;
+}
 
 .content{
     width: 100vw;
@@ -302,12 +417,6 @@ const handleConfirm = async () => {
         width: 100vw;
         height: 1624px;
         position: relative;
-        .asset{
-            height: 56px;
-            border-radius: 28px;
-            border: 1px solid #FFFFFF;
-            padding: 0 10px;
-        }
         .pic12{
             width: 100vw;
             height: 1132px;
@@ -335,7 +444,7 @@ const handleConfirm = async () => {
         .container{
             position: relative;
             z-index: 5;
-            padding: 100px 0 40px 0;
+            padding: 120px 0 40px 0;
             height: 1624px;
             .tag{
                 background-color: #00000033;

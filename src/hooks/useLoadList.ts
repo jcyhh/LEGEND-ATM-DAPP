@@ -26,7 +26,7 @@ export function useLoadList(api:Api, listName:string = 'list', params:Ref | Comp
                 finished.value = data.length < pageSize
             }else{
                 loading.value = false
-                finished.value = false
+                finished.value = true
             }
         })
     }

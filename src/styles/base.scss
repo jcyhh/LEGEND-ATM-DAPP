@@ -28,3 +28,9 @@
         align-items: center;
     }
 }
+
+.fullPage{
+    width: 100vw;
+    min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
+}

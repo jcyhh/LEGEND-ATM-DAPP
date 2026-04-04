@@ -41,7 +41,7 @@ export default [
         component: () => import('@/views/ball/pool.vue')
     },
     {
-        path:'/ball',
+        path:'/game',
         component: () => import('@/views/ball.vue')
     },
     {
@@ -57,8 +57,12 @@ export default [
         component: () => import('@/views/notice/index.vue')
     },
     {
-        path:'/ctlog',
-        component: () => import('@/views/ball/ctlog.vue')
+        path:'/withdrawRecoard',
+        component: () => import('@/views/ball/withdrawRecoard.vue')
+    },
+    {
+        path:'/rechargeRecord',
+        component: () => import('@/views/ball/rechargeRecord.vue')
     },
     {
         path:'/notices/:id',

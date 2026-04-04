@@ -1,8 +1,8 @@
 <template>
     <div class="reocrd">
         <div class="top flex jb ac">
-            <div class="size28 bold">第{{ period }}期</div>
-            <div class="size24">当前{{ playerCount }}/{{ maxPlayers }}人</div>
+            <div class="size28 bold">{{ $t('第') }} {{ period }} {{ $t('期') }}</div>
+            <div class="size24">{{ $t('当前') }} {{ playerCount }}/{{ maxPlayers }} {{ $t('人') }}</div>
         </div>
         <div class="member">
             <div class="flex col ac" v-for="(item,index) in displayPlayers" :key="item.user_id ?? index">

@@ -12,7 +12,7 @@ export const defaultGasPrice = parseGwei('0.05') // GWEI
 
 export const minGasBalance = parseEther('0.0004') // 交易前最低 ETH 余额
 
-export type SignMessage = 'Login' | 'Transfer' | 'Withdraw' | 'Order' | 'Node' | 'Pledge' | 'Claim' | 'Saving' | 'TokenOrder'; // 签名前缀
+export type SignMessage = 'Login' | 'Transfer' | 'Withdraw' | 'Order' | 'Node' | 'Pledge' | 'Claim' | 'Saving' | 'TokenOrder' | 'Recharge' | 'Withdraw'; // 签名前缀
 
 const addressKey: string = 'WELLET_ADDRESS' // 存储钱包地址的KEY
 

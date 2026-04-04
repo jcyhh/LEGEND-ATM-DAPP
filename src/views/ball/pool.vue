@@ -7,7 +7,7 @@
         <div class="flex1" @click="routerGo()">
             <van-icon name="arrow-left" :size="20" />
         </div>
-        <div class="flex2 tc size36 bold">池子</div>
+        <div class="flex2 tc size36 bold">{{ $t('池子') }}</div>
         <div class="flex1"></div>
     </div>
     <div class="gap200"></div>
@@ -16,10 +16,10 @@
         
         <div class="size48 tc bold">
             <span class="yellow">LEGEND ATM</span>
-            <span class="ml10">池子</span>
+            <span class="ml10">{{ $t('池子') }}</span>
         </div>
 
-        <div class="tc size24 opc5 mt10">链上归集、销毁，安全上链，全程可查</div>
+        <div class="tc size24 opc5 mt10">{{ $t('链上归集、销毁，安全上链，全程可查') }}</div>
 
         <div class="gap200"></div>
         <div class="gap76"></div>
@@ -27,13 +27,13 @@
         <div class="card">
             <div class="flex ac">
                 <img src="@/assets/img/coin.png" class="img60 mr10">
-                <div class="size32 bold">添加ATM池</div>
+                <div class="size32 bold">{{ $t('添加ATM池') }}</div>
             </div>
             <div class="flex jb ac mt30">
-                <div class="size28 opc5">池子总额</div>
+                <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
-                    <span v-init="1000"></span>
-                    <span class="ml10">ATM</span>
+                    <span v-init="atm_pool"></span>
+                    <span class="ml10">TOKEN</span>
                 </div>
             </div>
         </div>
@@ -41,13 +41,13 @@
         <div class="card mt30">
             <div class="flex ac">
                 <img src="@/assets/img/coin.png" class="img60 mr10">
-                <div class="size32 bold">ATM销毁池</div>
+                <div class="size32 bold">ATM {{ $t('销毁池') }}</div>
             </div>
             <div class="flex jb ac mt40">
-                <div class="size28 opc5">池子总额</div>
+                <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
-                    <span v-init="1000"></span>
-                    <span class="ml10">ATM</span>
+                    <span v-init="atm_burn"></span>
+                    <span class="ml10">TOKEN</span>
                 </div>
             </div>
         </div>
@@ -55,13 +55,13 @@
         <div class="card mt30">
             <div class="flex ac">
                 <img src="@/assets/img/bub.png" class="img60 mr10">
-                <div class="size32 bold">BUB销毁池</div>
+                <div class="size32 bold">BUB {{ $t('销毁池') }}</div>
             </div>
             <div class="flex jb ac mt40">
-                <div class="size28 opc5">池子总额</div>
+                <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
-                    <span v-init="1000"></span>
-                    <span class="ml10">BUB</span>
+                    <span v-init="bub_burn"></span>
+                    <span class="ml10">TOKEN</span>
                 </div>
             </div>
         </div>
@@ -73,6 +73,17 @@
 
 <script setup lang="ts">
 import { routerGo } from '@/router';
+import { apiGet } from '@/utils/request';
+import { ref } from 'vue';
+
+const atm_burn = ref()
+const atm_pool = ref()
+const bub_burn = ref()
+apiGet('/api/football/pools').then((res:any)=>{
+    atm_burn.value = res.atm_burn
+    atm_pool.value = res.atm_pool
+    bub_burn.value = res.bub_burn
+})
 </script>
 
 <style lang="scss" scoped>

@@ -5,36 +5,54 @@
             <div class="pl30 pr30">
                 <div class="flex jb ac">
                     <div class="img32"></div>
-                    <div class="title size38 bold">充值</div>
+                    <div class="title size38 bold">{{ $t('充值') }}</div>
                     <img src="@/assets/img/28.png" class="img32" @click="close">
                 </div>
             </div>
 
             <div class="cell flex jb ac mt100">
-                <div class="opc5 size28 bold">充值数量</div>
-                <input type="number" class="size28 bold flex1 tr" placeholder="0">
+                <div class="opc5 size28 bold">{{ $t('充值数量') }}</div>
+                <input type="number" v-model="inputAmount" class="size28 bold flex1 tr" placeholder="0">
                 <img src="@/assets/coin.png" class="img40 ml20">
             </div>
 
+            <div class="flex je mt20">
+                <div class="flex ac size26" @click="routerPush('/rechargeRecord')">
+                    <span class="mr5">{{ $t('充值记录') }}</span>
+                    <van-icon name="arrow" />
+                </div>
+            </div>
 
-            <div class="flex jc mt100">
-                <div class="btn flex jc ac">确认</div>
+
+            <div class="flex jc mt60">
+                <div class="btn flex jc ac" v-scale @click="submit">{{ $t('确认') }}</div>
             </div>
         </div>
     </van-popup>
 </template>
 
 <script setup lang="ts">
+import { t } from '@/locale';
+import { routerPush } from '@/router';
+import { message } from '@/utils/message';
 import { ref } from 'vue';
+const emits = defineEmits(['submit'])
 
 const show = ref(false)
 
 const open = () => {
+    inputAmount.value = ''
     show.value = true
 }
 
 const close = () => {
     show.value = false
+}
+const inputAmount = ref()
+
+const submit = () => {
+    if(!inputAmount.value)return message(t('请输入充值数量'))
+    emits('submit', inputAmount.value)
 }
 
 defineExpose({

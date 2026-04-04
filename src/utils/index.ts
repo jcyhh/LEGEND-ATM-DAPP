@@ -44,7 +44,7 @@ export function computedDiv(a:number|string, b:number|string) {
     try {
         f = Number(b).toString().split(".")[1].length
     } catch (g) { }
-    return c = Number(Number(a).toString().replace(".", "")), d = Number(Number(a).toString().replace(".", "")), computedMul(c /
+    return c = Number(Number(a).toString().replace(".", "")), d = Number(Number(b).toString().replace(".", "")), computedMul(c /
         d, Math.pow(10, f - e))
 }
 
@@ -63,7 +63,7 @@ export function computedAdd(a:number|string, b:number|string) {
         c = 0
     }
     try {
-        d = Number(a).toString().split(".")[1].length
+        d = Number(b).toString().split(".")[1].length
     } catch (f) {
         d = 0
     }
@@ -84,11 +84,21 @@ export function computedSub(a:number|string, b:number|string) {
         c = 0
     }
     try {
-        d = Number(a).toString().split(".")[1].length
+        d = Number(b).toString().split(".")[1].length
     } catch (f) {
         d = 0
     }
     return e = Math.pow(10, Math.max(c, d)), (computedMul(a, e) - computedMul(b, e)) / e
+}
+
+export function getPercent(a:number|string, b:number|string) {
+    const numA = Number(a)
+    const numB = Number(b)
+
+    if(!Number.isFinite(numA) || !Number.isFinite(numB) || numA < 0 || numB <= 0)return 0
+    if(numA >= numB)return 100
+
+    return computedMul(computedDiv(numA, numB), 100)
 }
 
 export function isIOS() {

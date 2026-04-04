@@ -5,13 +5,13 @@
             <div class="pl30 pr30">
                 <div class="flex jb ac">
                     <div class="img32"></div>
-                    <div class="title size38 bold">提现</div>
+                    <div class="title size38 bold">{{ $t('提现') }}</div>
                     <img src="@/assets/img/28.png" class="img32" @click="close">
                 </div>
             </div>
 
             <div class="cell flex jb ac mt50" @click="pickerRef?.open(pickerCurrent)">
-                <div class="opc5 size28 bold">提现数量</div>
+                <div class="opc5 size28 bold">{{ $t('选择资产') }}</div>
                 <div class="flex ac">
                     <img :src="pickerList[pickerCurrent].icon" class="img40 ml20">
                     <div class="size28 bold ml10 mr10">{{ pickerList[pickerCurrent].name }}</div>
@@ -20,18 +20,20 @@
             </div>
 
             <div class="cell flex jb ac mt20">
-                <div class="opc5 size28 bold">提现数量</div>
-                <input type="number" class="size28 bold flex1 tr" placeholder="0">
-                <img src="@/assets/coin.png" class="img40 ml20">
+                <div class="opc5 size28 bold">{{ $t('提现数量') }}</div>
+                <input type="number" v-model="inputAmount" class="size28 bold flex1 tr" placeholder="0">
+                <img :src="pickerList[pickerCurrent].icon" class="img40 ml20">
             </div>
 
-            <div class="tc size24 mt20">
-                <span class="opc5">当前最多可提现钻石</span>
-                <span class="bold ml5" v-init="1000"></span>
+            <div class="flex je mt15">
+                <div class="flex ac size26" @click="routerPush('/withdrawRecoard')">
+                    <span class="mr5">{{ $t('提现记录') }}</span>
+                    <van-icon name="arrow" />
+                </div>
             </div>
 
             <div class="flex jc mt20">
-                <div class="btn flex jc ac">确认</div>
+                <div class="btn flex jc ac" v-scale @click="submit">{{ $t('确认') }}</div>
             </div>
         </div>
     </van-popup>
@@ -46,22 +48,37 @@ import { computed, ref } from 'vue';
 import CusPicker from '@/components/CusPicker/index.vue';
 import zuanshi from '@/assets/coin.png'
 import bub from '@/assets/img/bub.png'
+import { routerPush } from '@/router';
+import { message } from '@/utils/message';
+import { t } from '@/locale';
+
+const emits = defineEmits(['submit'])
 
 const show = ref(false)
 
 const pickerCurrent = ref(0)
 const pickerRef = ref()
 const pickerList = computed(()=>([
-    {name:'钻石', icon: zuanshi, value:''},
-    {name:'BUB', icon: bub, value:''}
+    {name:t('钻石'), icon: zuanshi, value:'balance_diamond'},
+    {name:'BUB', icon: bub, value:'balance_bub'}
 ]))
 
 const open = () => {
+    inputAmount.value = ''
     show.value = true
 }
 
 const close = () => {
     show.value = false
+}
+
+const inputAmount = ref()
+const submit = () => {
+    if(!inputAmount.value)return message(t('请输入提现数量'))
+    emits('submit', {
+        amount: inputAmount.value,
+        ccy: pickerList.value[pickerCurrent.value].value
+    })
 }
 
 defineExpose({

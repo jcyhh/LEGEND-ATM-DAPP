@@ -29,3 +29,7 @@ export type Api =
 | '/api/football/config'
 | '/api/football/join'
 | '/api/football/result'
+| '/api/recharge'
+| '/api/football/records'
+| '/api/football/release_orders'
+| '/api/football/pools'

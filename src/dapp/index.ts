@@ -147,6 +147,9 @@ export const checkGasBalance = async () => {
     const walletClient = getWalletClient()
     const address = await getConnectedAddress()
     const balance = await walletClient.getBalance({ address })
+
+    console.log(balance);
+    
     
     if (balance < minGasBalance) {
         message(t('Gas费用不足'))
