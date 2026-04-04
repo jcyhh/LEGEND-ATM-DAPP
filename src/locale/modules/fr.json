@@ -101,8 +101,8 @@
     "确认":"Confirmer",
     "请输入充值数量":"Veuillez saisir le montant de recharge",
     "点球记录":"Historique des tirs au but",
-    "挑战成功":"Défi réussi",
-    "挑战失败":"Défi échoué",
+    "挑战成功":"Frappe parfaite",
+    "挑战失败":"Pas de but cette manche",
     "投入钻石":"Diamants investis",
     "获得钻石":"Diamants obtenus",
     "本期投入":"Investi cette manche",
@@ -114,5 +114,6 @@
     "提现数量":"Montant du retrait",
     "提现记录":"Historique des retraits",
     "请输入提现数量":"Veuillez saisir le montant du retrait",
-    "极速链接":"Lien de vitesse extrême"
+    "极速链接":"Lien de vitesse extrême",
+    "本局奖励已转入bub补偿池":"La récompense de cette manche a été transférée dans le pool de compensation BUB"
 }

@@ -10,22 +10,24 @@
                 </div>
             </div>
 
-            <div class="cell flex jb ac mt50" @click="pickerRef?.open(pickerCurrent)">
+            <div class="cell flex jb ac mt40" @click="pickerRef?.open(pickerCurrent)">
                 <div class="opc5 size28 bold">{{ $t('选择资产') }}</div>
                 <div class="flex ac">
-                    <img :src="pickerList[pickerCurrent].icon" class="img40 ml20">
+                    <img :src="pickerList[pickerCurrent].icon" class="img40 ml20 avatar">
                     <div class="size28 bold ml10 mr10">{{ pickerList[pickerCurrent].name }}</div>
                     <van-icon name="arrow" />
                 </div>
             </div>
 
-            <div class="cell flex jb ac mt20">
+            <div class="cell flex jb ac mt10">
                 <div class="opc5 size28 bold">{{ $t('提现数量') }}</div>
                 <input type="number" v-model="inputAmount" class="size28 bold flex1 tr" placeholder="0">
-                <img :src="pickerList[pickerCurrent].icon" class="img40 ml20">
+                <img :src="pickerList[pickerCurrent].icon" class="img40 ml20 avatar">
             </div>
 
-            <div class="flex je mt15">
+            <div class="flex jb ac mt10">
+                <div class="size24" v-if="pickerCurrent==0">{{ $t('当前最多可提现') }} {{ diamond_withdraw_quota || 0 }} {{ $t('钻石') }}</div>
+                <div v-else></div>
                 <div class="flex ac size26" @click="routerPush('/withdrawRecoard')">
                     <span class="mr5">{{ $t('提现记录') }}</span>
                     <van-icon name="arrow" />
@@ -47,10 +49,11 @@
 import { computed, ref } from 'vue';
 import CusPicker from '@/components/CusPicker/index.vue';
 import zuanshi from '@/assets/coin.png'
-import bub from '@/assets/img/bub.png'
+import bub from '@/assets/img/bub.jpeg'
 import { routerPush } from '@/router';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
+import { apiGet } from '@/utils/request';
 
 const emits = defineEmits(['submit'])
 
@@ -63,7 +66,15 @@ const pickerList = computed(()=>([
     {name:'BUB', icon: bub, value:'balance_bub'}
 ]))
 
+const diamond_withdraw_quota = ref()
+const loadData = () => {
+    apiGet('/api/users/my').then((res:any)=>{
+        diamond_withdraw_quota.value = res.diamond_withdraw_quota
+    })
+}
+
 const open = () => {
+    loadData()
     inputAmount.value = ''
     show.value = true
 }

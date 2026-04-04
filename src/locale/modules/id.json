@@ -101,8 +101,8 @@
     "确认":"Konfirmasi",
     "请输入充值数量":"Masukkan jumlah isi ulang",
     "点球记录":"Catatan adu penalti",
-    "挑战成功":"Tantangan berhasil",
-    "挑战失败":"Tantangan gagal",
+    "挑战成功":"Tepat sempurna",
+    "挑战失败":"Tidak ada gol pada ronde ini",
     "投入钻石":"Berlian yang diinvestasikan",
     "获得钻石":"Berlian yang diperoleh",
     "本期投入":"Investasi ronde ini",
@@ -114,5 +114,6 @@
     "提现数量":"Jumlah penarikan",
     "提现记录":"Catatan penarikan",
     "请输入提现数量":"Masukkan jumlah penarikan",
-    "极速链接":"Link kecepatan tinggi"
+    "极速链接":"Link kecepatan tinggi",
+    "本局奖励已转入bub补偿池":"Hadiah ronde ini telah dipindahkan ke pool kompensasi BUB"
 }

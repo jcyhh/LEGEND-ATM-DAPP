@@ -6,13 +6,14 @@
             <div class="content">
                 <div class="pl30 pr30">
                     <div class="msg flex jc ac">
-                        <div class="size26 br tc">
+                        <div class="size26 br tc" v-if="isWin">
                             <span>{{ $t('本期投入') }}</span>
                             <span class="size32 bold ml5 mr5">{{ investedText }}</span>
                             <span>{{ $t('钻石，获得') }}</span>
                             <span class="size32 bold ml5 mr5 red">{{ receivedText }}</span>
                             <span>{{ $t('钻石') }}</span>
                         </div>
+                        <div class="size26 br tc" v-else>{{ $t('本局奖励已转入bub补偿池') }}</div>
                     </div>
                     <div class="flex jc ac mt40">
                         <img src="@/assets/img/29.png" class="img22 mr6">

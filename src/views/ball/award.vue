@@ -56,7 +56,7 @@
                         <div class="size24 opc5">{{ $t('已释放') }}(BUB)</div>
                         <div class="flex ac">
                             <div class="size24 bold" v-init="item.released_amount"></div>
-                            <img src="@/assets/img/bub.png" class="img24 ml5">
+                            <img src="@/assets/img/bub.jpeg" class="img24 ml5 avatar">
                         </div>
                     </div>
                 </div>

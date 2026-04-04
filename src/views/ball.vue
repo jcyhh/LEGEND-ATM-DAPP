@@ -6,7 +6,7 @@
         </div>
         <div class="flex ac">
             <div class="asset size24 flex ac">
-                <img src="@/assets/img/bub.png" class="img32 mr10">
+                <img src="@/assets/img/bub.jpeg" class="img32 mr10 avatar">
                 <div v-init="balance_bub"></div>
             </div>
             <div class="asset size24 flex ac ml24">

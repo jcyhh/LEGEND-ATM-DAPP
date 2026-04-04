@@ -101,8 +101,8 @@
     "确认":"Sahkan",
     "请输入充值数量":"Sila masukkan jumlah tambah nilai",
     "点球记录":"Rekod sepakan penalti",
-    "挑战成功":"Cabaran berjaya",
-    "挑战失败":"Cabaran gagal",
+    "挑战成功":"Tepat sempurna",
+    "挑战失败":"Tiada gol dalam pusingan ini",
     "投入钻石":"Berlian dilaburkan",
     "获得钻石":"Berlian diperoleh",
     "本期投入":"Pelaburan pusingan ini",
@@ -114,5 +114,6 @@
     "提现数量":"Jumlah pengeluaran",
     "提现记录":"Rekod pengeluaran",
     "请输入提现数量":"Sila masukkan jumlah pengeluaran",
-    "极速链接":"Pautan kelajuan"
+    "极速链接":"Pautan kelajuan",
+    "本局奖励已转入bub补偿池":"Ganjaran pusingan ini telah dipindahkan ke kolam pampasan BUB"
 }

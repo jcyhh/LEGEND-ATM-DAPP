@@ -101,8 +101,8 @@
     "确认":"Confirm",
     "请输入充值数量":"Please enter the recharge amount",
     "点球记录":"Penalty Kick Records",
-    "挑战成功":"Challenge Successful",
-    "挑战失败":"Challenge Failed",
+    "挑战成功":"Perfect Shot",
+    "挑战失败":"No Goal This Round",
     "投入钻石":"Diamonds Invested",
     "获得钻石":"Diamonds Received",
     "本期投入":"Invested This Round",
@@ -114,5 +114,6 @@
     "提现数量":"Withdraw Amount",
     "提现记录":"Withdraw Records",
     "请输入提现数量":"Please enter the withdrawal amount",
-    "极速链接":"Ultra-fast Link"
+    "极速链接":"Ultra-fast Link",
+    "本局奖励已转入bub补偿池":"This round's reward has been transferred to the BUB compensation pool"
 }

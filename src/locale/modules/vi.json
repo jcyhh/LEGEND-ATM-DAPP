@@ -101,8 +101,8 @@
     "确认":"Xác nhận",
     "请输入充值数量":"Vui lòng nhập số lượng nạp",
     "点球记录":"Lịch sử đá phạt đền",
-    "挑战成功":"Thử thách thành công",
-    "挑战失败":"Thử thách thất bại",
+    "挑战成功":"Sút trúng hoàn hảo",
+    "挑战失败":"Ván này không ghi bàn",
     "投入钻石":"Kim cương đã đầu tư",
     "获得钻石":"Kim cương nhận được",
     "本期投入":"Đầu tư kỳ này",
@@ -114,5 +114,6 @@
     "提现数量":"Số lượng rút",
     "提现记录":"Lịch sử rút tiền",
     "请输入提现数量":"Vui lòng nhập số lượng rút",
-    "极速链接":"Kết nối cực nhanh"
+    "极速链接":"Kết nối cực nhanh",
+    "本局奖励已转入bub补偿池":"Phần thưởng ván này đã được chuyển vào pool bồi thường BUB"
 }
