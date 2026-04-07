@@ -67,7 +67,7 @@
     "卡顿备用":"Tautan cepat",
     "操作成功":"Operasi berhasil",
     "操作失败":"Operasi gagal",
-    "多人点球":"Adu penalti multipemain",
+    "点球大战":"Adu penalti",
     "请先绑定上级":"Silakan hubungkan upline terlebih dahulu",
     "点球":"Adu penalti",
     "记录":"Catatan",
@@ -115,5 +115,8 @@
     "提现记录":"Catatan penarikan",
     "请输入提现数量":"Masukkan jumlah penarikan",
     "极速链接":"Link kecepatan tinggi",
-    "本局奖励已转入bub补偿池":"Hadiah ronde ini telah dipindahkan ke pool kompensasi BUB"
+    "本局奖励已转入bub补偿池":"Hadiah ronde ini telah dipindahkan ke pool kompensasi BUB",
+    "留存池":"Pool cadangan",
+    "进球1.5倍卡":"Kartu gol 1,5x",
+    "未结算":"Belum diselesaikan"
 }

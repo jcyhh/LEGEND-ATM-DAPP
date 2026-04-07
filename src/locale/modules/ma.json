@@ -67,7 +67,7 @@
     "卡顿备用":"Pautan pantas",
     "操作成功":"Operasi berjaya",
     "操作失败":"Operasi gagal",
-    "多人点球":"Sepakan penalti berbilang pemain",
+    "点球大战":"Pertarungan sepakan penalti",
     "请先绑定上级":"Sila ikat upline dahulu",
     "点球":"Sepakan penalti",
     "记录":"Rekod",
@@ -115,5 +115,8 @@
     "提现记录":"Rekod pengeluaran",
     "请输入提现数量":"Sila masukkan jumlah pengeluaran",
     "极速链接":"Pautan kelajuan",
-    "本局奖励已转入bub补偿池":"Ganjaran pusingan ini telah dipindahkan ke kolam pampasan BUB"
+    "本局奖励已转入bub补偿池":"Ganjaran pusingan ini telah dipindahkan ke kolam pampasan BUB",
+    "留存池":"Kolam simpanan",
+    "进球1.5倍卡":"Kad gol 1.5x",
+    "未结算":"Belum diselesaikan"
 }

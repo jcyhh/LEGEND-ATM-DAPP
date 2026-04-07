@@ -53,6 +53,10 @@ export default [
         component: () => import('@/views/ball/award.vue')
     },
     {
+        path:'/asset/:ccy',
+        component: () => import('@/views/ball/asset.vue')
+    },
+    {
         path:'/notices',
         component: () => import('@/views/notice/index.vue')
     },

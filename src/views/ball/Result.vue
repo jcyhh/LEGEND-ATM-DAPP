@@ -6,14 +6,8 @@
             <div class="content">
                 <div class="pl30 pr30">
                     <div class="msg flex jc ac">
-                        <div class="size26 br tc" v-if="isWin">
-                            <span>{{ $t('本期投入') }}</span>
-                            <span class="size32 bold ml5 mr5">{{ investedText }}</span>
-                            <span>{{ $t('钻石，获得') }}</span>
-                            <span class="size32 bold ml5 mr5 red">{{ receivedText }}</span>
-                            <span>{{ $t('钻石') }}</span>
-                        </div>
-                        <div class="size26 br tc" v-else>{{ $t('本局奖励已转入bub补偿池') }}</div>
+                        <div class="size26 br tc" v-if="isWin">恭喜破门！获得1.5倍BUB奖励</div>
+                        <div class="size26 br tc" v-else>感谢参与，获得参与奖奖励</div>
                     </div>
                     <div class="flex jc ac mt40">
                         <img src="@/assets/img/29.png" class="img22 mr6">
@@ -27,9 +21,8 @@
                 </div>
 
                 <div class="marquee-wrap mt30">
-                    <div class="marquee-track size20" v-if="marqueePlayers.length">
-                        <span class="marquee-item" v-for="(item, index) in marqueePlayers" :key="'a'+index">{{ item }}</span>
-                        <span class="marquee-item" v-for="(item, index) in marqueePlayers" :key="'b'+index">{{ item }}</span>
+                    <div class="winner-list size20" v-if="marqueePlayers.length">
+                        <span class="winner-item" v-for="(item, index) in marqueePlayers" :key="index">{{ item }}</span>
                     </div>
                     <div class="size20 tc opc5" v-else>--</div>
                 </div>
@@ -46,7 +39,6 @@
 import { useConfetti } from '@/hooks/useConfetti';
 import winImage from '@/assets/img/25.png'
 import failImage from '@/assets/img/26.png'
-import { initNumber } from '@/utils'
 import { computed, ref } from 'vue';
 
 type ResultPlayer = {
@@ -59,16 +51,12 @@ const { showConfetti } = useConfetti()
 
 const show = ref(false)
 const result = ref<1 | 2>(1)
-const invested = ref<string | number>('0')
-const received = ref<string | number>('0')
 const players = ref<ResultPlayer[]>([])
 
-const isWin = computed(() => result.value === 1)
+const isWin = computed(() => result.value === 2)
 const resultImage = computed(() => (isWin.value ? winImage : failImage))
-const investedText = computed(() => initNumber(Number(invested.value) || 0))
-const receivedText = computed(() => initNumber(Number(received.value) || 0))
 const winnerPlayers = computed(() => {
-    return players.value.filter(item => Number(item?.result) === 1)
+    return players.value.filter(item => Number(item?.result) === 2)
 })
 const marqueePlayers = computed(() => {
     return winnerPlayers.value
@@ -91,8 +79,6 @@ const setResult = (value: number) => {
 }
 
 const setData = (data: any) => {
-    invested.value = data?.invested ?? '0'
-    received.value = data?.received ?? '0'
     players.value = Array.isArray(data?.players) ? data.players : []
     setResult(Number(data?.result))
 }
@@ -148,19 +134,17 @@ defineExpose({
             overflow: hidden;
             padding: 0 10px;
         }
-        .marquee-track{
+        .winner-list{
             display: flex;
-            white-space: nowrap;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 20px;
             font-weight: 600;
-            animation: marquee 5s linear infinite;
+            text-align: center;
         }
-        .marquee-item{
-            flex-shrink: 0;
-            padding: 0 10px;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .winner-item{
+            line-height: 1.4;
         }
         .btn{
             width: 278px;

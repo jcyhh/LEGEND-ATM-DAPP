@@ -67,7 +67,7 @@
     "卡顿备用":"Fast Link",
     "操作成功":"Operation Successful",
     "操作失败":"Operation Failed",
-    "多人点球":"Multiplayer Penalty Kick",
+    "点球大战":"Penalty Shootout",
     "请先绑定上级":"Please bind an upline first",
     "点球":"Penalty Kick",
     "记录":"Records",
@@ -115,5 +115,8 @@
     "提现记录":"Withdraw Records",
     "请输入提现数量":"Please enter the withdrawal amount",
     "极速链接":"Ultra-fast Link",
-    "本局奖励已转入bub补偿池":"This round's reward has been transferred to the BUB compensation pool"
+    "本局奖励已转入bub补偿池":"This round's reward has been transferred to the BUB compensation pool",
+    "留存池":"Reserve Pool",
+    "进球1.5倍卡":"1.5x Goal Card",
+    "未结算":"Unsettled"
 }

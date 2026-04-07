@@ -40,8 +40,8 @@
 
         <div class="card mt30">
             <div class="flex ac">
-                <img src="@/assets/img/1.png" class="img60 mr10">
-                <div class="size32 bold">ATM {{ $t('销毁池') }}</div>
+                <img src="@/assets/img/bub.jpeg" class="img60 mr10 avatar">
+                <div class="size32 bold">BUB {{ $t('留存池') }}</div>
             </div>
             <div class="flex jb ac mt40">
                 <div class="size28 opc5">{{ $t('池子总额') }}</div>

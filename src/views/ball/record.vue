@@ -17,22 +17,29 @@
             <div class="pl30 pr30 pt30">
 
                 <div class="card mb20" v-for="(item, index) in list" :key="index">
-                    <div class="flex jb ac">
+                    <div class="flex jb ac top">
                         <div class="flex ac">
                             <div class="size28 bold mr20">NO.{{ item.period }}</div>
                             <div class="size24 opc5">{{ item.end_time }}</div>
                         </div>
-                        <div class="size24 success" v-if="item.result==1">{{ $t('挑战成功') }}</div>
+                        <div class="size24 success" v-if="item.result==2">{{ $t('挑战成功') }}</div>
                         <div class="size24 fail" v-else>{{ $t('挑战失败') }}</div>
                     </div>
-                    <div class="flex ac mt50">
+                    <div class="flex ac pl38 pr38 mt30">
                         <div class="flex1">
                             <span class="size24 opc5 mr10">{{ $t('投入钻石') }}</span>
                             <span class="size28 bold" v-init="item.invested"></span>
                         </div>
                         <div class="flex1">
                             <span class="size24 opc5 mr10">{{ $t('获得钻石') }}</span>
-                            <span class="size28 bold" v-init="item.received"></span>
+                            <span class="size28 bold" v-if="item.result==2">获得1.5倍钻石BUB</span>
+                            <span class="size28 bold" v-else v-init="item.received"></span>
+                        </div>
+                    </div>
+                    <div class="flex ac mt30 pl38 pr38">
+                        <div class="flex1">
+                            <span class="size24 opc5 mr10">{{ $t('幸运用户') }}</span>
+                            <span class="size28 bold">{{ getWinnerText(item) }}</span>
                         </div>
                     </div>
                 </div>
@@ -48,10 +55,18 @@ import { routerGo } from '@/router';
 import { useLoadList } from '@/hooks/useLoadList';
 import { usePullRefresh } from '@/hooks/usePullRefresh';
 import CusEmpty from '@/components/CusEmpty/index.vue'
+import { t } from '@/locale';
 
 const { list, props: listProps, loadList } = useLoadList('/api/football/records', 'records')
 const { props } = usePullRefresh(loadList)
 loadList()
+
+const getWinnerText = (item: any) => {
+    const loser = item?.loser
+
+    if (typeof loser === 'string' && loser) return loser
+    return t('未结算')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -92,10 +107,18 @@ loadList()
 
 .card {
     width: 690px;
-    height: 190px;
+    height: 250px;
     background-image: url("@/assets/img/31.png");
     background-size: 100% 100%;
-    padding: 28px 38px 0 38px;
+    padding: 8px;
+
+    .top{
+        width: 100%;
+        height: 78px;
+        background: linear-gradient(90deg, #41A100 0%, rgba(65, 161, 0, 0) 100%);
+        border-radius: 30px 0 0 0;
+        padding: 30px 30px;
+    }
 
     .success {
         color: #FFEE00;

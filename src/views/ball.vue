@@ -2,16 +2,18 @@
     <div class="nav flex jb ac">
         <div class="flex ac" @click="routerGo()">
             <van-icon name="arrow-left" :size="20" />
-            <div class="size36 bold ml10">{{ $t('多人点球') }}</div>
+            <div class="size36 bold ml10">{{ $t('点球大战') }}</div>
         </div>
         <div class="flex ac">
-            <div class="asset size24 flex ac">
+            <div class="asset size24 flex ac" @click="routerPush('/asset/balance_bub')">
                 <img src="@/assets/img/bub.jpeg" class="img32 mr10 avatar">
                 <div v-init="balance_bub"></div>
+                <van-icon name="arrow" color="#FFFFFF80" />
             </div>
-            <div class="asset size24 flex ac ml24">
+            <div class="asset size24 flex ac ml24" @click="routerPush('/asset/balance_diamond')">
                 <img src="@/assets/coin.png" class="img32 mr10">
                 <div v-init="balance_diamond"></div>
+                <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
     </div>
@@ -63,10 +65,10 @@
                                 <img src="@/assets/coin.png" class="img40 ml12">
                             </div>
                         </div>
-                        <div class="btn flex jc ac" v-scale>
-                            <img src="@/assets/img/22.png" class="img50 mr10 animate__animated animate__zoomIn ani5" v-if="check" @click.stop="check=false">
-                            <img src="@/assets/img/38.png" class="img50 mr10" v-else @click.stop="check=true">
-                            <div class="size28">{{ $t('购买保险') }}</div>
+                        <div class="btn flex jc ac">
+                            <img src="@/assets/img/22.png" class="img50 mr10 animate__animated animate__zoomIn ani5" v-if="check">
+                            <img src="@/assets/img/38.png" class="img50 mr10" v-else>
+                            <div class="size28">{{ $t('进球1.5倍卡') }}</div>
                         </div>
                     </div>
                     <div class="flex jb tabs mt30 pl30 pr30">
@@ -143,7 +145,7 @@ const submitWithdraw = async (data:any) => {
     const { amount, ccy } = data
     await checkGasBalance()
 
-    const signInfo = await getSign('Withdraw')
+    const signInfo = await getSign('Claim')
 
     const res:any = await apiPost('/api/withdraw', {
         amount,
@@ -245,7 +247,7 @@ const playSettlementAni = async (targetGameId: number) => {
         currentResult.value = result
         resultRef.value?.setData(res)
 
-        if (result === 1) aniRef.value?.playSuccess()
+        if (result === 2) aniRef.value?.playSuccess()
         else aniRef.value?.playFail()
     } catch (error) {
         if (gameId.value === targetGameId) {

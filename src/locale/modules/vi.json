@@ -67,7 +67,7 @@
     "卡顿备用":"Liên kết tốc độ cao",
     "操作成功":"Thao tác thành công",
     "操作失败":"Thao tác thất bại",
-    "多人点球":"Đá phạt đền nhiều người",
+    "点球大战":"Loạt sút luân lưu",
     "请先绑定上级":"Vui lòng liên kết cấp trên trước",
     "点球":"Đá phạt đền",
     "记录":"Lịch sử",
@@ -115,5 +115,8 @@
     "提现记录":"Lịch sử rút tiền",
     "请输入提现数量":"Vui lòng nhập số lượng rút",
     "极速链接":"Kết nối cực nhanh",
-    "本局奖励已转入bub补偿池":"Phần thưởng ván này đã được chuyển vào pool bồi thường BUB"
+    "本局奖励已转入bub补偿池":"Phần thưởng ván này đã được chuyển vào pool bồi thường BUB",
+    "留存池":"Pool lưu giữ",
+    "进球1.5倍卡":"Thẻ nhân 1,5 lần bàn thắng",
+    "未结算":"Chưa quyết toán"
 }

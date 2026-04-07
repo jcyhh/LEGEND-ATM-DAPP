@@ -19,6 +19,12 @@
                 </div>
             </div>
 
+            <div class="flex jb size24 mt10">
+                <div v-if="pickerCurrent==0">{{ $t('可提额度') }} <span v-init="diamond_withdraw_quota"></span> {{ $t('钻石') }}</div>
+                <div v-else></div>
+                <div>{{ $t('余额') }} <span v-init="pickerCurrent==0 ? balance_diamond : balance_bub"></span> {{ pickerList[pickerCurrent].name }}</div>
+            </div>
+
             <div class="cell flex jb ac mt10">
                 <div class="opc5 size28 bold">{{ $t('提现数量') }}</div>
                 <input type="number" v-model="inputAmount" class="size28 bold flex1 tr" placeholder="0">
@@ -26,8 +32,7 @@
             </div>
 
             <div class="flex jb ac mt10">
-                <div class="size24" v-if="pickerCurrent==0">{{ $t('当前最多可提现') }} {{ diamond_withdraw_quota || 0 }} {{ $t('钻石') }}</div>
-                <div v-else></div>
+                <div></div>
                 <div class="flex ac size26" @click="routerPush('/withdrawRecoard')">
                     <span class="mr5">{{ $t('提现记录') }}</span>
                     <van-icon name="arrow" />
@@ -67,9 +72,13 @@ const pickerList = computed(()=>([
 ]))
 
 const diamond_withdraw_quota = ref()
+const balance_diamond = ref()
+const balance_bub = ref()
 const loadData = () => {
     apiGet('/api/users/my').then((res:any)=>{
         diamond_withdraw_quota.value = res.diamond_withdraw_quota
+        balance_diamond.value = res.balance_diamond
+        balance_bub.value = res.balance_bub
     })
 }
 
@@ -101,7 +110,7 @@ defineExpose({
 <style lang="scss" scoped>
 .result {
     width: 630px;
-    height: 530px;
+    height: 560px;
     background-image: url("@/assets/img/24.png");
     background-size: 100% 100%;
     padding: 24px 30px 0 30px;

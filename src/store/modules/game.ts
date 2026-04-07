@@ -30,10 +30,17 @@ export const useGameStore = defineStore('game', () => {
         }
     }
 
+    const resolveSocketUrl = () => {
+        const envSocketUrl = import.meta.env.VITE_SOCKET_URL?.trim()
+        if (envSocketUrl) return envSocketUrl
+
+        return `wss://${window.location.host}/ws`
+    }
+
     const connectSocket = () => {
         const token = getToken()
         gameSocket = createSocket({
-            url: `${import.meta.env.VITE_SOCKET_URL}?token=${encodeURIComponent(token)}`,
+            url: `${resolveSocketUrl()}?token=${encodeURIComponent(token)}`,
             parse: normalizeGameInfo,
             onMessage: (data) => {
                 gameInfo.value = data

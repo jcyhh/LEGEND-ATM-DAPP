@@ -67,7 +67,7 @@
     "卡顿备用":"Lien rapide",
     "操作成功":"Opération réussie",
     "操作失败":"Opération échouée",
-    "多人点球":"Tirs au but multijoueurs",
+    "点球大战":"Séance de tirs au but",
     "请先绑定上级":"Veuillez d'abord lier votre parrain",
     "点球":"Tir au but",
     "记录":"Historique",
@@ -115,5 +115,8 @@
     "提现记录":"Historique des retraits",
     "请输入提现数量":"Veuillez saisir le montant du retrait",
     "极速链接":"Lien de vitesse extrême",
-    "本局奖励已转入bub补偿池":"La récompense de cette manche a été transférée dans le pool de compensation BUB"
+    "本局奖励已转入bub补偿池":"La récompense de cette manche a été transférée dans le pool de compensation BUB",
+    "留存池":"Pool de réserve",
+    "进球1.5倍卡":"Carte but x1,5",
+    "未结算":"Non réglé"
 }
