@@ -6,8 +6,8 @@
             <div class="content">
                 <div class="pl30 pr30">
                     <div class="msg flex jc ac">
-                        <div class="size26 br tc" v-if="isWin">恭喜破门！获得1.5倍BUB奖励</div>
-                        <div class="size26 br tc" v-else>感谢参与，获得参与奖奖励</div>
+                        <div class="size26 br tc" v-if="isWin">{{ rewardText }}</div>
+                        <div class="size26 br tc" v-else>{{ $t('感谢参与，获得参与奖奖励') }}</div>
                     </div>
                     <div class="flex jc ac mt40">
                         <img src="@/assets/img/29.png" class="img22 mr6">
@@ -39,7 +39,9 @@
 import { useConfetti } from '@/hooks/useConfetti';
 import winImage from '@/assets/img/25.png'
 import failImage from '@/assets/img/26.png'
+import { t } from '@/locale';
 import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 type ResultPlayer = {
     user_id?: number
@@ -48,17 +50,40 @@ type ResultPlayer = {
 }
 
 const { showConfetti } = useConfetti()
+const route = useRoute()
 
 const show = ref(false)
 const result = ref<1 | 2>(1)
 const players = ref<ResultPlayer[]>([])
+const winners = ref<string[]>([])
 
-const isWin = computed(() => result.value === 2)
+const parseGameType = (value: unknown): 1 | 2 | 3 => {
+    const rawValue = Array.isArray(value) ? value[0] : value
+    const type = Number(rawValue)
+    if (type === 1 || type === 3) return type
+    return 2
+}
+
+const currentType = computed(() => parseGameType(route.query.type))
+const isWinningResult = (value: number) => {
+    if (currentType.value === 3) return value === 1
+    return value === 2
+}
+const isWin = computed(() => isWinningResult(result.value))
+const rewardText = computed(() => currentType.value === 3 ? t('恭喜破门！获得1.2倍BUB奖励') : t('恭喜破门！获得1.5倍BUB奖励'))
 const resultImage = computed(() => (isWin.value ? winImage : failImage))
 const winnerPlayers = computed(() => {
-    return players.value.filter(item => Number(item?.result) === 2)
+    return players.value.filter(item => isWinningResult(Number(item?.result)))
+})
+const type3WinnerAddresses = computed(() => {
+    if (winners.value.length) return winners.value
+    return players.value
+        .filter(item => Number(item?.result) === 1)
+        .map(item => item.maddress || '--')
+        .filter(Boolean)
 })
 const marqueePlayers = computed(() => {
+    if (currentType.value === 3) return type3WinnerAddresses.value
     return winnerPlayers.value
         .map(item => item.maddress || '--')
         .filter(Boolean)
@@ -80,6 +105,7 @@ const setResult = (value: number) => {
 
 const setData = (data: any) => {
     players.value = Array.isArray(data?.players) ? data.players : []
+    winners.value = Array.isArray(data?.winners) ? data.winners.filter((item: unknown) => typeof item === 'string' && item) : []
     setResult(Number(data?.result))
 }
 

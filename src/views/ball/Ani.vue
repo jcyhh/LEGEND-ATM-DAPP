@@ -1,7 +1,7 @@
 <template>
     <div class="aniBox">
         <div class="aniItem" :class="{ aniHidden: activeAni !== 'success' }" ref="successAniRef"></div>
-        <div class="aniItem" :class="{ aniHidden: activeAni !== 'fail' }" ref="failAniRef"></div>
+        <div class="aniItem failItem" :class="{ aniHidden: activeAni !== 'fail' }" ref="failAniRef"></div>
         <div class="standby" :class="{ aniHidden: activeAni !== 'standby' }" ref="standbyAniRef"></div>
     </div>
 </template>
@@ -122,6 +122,11 @@ onUnmounted(() => {
     position: absolute;
     top: 0;
     left: 0;
+}
+.failItem{
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .standby{
     width: 172px;

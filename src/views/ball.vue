@@ -2,7 +2,7 @@
     <div class="nav flex jb ac">
         <div class="flex ac" @click="routerGo()">
             <van-icon name="arrow-left" :size="20" />
-            <div class="size36 bold ml10">{{ $t('点球大战') }}</div>
+            <div class="size36 bold ml10">{{ currentGameTitle }}</div>
         </div>
         <div class="flex ac">
             <div class="asset size24 flex ac" @click="routerPush('/asset/balance_bub')">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="recordMenu br" @click="routerPush('/record')">
+    <div class="recordMenu br" @click="routerPush('/record', { type: currentType })">
         <div>{{ $t('点球') }}</div>
         <div>{{ $t('记录') }}</div>
     </div>
@@ -56,7 +56,14 @@
                             <div class="btnDisable flex jc ac">{{ buttonText }}</div>
                         </div>
                     </div>
-                    <div class="tc size24 opc5 mb30 mt26">{{ $t('10人参与完毕后开始游戏') }}</div>
+                    <div class="flex jb ac mt10 mb30 pl30 pr30">
+                        <div class="size24 opc5">{{ maxPlayersText }}{{ $t('人参与完毕后开始游戏') }}</div>
+                        <div class="rank flex ac" @click="routerPush(`/rank/${currentType}`)">
+                            <img src="@/assets/img/47.png" class="img36 mr10">
+                            <div class="size26">{{ $t('排行榜') }}</div>
+                        </div>
+                    </div>
+                    
                     <div class="flex jb ac pl30 pr30">
                         <div class="inp flex jb ac pl30">
                             <div class="size28 bold opc5">{{ $t('支付') }}</div>
@@ -65,7 +72,7 @@
                                 <img src="@/assets/coin.png" class="img40 ml12">
                             </div>
                         </div>
-                        <div class="btn flex jc ac">
+                        <div class="btn flex jc ac" v-if="currentType !== 3">
                             <img src="@/assets/img/22.png" class="img50 mr10 animate__animated animate__zoomIn ani5" v-if="check">
                             <img src="@/assets/img/38.png" class="img50 mr10" v-else>
                             <div class="size28">{{ $t('进球1.5倍卡') }}</div>
@@ -101,6 +108,7 @@
 <script setup lang="ts">
 import { routerGo, routerPush } from '@/router';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import Ani from './ball/Ani.vue';
 import Result from './ball/Result.vue';
 import Recharge from './ball/Recharge.vue';
@@ -117,6 +125,19 @@ import { t } from '@/locale';
 const { writeRecharge, writeWithdraw } = useGameProject()
 
 const { writeApprove } = useErc20()
+const route = useRoute()
+const parseGameType = (value: unknown): 1 | 2 | 3 => {
+    const rawValue = Array.isArray(value) ? value[0] : value
+    const type = Number(rawValue)
+    if (type === 1 || type === 3) return type
+    return 2
+}
+const currentType = computed(() => parseGameType(route.query.type))
+const currentGameTitle = computed(() => {
+    if (currentType.value === 1) return `100U ${t('球场')}`
+    if (currentType.value === 3) return `1U ${t('球场')}`
+    return `10U ${t('球场')}`
+})
 
 // 充值
 const submitRecharge = async (data:any) => {
@@ -207,17 +228,17 @@ const total_amount = computed(()=>{
     else return 0
 })
 const loadGameConfig = () => {
-    apiGet('/api/football/config').then((res:any)=>{
+    apiGet('/api/football/config', { type: currentType.value }).then((res:any)=>{
         game_amount.value = res.game_amount
         insurance_amount.value = res.insurance_amount
     })
 }
-loadGameConfig()
 
 const gameId = computed(() => {
     const value = gameStore.gameInfo?.id
     return value === undefined || value === null ? null : Number(value)
 })
+const maxPlayersText = computed(() => gameStore.gameInfo?.max_players ?? 0)
 const gameStatus = computed(() => gameStore.gameInfo?.status ?? null)
 const gameTimer = computed(() => gameStore.gameInfo?.timer ?? null)
 const showCountdown = computed(() => {
@@ -231,6 +252,10 @@ const displayGameTimer = computed(() => {
     if (Number.isNaN(value)) return gameTimer.value
     return value + 1
 })
+const isWinningResult = (result: number) => {
+    if (currentType.value === 3) return result === 1
+    return result === 2
+}
 
 const playSettlementAni = async (targetGameId: number) => {
     if (settledFlowGameId.value === targetGameId) return
@@ -247,7 +272,7 @@ const playSettlementAni = async (targetGameId: number) => {
         currentResult.value = result
         resultRef.value?.setData(res)
 
-        if (result === 2) aniRef.value?.playSuccess()
+        if (isWinningResult(result)) aniRef.value?.playSuccess()
         else aniRef.value?.playFail()
     } catch (error) {
         if (gameId.value === targetGameId) {
@@ -286,7 +311,8 @@ watch(
 )
 
 onMounted(() => {
-    gameStore.startSync()
+    loadGameConfig()
+    gameStore.startSync(currentType.value)
     setTimeout(() => {
         contentRef.value?.scrollTo({ top: contentRef.value.scrollHeight, behavior: 'smooth' })
     }, 1000)
@@ -296,6 +322,15 @@ onUnmounted(() => {
     gameStore.stopSync()
 })
 
+watch(currentType, (type, oldType) => {
+    if (type === oldType) return
+
+    settledFlowGameId.value = null
+    currentResult.value = null
+    loadGameConfig()
+    gameStore.startSync(type)
+})
+
 const handleConfirm = async () => {
     const currentGameId = gameId.value
     if (!currentGameId || !canJoin.value || joinLoading.value) return
@@ -303,6 +338,7 @@ const handleConfirm = async () => {
     joinLoading.value = true
     try {
         await apiPost('/api/football/join', {
+            type: currentType.value,
             game_id: currentGameId,
             buy_insurance: check.value
         })
@@ -320,7 +356,7 @@ const handleConfirm = async () => {
     border-radius: 20px;
     position: fixed;
     right: 30px;
-    bottom: 450px;
+    bottom: 550px;
     z-index: 10;
     padding: 10px 16px;
 }
@@ -331,7 +367,7 @@ const handleConfirm = async () => {
     border-radius: 20px;
     position: fixed;
     right: 30px;
-    bottom: 328px;
+    bottom: 428px;
     z-index: 10;
     padding: 10px 16px;
 }
@@ -367,6 +403,13 @@ const handleConfirm = async () => {
     border-radius: 30px;
     z-index: 20;
     pointer-events: none;
+}
+.rank{
+    background-color: #0000004D;
+    border: 1px solid #FFFFFF66;
+    height: 56px;
+    border-radius: 20px;
+    padding: 0 20px;
 }
 .spectatorBall{
     width: 140px;
@@ -488,10 +531,15 @@ const handleConfirm = async () => {
                 }
             }
             .inp{
-                width: 400px;
+                flex: 1;
                 height: 88px;
-                background-image: url("@/assets/img/21.png");
-                background-size: 100% 100%;
+                border: 2px solid #FFFFFF99;
+                border-radius: 15px;
+                background-color: #3D8021;
+                box-shadow: 
+                0px 4px 10px 0px #00000033 inset,
+                0px 4px 4px 0px #FFFFFF33,
+                0px -4px 4px 0px #00000040 inset;
             }
             .btn{
                 width: 278px;

@@ -6,12 +6,29 @@ import { getToken } from '@/dapp/config'
 export const useGameStore = defineStore('game', () => {
     const gameInfo = ref<any>(null)
     const currentUserId = ref<number | null>(null)
+    const currentType = ref<1 | 2 | 3>(2)
     let gameSocket: ReturnType<typeof createSocket<any>> | null = null
+
+    const resolveTypeGameInfo = (source: any) => {
+        if (!source || typeof source !== 'object') return null
+
+        const typeKey = String(currentType.value)
+        if (source[typeKey] && typeof source[typeKey] === 'object') return source[typeKey]
+        if (source[currentType.value] && typeof source[currentType.value] === 'object') return source[currentType.value]
+
+        return source
+    }
 
     const normalizeGameInfo = (payload: any) => {
         if (!payload || typeof payload !== 'object') return null
 
-        const data = payload.football ?? payload.data?.football ?? payload.data ?? payload.result ?? payload.payload
+        const data =
+            resolveTypeGameInfo(payload.football) ??
+            resolveTypeGameInfo(payload.data?.football) ??
+            resolveTypeGameInfo(payload.data) ??
+            resolveTypeGameInfo(payload.result) ??
+            resolveTypeGameInfo(payload.payload)
+
         if (!data || typeof data !== 'object') return null
 
         const gameId = data.id ?? data.game_id
@@ -40,7 +57,7 @@ export const useGameStore = defineStore('game', () => {
     const connectSocket = () => {
         const token = getToken()
         gameSocket = createSocket({
-            url: `${resolveSocketUrl()}?token=${encodeURIComponent(token)}`,
+            url: `${resolveSocketUrl()}?token=${encodeURIComponent(token)}&type=${currentType.value}`,
             parse: normalizeGameInfo,
             onMessage: (data) => {
                 gameInfo.value = data
@@ -49,7 +66,9 @@ export const useGameStore = defineStore('game', () => {
         gameSocket.connect()
     }
 
-    const startSync = () => {
+    const startSync = (type: 1 | 2 | 3 = 2) => {
+        currentType.value = type
+        gameInfo.value = null
         stopSync()
         connectSocket()
     }

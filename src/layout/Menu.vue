@@ -38,7 +38,7 @@
                     <div class="size26 mt20">{{ $t('安全审计') }}</div>
                 </div>
                 <div class="flex1 flex col ac" @click="goBall">
-                    <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/game'">
+                    <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/door'">
                     <img src="@/assets/menu/ball.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('点球大战') }}</div>
                 </div>
@@ -97,7 +97,7 @@ const langRef = ref()
 
 const goBall = () => {
     if(parent_id.value > 0){
-        routerPush('/game')
+        routerPush('/door')
     }else{
         message(t('请先绑定上级'))
     }

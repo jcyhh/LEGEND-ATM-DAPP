@@ -33,3 +33,4 @@ export type Api =
 | '/api/football/records'
 | '/api/football/release_orders'
 | '/api/football/pools'
+| '/api/football/leaderboard'

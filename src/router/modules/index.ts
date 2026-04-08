@@ -41,12 +41,20 @@ export default [
         component: () => import('@/views/ball/pool.vue')
     },
     {
+        path:'/door',
+        component: () => import('@/views/ball/door.vue')
+    },
+    {
         path:'/game',
         component: () => import('@/views/ball.vue')
     },
     {
         path:'/record',
         component: () => import('@/views/ball/record.vue')
+    },
+    {
+        path:'/rank/:type',
+        component: () => import('@/views/ball/rank.vue')
     },
     {
         path:'/award',
