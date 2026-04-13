@@ -134,5 +134,9 @@
     "10人玩/1人赢":"10 nguoi choi / 1 nguoi thang",
     "排名":"Xep hang",
     "用户":"Nguoi dung",
-    "投入":"Dau tu"
+    "投入":"Dau tu",
+    "参与数量":"So luong tham gia",
+    "请输入本次参与数量":"Vui long nhap so luong tham gia lan nay",
+    "当前可参与上限":"Gioi han tham gia hien tai",
+    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"Thao tac nay la hanh vi hop tac trong he sinh thai. Ket qua quyet toan duoc xac dinh dua tren quy tac he thong va du lieu on-chain, khong cau thanh bat ky ket qua co dinh hoac duoc dam bao nao."
 }

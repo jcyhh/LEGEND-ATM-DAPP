@@ -134,5 +134,9 @@
     "10人玩/1人赢":"10 joueurs / 1 gagnant",
     "排名":"Rang",
     "用户":"Utilisateur",
-    "投入":"Mise"
+    "投入":"Mise",
+    "参与数量":"Quantité de participation",
+    "请输入本次参与数量":"Veuillez saisir la quantité de participation pour cette fois",
+    "当前可参与上限":"Limite actuelle de participation",
+    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"Cette opération relève d'une collaboration de l'écosystème. Les résultats du règlement sont basés sur les règles du système et les données on-chain, et ne constituent aucun résultat fixe ou garanti."
 }

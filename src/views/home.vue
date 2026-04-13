@@ -27,6 +27,7 @@
             </div>
             <div class="btn size26 font2 flex jc ac mt32 rel disableBtn" v-if="is_order">{{ $t('进入流动性协同协议') }}</div>
             <div class="btn size26 font2 flex jc ac mt32 rel" @click="openpop" v-else>{{ $t('进入流动性协同协议') }}</div>
+            <div class="linebtn size26 flex jc ac mt20 rel" @click="openQueue">排队</div>
         </div>
 
         <div class="desc mt40 mb40">
@@ -57,6 +58,8 @@
 
     <CreateOrder ref="createOrderRef" @success="onSuccess"></CreateOrder>
 
+    <CreateQueueOrder ref="createQueueOrderRef" @success="onSuccess"></CreateQueueOrder>
+
     <van-popup v-model:show="showNoticePop" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
         <div class="pop">
             <div class="size28 bold">{{ noticePopInfo.title }}</div>
@@ -73,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import { Asset, List, CreateOrder } from './home'
+import { Asset, List, CreateOrder, CreateQueueOrder } from './home'
 import { useDappStore } from '@/dapp/store';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
@@ -86,6 +89,7 @@ const dappStore = useDappStore()
 const { walletAddress } = storeToRefs(dappStore)
 
 const createOrderRef = ref()
+const createQueueOrderRef = ref()
 
 const { loadNotice, noticeList, loadNoticePop, showNoticePop, readNotice, noticePopInfo } = useNotice()
 loadNotice()
@@ -105,6 +109,11 @@ const onSuccess = () => {
 const openpop = () => {
     if(!walletAddress.value)return
     createOrderRef.value?.open()
+}
+
+const openQueue = () => {
+    if(!walletAddress.value)return
+    createQueueOrderRef.value?.open()
 }
 </script>
 
@@ -188,6 +197,12 @@ const openpop = () => {
         border-radius: 36px;
         background: linear-gradient(#50D6FC, #1989F5);
         color: #000000;
+    }
+    .linebtn{
+        height: 72px;
+        border-radius: 36px;
+        color: #1989F5;
+        border: 1px solid #1989F5;
     }
     .disableBtn{
         background: rgba(255, 266, 255, 0.5);

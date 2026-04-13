@@ -1,9 +1,11 @@
 <template>
     <div class="flex ac size28 mb40">
-        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('协议参与记录') }}</div>
-        <div class="flex ac line1" :class="current==1?'act':'def'" @click="current=1">{{ $t('结算记录') }}</div>
+        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('排队中') }}</div>
+        <div class="flex ac mr20 line1" :class="current==1?'act':'def'" @click="current=1">{{ $t('协议参与记录') }}</div>
+        <div class="flex ac line1" :class="current==2?'act':'def'" @click="current=2">{{ $t('结算记录') }}</div>
     </div>
-    <InvesmentList v-if="current==0"></InvesmentList>
+    <Queue v-if="current==0"></Queue>
+    <InvesmentList v-else-if="current==1"></InvesmentList>
     <UnstakingList v-else></UnstakingList>
 </template>
 
@@ -11,6 +13,7 @@
 import { useStaking } from '@/dapp/contract/staking';
 import InvesmentList from './InvestmentList.vue';
 import UnstakingList from './UnstakingList.vue';
+import Queue from './Queue.vue';
 import { useDappStore } from '@/dapp/store';
 import { useUserStore } from '@/store';
 import { apiGet } from '@/utils/request';

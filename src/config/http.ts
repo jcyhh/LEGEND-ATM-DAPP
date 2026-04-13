@@ -34,3 +34,4 @@ export type Api =
 | '/api/football/release_orders'
 | '/api/football/pools'
 | '/api/football/leaderboard'
+| '/api/index/queue_list'

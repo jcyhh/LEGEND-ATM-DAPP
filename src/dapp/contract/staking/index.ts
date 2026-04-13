@@ -42,5 +42,8 @@ export function useStaking() {
     // 销毁
     const writeBurn = async (...args: any[]) => await contract.writeWithGas('burnExpiredReward', args)
 
-    return { readBalanceOf, readTeamKpi, readRewardOfSlot, readUserStakeRecord, readMaxStakeAmount, writeUnstake, writeStake, writeStakeWithInviter, writeRestake, writeClaim, writeBurn, readMinStakeAmount }
+    // 取消排队
+    const writeCancelQueue = async (...args: any[]) => await contract.writeWithGas('cancelQueue', args)
+
+    return { readBalanceOf, readTeamKpi, readRewardOfSlot, readUserStakeRecord, readMaxStakeAmount, writeUnstake, writeStake, writeStakeWithInviter, writeRestake, writeClaim, writeBurn, readMinStakeAmount, writeCancelQueue }
 }

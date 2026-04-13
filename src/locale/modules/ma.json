@@ -134,5 +134,9 @@
     "10人玩/1人赢":"10 pemain / 1 pemenang",
     "排名":"Kedudukan",
     "用户":"Pengguna",
-    "投入":"Pelaburan"
+    "投入":"Pelaburan",
+    "参与数量":"Jumlah penyertaan",
+    "请输入本次参与数量":"Sila masukkan jumlah penyertaan kali ini",
+    "当前可参与上限":"Had maksimum penyertaan semasa",
+    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"Operasi ini ialah tindakan kerjasama ekosistem. Keputusan penyelesaian adalah berdasarkan peraturan sistem dan data on-chain, dan tidak membentuk sebarang hasil yang tetap atau dijamin."
 }

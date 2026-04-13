@@ -134,5 +134,9 @@
     "10人玩/1人赢":"10 players / 1 winner",
     "排名":"Rank",
     "用户":"User",
-    "投入":"Investment"
+    "投入":"Investment",
+    "参与数量":"Participation Amount",
+    "请输入本次参与数量":"Please enter the participation amount",
+    "当前可参与上限":"Current participation limit",
+    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"This action is part of ecosystem collaboration. Settlement results are based on system rules and on-chain data, and do not constitute any fixed or guaranteed outcome."
 }
