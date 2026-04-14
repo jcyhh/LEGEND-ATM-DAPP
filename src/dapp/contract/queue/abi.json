@@ -45,37 +45,6 @@
         "type": "address"
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "queueIndex",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint40",
-        "name": "timestamp",
-        "type": "uint40"
-      }
-    ],
-    "name": "FomoRewardClaimed",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
         "indexed": true,
         "internalType": "address",
         "name": "newOwner",
@@ -212,7 +181,20 @@
   },
   {
     "inputs": [],
-    "name": "AFTERNOON_HOUR_UTC",
+    "name": "ATM",
+    "outputs": [
+      {
+        "internalType": "contract IATMToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "AUTO_PROCESS_COUNT_PER_UNSTAKE",
     "outputs": [
       {
         "internalType": "uint256",
@@ -225,7 +207,7 @@
   },
   {
     "inputs": [],
-    "name": "CANCEL_FEE",
+    "name": "AUTO_PROCESS_DAILY_RATE",
     "outputs": [
       {
         "internalType": "uint256",
@@ -264,25 +246,12 @@
   },
   {
     "inputs": [],
-    "name": "EARLY_DAYS",
+    "name": "DAILY_DROP_THRESHOLD",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "EARLY_MAX_ORDERS_PER_DAY",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -303,7 +272,7 @@
   },
   {
     "inputs": [],
-    "name": "FOMO_WINNERS_COUNT",
+    "name": "FIRST_MONTH_RATE",
     "outputs": [
       {
         "internalType": "uint256",
@@ -316,33 +285,7 @@
   },
   {
     "inputs": [],
-    "name": "LAX",
-    "outputs": [
-      {
-        "internalType": "contract ILAXToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MAX_PROCESS_COUNT",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MIN_BIND_AMOUNT",
+    "name": "LIMIT_PERIOD_DAYS",
     "outputs": [
       {
         "internalType": "uint256",
@@ -368,7 +311,20 @@
   },
   {
     "inputs": [],
-    "name": "MORNING_QUOTA_RATE",
+    "name": "NO_LIMIT_DURATION",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PENDING_MULTIPLIER",
     "outputs": [
       {
         "internalType": "uint256",
@@ -394,19 +350,6 @@
   },
   {
     "inputs": [],
-    "name": "QUEUE_ENTRY_FEE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "REFERRAL",
     "outputs": [
       {
@@ -420,7 +363,7 @@
   },
   {
     "inputs": [],
-    "name": "SOFT_CIRCUIT_BREAKER_THRESHOLD",
+    "name": "STAGE_100M",
     "outputs": [
       {
         "internalType": "uint256",
@@ -433,33 +376,7 @@
   },
   {
     "inputs": [],
-    "name": "STAGE1_THRESHOLD",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "STAGE2_THRESHOLD",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "STAGE3_THRESHOLD",
+    "name": "STAGE_50M",
     "outputs": [
       {
         "internalType": "uint256",
@@ -497,16 +414,16 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "botAddress",
+    "outputs": [
       {
         "internalType": "address",
-        "name": "parent",
+        "name": "",
         "type": "address"
       }
     ],
-    "name": "bindReferral",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -558,6 +475,19 @@
   },
   {
     "inputs": [],
+    "name": "circuitBreakerStartTime",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "circuitBreakerTime",
     "outputs": [
       {
@@ -583,6 +513,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "dailyDropNoLimitTime",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -590,7 +533,7 @@
         "type": "uint256"
       }
     ],
-    "name": "dailyTotalStaked",
+    "name": "dailyOneDayStaked",
     "outputs": [
       {
         "internalType": "uint256",
@@ -609,7 +552,7 @@
         "type": "uint256"
       }
     ],
-    "name": "dailyTotalUnstaked",
+    "name": "dailyTotalStaked",
     "outputs": [
       {
         "internalType": "uint256",
@@ -640,13 +583,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "distributeFomo",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -670,51 +606,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "fomoEligibleQueues",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "fomoEnabled",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "fomoPool",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "getDailyStakeLimit",
     "outputs": [
@@ -722,87 +613,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getDailyUnstakeLimit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getFomoEligibleCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getFomoWinners",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "indices",
-        "type": "uint256[]"
-      },
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "user",
-            "type": "address"
-          },
-          {
-            "internalType": "uint160",
-            "name": "amount",
-            "type": "uint160"
-          },
-          {
-            "internalType": "uint40",
-            "name": "queueTime",
-            "type": "uint40"
-          },
-          {
-            "internalType": "uint8",
-            "name": "stakeIndex",
-            "type": "uint8"
-          },
-          {
-            "internalType": "bool",
-            "name": "processed",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "cancelled",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "restakeIndex",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct Queue.QueueInfo[]",
-        "name": "infos",
-        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -961,7 +771,7 @@
   },
   {
     "inputs": [],
-    "name": "isEarlyPeriod",
+    "name": "isCircuitBreakerFirstMonth",
     "outputs": [
       {
         "internalType": "bool",
@@ -974,7 +784,7 @@
   },
   {
     "inputs": [],
-    "name": "isFirstDay",
+    "name": "isDailyDropNoLimitPeriod",
     "outputs": [
       {
         "internalType": "bool",
@@ -999,14 +809,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "isNewUser",
+    "inputs": [],
+    "name": "isLimitPeriod",
     "outputs": [
       {
         "internalType": "bool",
@@ -1057,32 +861,6 @@
   },
   {
     "inputs": [],
-    "name": "lastDistributeDay",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastFomoIdx",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "launchTime",
     "outputs": [
       {
@@ -1110,6 +888,71 @@
   {
     "inputs": [],
     "name": "maxStakeAmountValue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "maxStakesInLimitPeriod",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "multiplier50MTo100M",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "multiplierAbove100M",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "multiplierUnder50M",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "oneDayStakeDailyLimit",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1157,8 +1000,32 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "pendingOutAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "count",
         "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "allowWhenNoQuota",
+        "type": "bool"
       }
     ],
     "name": "processQueue",
@@ -1167,19 +1034,13 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "queueFomoReward",
+    "inputs": [],
+    "name": "queueEnabled",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bool",
         "name": "",
-        "type": "uint256"
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -1275,7 +1136,7 @@
   },
   {
     "inputs": [],
-    "name": "remainingStakeAmount",
+    "name": "remainingAutoProcessAmount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1288,7 +1149,20 @@
   },
   {
     "inputs": [],
-    "name": "remainingUnstakeAmount",
+    "name": "remainingOneDayStakeAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "remainingStakeAmount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1336,27 +1210,24 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "riskUploader",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "bool",
-        "name": "_enabled",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "_index",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint160",
+        "name": "_amount",
+        "type": "uint160"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_stakeIndex",
+        "type": "uint8"
       }
     ],
-    "name": "setFomoEnabled",
+    "name": "restakeAndClaim",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1365,11 +1236,24 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_lax",
+        "name": "_atm",
         "type": "address"
       }
     ],
-    "name": "setLAX",
+    "name": "setATM",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_bot",
+        "type": "address"
+      }
+    ],
+    "name": "setBot",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1403,6 +1287,73 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxStakesInLimitPeriod",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_under50M",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_50MTo100M",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_above100M",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMultipliers",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "setOneDayStakeDailyLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_day",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPendingOutAmount",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_project",
         "type": "address"
@@ -1416,12 +1367,25 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_uploader",
-        "type": "address"
+        "internalType": "bool",
+        "name": "_enabled",
+        "type": "bool"
       }
     ],
-    "name": "setRiskUploader",
+    "name": "setQueueEnabled",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setShortTermStakeEnabled",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1435,6 +1399,24 @@
       }
     ],
     "name": "setStaking",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_users",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_counts",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "setUserStakeCount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1459,6 +1441,19 @@
   },
   {
     "inputs": [],
+    "name": "shortTermStakeEnabled",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "shouldUpdateCircuitBreaker",
     "outputs": [
       {
@@ -1478,20 +1473,7 @@
       },
       {
         "internalType": "bool",
-        "name": "willTriggerSoft",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "softCircuitBreakerTriggered",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
+        "name": "willTriggerDailyDrop",
         "type": "bool"
       }
     ],
@@ -1591,27 +1573,9 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
-    "name": "userDailyStakeCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawableUsdtAmount",
+    "name": "userStakeCount",
     "outputs": [
       {
         "internalType": "uint256",
