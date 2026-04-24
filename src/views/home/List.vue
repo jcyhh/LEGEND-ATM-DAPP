@@ -1,6 +1,6 @@
 <template>
     <div class="flex ac size28 mb40">
-        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('排队中') }}</div>
+        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('列队记录') }}</div>
         <div class="flex ac mr20 line1" :class="current==1?'act':'def'" @click="current=1">{{ $t('协议参与记录') }}</div>
         <div class="flex ac line1" :class="current==2?'act':'def'" @click="current=2">{{ $t('结算记录') }}</div>
     </div>

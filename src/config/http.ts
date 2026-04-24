@@ -35,3 +35,5 @@ export type Api =
 | '/api/football/pools'
 | '/api/football/leaderboard'
 | '/api/index/queue_list'
+| '/api/users/my/extra_address'
+| '/api/index/donate_list'

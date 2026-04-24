@@ -27,7 +27,13 @@
             </div>
             <div class="btn size26 font2 flex jc ac mt32 rel disableBtn" v-if="is_order">{{ $t('进入流动性协同协议') }}</div>
             <div class="btn size26 font2 flex jc ac mt32 rel" @click="openpop" v-else>{{ $t('进入流动性协同协议') }}</div>
-            <div class="linebtn size26 flex jc ac mt20 rel" @click="openQueue">排队</div>
+            <div class="linebtn size26 flex jc ac mt20 rel" @click="openQueue">{{ $t('列队等待协议开始') }}</div>
+            <div class="flex jc ac mt20 rel size26">
+                <div class="flex ac" @click="changeAddressRef?.open()">
+                    <div>{{ $t('更换地址') }}</div>
+                    <van-icon name="arrow" />
+                </div>
+            </div>
         </div>
 
         <div class="desc mt40 mb40">
@@ -60,6 +66,8 @@
 
     <CreateQueueOrder ref="createQueueOrderRef" @success="onSuccess"></CreateQueueOrder>
 
+    <ChangeAddress ref="changeAddressRef"></ChangeAddress>
+
     <van-popup v-model:show="showNoticePop" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
         <div class="pop">
             <div class="size28 bold">{{ noticePopInfo.title }}</div>
@@ -84,12 +92,14 @@ import Bg from '@/components/Bg.vue';
 import { apiGet } from '@/utils/request';
 import { useNotice } from '@/hooks/useNotice';
 import { routerPush } from '@/router';
+import ChangeAddress from './home/ChangeAddress.vue';
 
 const dappStore = useDappStore()
 const { walletAddress } = storeToRefs(dappStore)
 
 const createOrderRef = ref()
 const createQueueOrderRef = ref()
+const changeAddressRef = ref()
 
 const { loadNotice, noticeList, loadNoticePop, showNoticePop, readNotice, noticePopInfo } = useNotice()
 loadNotice()

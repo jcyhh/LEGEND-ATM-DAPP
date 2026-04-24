@@ -138,5 +138,16 @@
     "参与数量":"So luong tham gia",
     "请输入本次参与数量":"Vui long nhap so luong tham gia lan nay",
     "当前可参与上限":"Gioi han tham gia hien tai",
-    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"Thao tac nay la hanh vi hop tac trong he sinh thai. Ket qua quyet toan duoc xac dinh dua tren quy tac he thong va du lieu on-chain, khong cau thanh bat ky ket qua co dinh hoac duoc dam bao nao."
+    "本操作为生态协作行为，结算结果基于系统规则与链上数据，不构成任何固定或保证结果。":"Thao tac nay la hanh vi hop tac trong he sinh thai. Ket qua quyet toan duoc xac dinh dua tren quy tac he thong va du lieu on-chain, khong cau thanh bat ky ket qua co dinh hoac duoc dam bao nao.",
+    "单笔可参与":"Gioi han moi lan tham gia",
+    "存入":"Nap vao",
+    "列队等待协议开始":"Xep hang cho giao thuc bat dau",
+    "更换地址":"Doi dia chi",
+    "前方排队人数":"So nguoi dang cho phia truoc",
+    "协议参与额度":"Han muc tham gia giao thuc",
+    "列队记录":"Lich su xep hang",
+    "当前网体地址":"Dia chi mang hien tai",
+    "请输入新地址":"Vui long nhap dia chi moi",
+    "更换成功":"Thay doi thanh cong",
+    "单笔最低":"Muc toi thieu moi lan"
 }
