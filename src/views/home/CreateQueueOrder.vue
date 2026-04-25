@@ -10,13 +10,20 @@
             <div class="inp flex mt30">
                 <input type="number" v-model="inputAmount" :placeholder="`${$t('单笔最低')} ${minStakeAmount} BNB`" class="flex1 size26">
             </div>
-            <div class="size24 mt20 tr">
-                <span>{{ $t('已参与') }}</span>
-                <span class="ml10 mr10 main" v-init="donatedAmount"></span>
-                <span>/</span>
-                <span class="mr10 ml10 main" v-if="isWhite">∞</span>
-                <span class="ml10 mr10 main" v-init="maxStakeAmount" v-else></span>
-                <span>BNB</span>
+            <div class="size24 mt20 flex jb ac">
+                <div>
+                    <span>{{ $t('余额') }}</span>
+                    <span class="ml5 mr5 main" v-init="balanceBnb"></span>
+                    <span>BNB</span>
+                </div>
+                <div>
+                    <span>{{ $t('已参与') }}</span>
+                    <span class="ml10 mr10 main" v-init="donatedAmount"></span>
+                    <span>/</span>
+                    <span class="mr10 ml10 main" v-if="isWhite">∞</span>
+                    <span class="ml10 mr10 main" v-init="maxStakeAmount" v-else></span>
+                    <span>BNB</span>
+                </div>
             </div>
             <div class="flex ac mt30 font2 size28">
                 <div class="popCancel flex1 mr20" @click="show=false">{{ $t('取消') }}</div>
@@ -32,7 +39,7 @@
 import { computed, ref } from 'vue';
 import { formatEther, parseEther } from 'viem';
 import { useErc20 } from '@/dapp/contract/erc20';
-import { checkGasBalance } from '@/dapp';
+import { getBnbBalance } from '@/dapp';
 import { getRef } from '@/dapp/config';
 import { useReferral } from '@/dapp/contract/referral';
 import bus from '@/bus'
@@ -53,6 +60,12 @@ const show = ref(false)
 const inputAmount = ref()
 // 输入的绑定上级地址
 const refAddress = ref()
+
+const balanceBnb = ref()
+const loadBalance = async () => {
+    const amount = await getBnbBalance()
+    balanceBnb.value = Number(formatEther(amount))
+}
 
 /**
  * 获取用户是否绑定上级
@@ -144,6 +157,8 @@ const open = () => {
     loadMinBindAmount()
     // 获取用户是否绑定上级
     loadRefAddress()
+    // 加载余额
+    loadBalance()
 }
 
 // 下单确认
@@ -151,7 +166,6 @@ const submit = async () => {
 
     const amount = parseEther(`${inputAmount.value}`)
 
-    await checkGasBalance() // 检测Gas
     await writeApprove(import.meta.env.VITE_DONATION, amount)
 
     if(isBindReferral.value)await writeDonated(amount)

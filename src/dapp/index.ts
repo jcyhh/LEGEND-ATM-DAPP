@@ -140,17 +140,20 @@ export const checkChain = async () => {
 }
 
 /**
+ * 获取当前钱包 BNB 余额
+ */
+export const getBnbBalance = async (): Promise<bigint> => {
+    const walletClient = getWalletClient()
+    const address = await getConnectedAddress()
+    return await walletClient.getBalance({ address })
+}
+
+/**
  * 检查 ETH 余额是否至少 0.0004
  * 不足时抛出异常
  */
 export const checkGasBalance = async () => {
-    const walletClient = getWalletClient()
-    const address = await getConnectedAddress()
-    const balance = await walletClient.getBalance({ address })
-
-    console.log(balance);
-    
-    
+    const balance = await getBnbBalance()
     if (balance < minGasBalance) {
         message(t('Gas费用不足'))
         throw new Error('Gas费用不足')

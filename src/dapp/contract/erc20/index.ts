@@ -6,8 +6,8 @@ import { t } from '@/locale';
 import { message } from '@/utils/message';
 import { useDappStore } from '@/dapp/store';
 
-export function useErc20 () {
-    const contract = useContract(import.meta.env.VITE_USDT, abi as Abi)
+export function useErc20 (contractAddress:`0x${string}` = import.meta.env.VITE_USDT) {
+    const contract = useContract(contractAddress, abi as Abi)
     
     // 读余额
     const readBalanceOf = async () => await contract.read('balanceOf', [getAddress()]) as bigint
@@ -19,8 +19,6 @@ export function useErc20 () {
     const checkBalance = async (amount: bigint) => {
         const balance = await readBalanceOf()
         if (balance < amount) {
-            const dappStore = useDappStore()
-            dappStore.dappLoading = false
             message(t('余额不足'))
             throw new Error('余额不足')
         }

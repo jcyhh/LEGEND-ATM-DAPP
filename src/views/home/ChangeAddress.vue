@@ -45,7 +45,7 @@ const open = (i:number) => {
 const submit = async () => {
     if(!inputAddress.value)return message(t('请输入新地址'))
     apiPost('/api/users/my/extra_address', {
-        extra_address: extra_address.value
+        extra_address: inputAddress.value
     }).then(()=>{
         show.value = false
         message(t('更换成功'), 'success')
