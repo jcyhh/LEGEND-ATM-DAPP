@@ -38,7 +38,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { formatEther, parseEther } from 'viem';
-import { useErc20 } from '@/dapp/contract/erc20';
 import { getBnbBalance } from '@/dapp';
 import { getRef } from '@/dapp/config';
 import { useReferral } from '@/dapp/contract/referral';
@@ -47,8 +46,6 @@ import { useDonation } from '@/dapp/contract/donation';
 import { computedSub } from '@/utils';
 
 const emits = defineEmits(['success'])
-
-const { writeApprove } = useErc20()
 
 const { readIsBindReferrer } = useReferral()
 
@@ -166,8 +163,8 @@ const submit = async () => {
 
     const amount = parseEther(`${inputAmount.value}`)
 
-    await writeApprove(import.meta.env.VITE_DONATION, amount)
-
+    console.log(amount, refAddress.value);
+    
     if(isBindReferral.value)await writeDonated(amount)
     else await writeDonated(amount, refAddress.value)
     

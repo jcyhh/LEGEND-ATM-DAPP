@@ -63,12 +63,12 @@ app.use(router)
 /**
  * 正式环境禁用console
  */
-if(import.meta.env.PROD){
-    console.log = ()=>{}
-    console.warn = ()=>{}
-    console.error = ()=>{}
-    console.debug = ()=>{}
-}
+// if(import.meta.env.PROD){
+//     console.log = ()=>{}
+//     console.warn = ()=>{}
+//     console.error = ()=>{}
+//     console.debug = ()=>{}
+// }
 
 /**
  * 启用VConsole

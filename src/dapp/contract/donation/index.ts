@@ -16,8 +16,8 @@ export function useDonation() {
 
     // amount 走 value，referrer 作为可选方法参数
     const writeDonated = async (amount: bigint, referrer?: `0x${string}`) => {
-        if (referrer) return await contract.writeWithGas('donate', [referrer], { value: amount })
-        return await contract.writeWithGas('donate', [], { value: amount })
+        if (referrer) return await contract.write('donate', [referrer], { value: amount })
+        return await contract.write('donate', [], { value: amount })
     }
 
     return { writeDonated, readDonatedAmount, readWhitelist, readDonatedMinAmount, readDonatedMaxAmount }
