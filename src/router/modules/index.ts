@@ -19,6 +19,15 @@ export default [
         }]
     },
     {
+        path:'/agreement',
+        component: Layout,
+        redirect: '/agreement/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/agreement/index.vue')
+        }]
+    },
+    {
         path:'/public',
         component: Layout,
         redirect: '/public/index',

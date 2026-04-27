@@ -1,6 +1,6 @@
 <template>
     <div class="head flex jb ac">
-        <img src="@/assets/img/logo.png" class="logo" @click="routerReplace('/home/index')">
+        <img src="@/assets/img/logo.png" class="logo" @click="routerReplace(homePath)">
         <div class="flex ac">
             <img src="@/assets/img/10.png" class="img52 mr20" @click="routerPush('/notices')">
             <img src="@/assets/common/lang.png" class="img52 mr20" @click="langRef?.open()">
@@ -20,6 +20,7 @@ import CusLang from '@/components/CusLang/index.vue';
 import { ref } from 'vue';
 import Menu from './Menu.vue';
 import { routerPush, routerReplace } from '@/router';
+import { homePath } from '@/dapp/config';
 
 const langRef = ref()
 </script>

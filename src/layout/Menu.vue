@@ -10,21 +10,25 @@
             <Invite></Invite>
             <div class="mt76">{{ $t('服务') }}</div>
             <div class="flex mt40 nav">
+                <div class="flex1 flex col ac" @click="goPath(homePath)">
+                    <img src="@/assets/menu/agreementHL.png" class="img56" v-if="$route.path==homePath">
+                    <img src="@/assets/menu/staking.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('协同协议') }}</div>
+                </div>
                 <div class="flex1 flex col ac" @click="goPath('/home/index')">
                     <img src="@/assets/menu/stakingHL.png" class="img56" v-if="$route.path=='/home/index'">
                     <img src="@/assets/menu/staking.png" class="img56" v-else>
-                    <div class="size26 mt20">{{ $t('质押') }}</div>
+                    <div class="size26 mt20">{{ $t('流动性协议') }}</div>
                 </div>
                 <div class="flex1 flex col ac" @click="goPath('/public/index')">
                     <img src="@/assets/menu/publicHL.png" class="img56" v-if="$route.path=='/public/index'">
                     <img src="@/assets/menu/public.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('公共联盟') }}</div>
                 </div>
-                <div class="flex1 flex col ac" @click="openLink('http://bubc2c.legend.rocks')">
-                    <!-- <img src="@/assets/menu/exchangeHL.png" class="img56" v-if="$route.path=='/exchange/index'"> -->
+                <!-- <div class="flex1 flex col ac" @click="openLink('http://bubc2c.legend.rocks')">
                     <img src="@/assets/menu/exchange.png" class="img56">
                     <div class="size26 mt20">{{ $t('C2C交易') }}</div>
-                </div>
+                </div> -->
             </div>
             <div class="flex mt40 nav">
                 <div class="flex1 flex col ac" @click="goPath('/node/index')">
@@ -87,6 +91,7 @@ import Invite from '@/views/home/Invite.vue';
 import { openLink } from '@/utils';
 import { apiGet } from '@/utils/request';
 import { message } from '@/utils/message';
+import { homePath } from '@/dapp/config';
 
 const useStore = useAppStore()
 const { lang } = storeToRefs(useStore)
