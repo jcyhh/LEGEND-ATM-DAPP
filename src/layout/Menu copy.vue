@@ -10,6 +10,11 @@
             <Invite></Invite>
             <div class="mt76">{{ $t('服务') }}</div>
             <div class="flex mt40 nav">
+                <div class="flex1 flex col ac" @click="goPath(homePath)">
+                    <img src="@/assets/menu/agreementHL.png" class="img56" v-if="$route.path==homePath">
+                    <img src="@/assets/menu/agreement.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('协同协议') }}</div>
+                </div>
                 <div class="flex1 flex col ac" @click="goPath('/home/index')">
                     <img src="@/assets/menu/stakingHL.png" class="img56" v-if="$route.path=='/home/index'">
                     <img src="@/assets/menu/staking.png" class="img56" v-else>
@@ -20,13 +25,17 @@
                     <img src="@/assets/menu/public.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('公共联盟') }}</div>
                 </div>
+                <!-- <div class="flex1 flex col ac" @click="openLink('http://bubc2c.legend.rocks')">
+                    <img src="@/assets/menu/exchange.png" class="img56">
+                    <div class="size26 mt20">{{ $t('C2C交易') }}</div>
+                </div> -->
+            </div>
+            <div class="flex mt40 nav">
                 <div class="flex1 flex col ac" @click="goPath('/node/index')">
                     <img src="@/assets/menu/nodeHL.png" class="img56" v-if="$route.path=='/node/index'">
                     <img src="@/assets/menu/node.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('节点') }}</div>
                 </div>
-            </div>
-            <div class="flex mt40 nav">
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/reportHL.png" class="img56" v-if="$route.path=='/report/index'">
                     <img src="@/assets/menu/report.png" class="img56" v-else>
@@ -36,6 +45,18 @@
                     <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/door'">
                     <img src="@/assets/menu/ball.png" class="img56" v-else>
                     <div class="size26 mt20">{{ $t('点球大战') }}</div>
+                </div>
+            </div>
+            <div class="flex mt40 nav">
+                <div class="flex1 flex col ac" @click="goPath('/rank/index')">
+                    <img src="@/assets/menu/rankHL.png" class="img56" v-if="$route.path=='/rank/index'">
+                    <img src="@/assets/menu/rank.png" class="img56" v-else>
+                    <div class="size26 mt20">{{ $t('龙虎榜') }}</div>
+                </div>
+                <div class="flex1 flex col ac" @click="goPath('/weight/index')">
+                    <img src="@/assets/menu/weightHL.png" class="img56" v-if="$route.path=='/weight/index'">
+                    <img src="@/assets/menu/weight.png" class="img56" v-else>
+                    <div class="size26 mt20">XO {{ $t('权重') }}</div>
                 </div>
                 <div class="flex1"></div>
             </div>

@@ -149,5 +149,6 @@
     "当前网体地址":"Current network address",
     "请输入新地址":"Please enter a new address",
     "更换成功":"Changed successfully",
-    "单笔最低":"Minimum per transaction"
+    "单笔最低":"Minimum per transaction",
+    "同步关系":"Sync Relationship"
 }

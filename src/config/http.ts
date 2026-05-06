@@ -11,6 +11,7 @@ export const uploadTimeOut: number = 60000 // 上传请求超时时间，毫秒
 export const timeOut: number = 10000 // 请求超时时间，毫秒
 
 export type Api =
+| '/api/auth/is_parent'
 | '/api/index'   // 配置
 | '/api/auth/login'
 | '/api/config'

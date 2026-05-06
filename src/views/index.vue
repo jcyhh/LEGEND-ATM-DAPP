@@ -9,6 +9,8 @@
         <van-loading></van-loading>
     </div>
     <div class="size28 mt30 white tips animate__animated animate__fadeInUp" v-if="providerStatus==2">{{ $t('请安装 MateMask !') }}</div>
+
+    <Bind v-model:show="show"></Bind>
 </template>
 
 <script setup lang="ts">
@@ -18,15 +20,18 @@ import { useDappStore } from '@/dapp/store';
 import { routerReplace } from '@/router';
 import { apiPost } from '@/utils/request';
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Bg from '@/components/Bg.vue';
+import Bind from './Bind.vue';
 
 const { params } = useRoute()
 if(params?.ref)setRef(params?.ref as any)
 
 const dappStore = useDappStore()
 const { providerStatus, walletAddress } = storeToRefs(dappStore)
+
+const show = ref(false)
 
 // 登录
 const loginIn = async () => {
@@ -41,7 +46,17 @@ const loginIn = async () => {
     })
 }
 
-watch(providerStatus, status => status==1 && setTimeout(() => getToken() ? routerReplace(homePath) : loginIn(), 1200), {immediate: true})
+watch(providerStatus, status => {
+    if(status != 1)return;
+    setTimeout(async () => {
+        const res:any = await apiPost('/api/auth/is_parent',{address:walletAddress.value})
+        if(res.is_parent==1){
+            getToken() ? routerReplace(homePath) : loginIn()
+        }else{
+            show.value = true
+        }
+    }, 1200);
+}, { immediate: true })
 </script>
 
 <style lang="scss" scoped>

@@ -70,6 +70,9 @@ const loadBalance = async () => {
 // 是否绑定上级
 const isBindReferral = ref(true)
 const loadRefAddress = async () => {
+    isBindReferral.value = true
+    return;
+    
     isBindReferral.value = await readIsBindReferrer()
     // 已绑定
     if(isBindReferral.value)return console.log('用户已绑定上级');

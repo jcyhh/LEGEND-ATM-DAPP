@@ -2,7 +2,7 @@ import { parseEther, parseGwei } from 'viem'
 
 export const loginPath = '/' // 登录页面
 
-export const homePath = '/agreement/index' // 首页
+export const homePath = '/home/index' // 首页
 
 export const approveAmount: string = '115792089237316195423570985008687907853269984665640564039457584007913129639935' // 授权额度
 
