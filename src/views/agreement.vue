@@ -128,6 +128,14 @@ loadNoticePop()
         line-height: 60px;
     }
 }
+.noticecontent{
+    max-height: 60vh;
+    width: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
 .card{
     border: 2px solid #FFFFFF33;
     background: linear-gradient(#0B3F73, #152535);
