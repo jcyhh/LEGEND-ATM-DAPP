@@ -65,3 +65,26 @@
         font-weight: 600;
     }
 }
+
+.mainBtn{
+    background: linear-gradient(#50D6FC, #1989F5);
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.mainCard{
+    border: 2px solid #FFFFFF33;
+    background: linear-gradient(#0B3F73, #152535);
+    padding: 40px 30px;
+    border-radius: 20px;
+    .cell{
+        background-color: #FFFFFF14;
+        border: 1px solid #FFFFFF33;
+        padding: 24px 30px;
+        border-radius: 20px;
+    }
+}

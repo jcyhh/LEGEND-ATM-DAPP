@@ -24,7 +24,7 @@ export default [
         redirect: '/agreement/index',
         children:[{
             path:'index',
-            component: () => import('@/views/agreement/index.vue')
+            component: () => import('@/views/agreement.vue')
         }]
     },
     {
@@ -43,6 +43,24 @@ export default [
         children:[{
             path:'index',
             component: () => import('@/views/node.vue')
+        }]
+    },
+    {
+        path:'/rank',
+        component: Layout,
+        redirect: '/rank/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/rank.vue')
+        }]
+    },
+    {
+        path:'/weight',
+        component: Layout,
+        redirect: '/weight/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/weight.vue')
         }]
     },
     {
