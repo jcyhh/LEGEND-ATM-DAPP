@@ -1,11 +1,13 @@
 <template>
-    <div class="flex ac size28 mb40">
-        <div class="flex ac mr20 line1" :class="current==0?'act':'def'" @click="current=0">{{ $t('列队记录') }}</div>
-        <div class="flex ac mr20 line1" :class="current==1?'act':'def'" @click="current=1">{{ $t('协议参与记录') }}</div>
-        <div class="flex ac line1" :class="current==2?'act':'def'" @click="current=2">{{ $t('结算记录') }}</div>
+    <div class="flex ac size28 mb40 tabs">
+        <div class="flex ac mr20 flex0" :class="current==0?'act':'def'" @click="current=0">{{ $t('排队中') }}</div>
+        <div class="flex ac mr20 flex0" :class="current==1?'act':'def'" @click="current=1">{{ $t('列队记录') }}</div>
+        <div class="flex ac mr20 flex0" :class="current==2?'act':'def'" @click="current=2">{{ $t('协议参与记录') }}</div>
+        <div class="flex ac flex0" :class="current==3?'act':'def'" @click="current=3">{{ $t('结算记录') }}</div>
     </div>
     <Queue v-if="current==0"></Queue>
-    <InvesmentList v-else-if="current==1"></InvesmentList>
+    <Donation v-else-if="current==1"></Donation>
+    <InvesmentList v-else-if="current==2"></InvesmentList>
     <UnstakingList v-else></UnstakingList>
 </template>
 
@@ -14,6 +16,7 @@ import { useStaking } from '@/dapp/contract/staking';
 import InvesmentList from './InvestmentList.vue';
 import UnstakingList from './UnstakingList.vue';
 import Queue from './Queue.vue';
+import Donation from './Donation.vue';
 import { useDappStore } from '@/dapp/store';
 import { useUserStore } from '@/store';
 import { apiGet } from '@/utils/request';
@@ -87,6 +90,12 @@ onUnmounted(()=>{
 </script>
 
 <style lang="scss" scoped>
+.tabs{
+    overflow-x: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
 .act{
     height: 68px;
     line-height: 68px;

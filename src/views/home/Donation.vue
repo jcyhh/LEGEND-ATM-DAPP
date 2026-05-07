@@ -1,16 +1,19 @@
 <template>
     <div class="card mb24" v-for="(item,index) in list" :key="index">
-        <div class="flex jb">
-            <div>
-                <div class="mb12 size24 opc6">{{ $t('协议结算值') }}</div>
-                <div>
-                    <span class="size44 mr10" v-init="item.amount"></span>
-                    <span class="size30">USDT</span>
-                </div>
+        <div class="flex jb ac">
+            <div class="flex ac">
+                <!-- <div class="size24 bold main mr10">#{{ index + 1 }}</div> -->
+                <div class="size24 opc6">{{ $t('协议参与额度') }}</div>
             </div>
-            <!-- <div class="btn flex jc ac size26" @click="cancelRef?.open(index)">{{ $t('取消排队') }}</div> -->
+            <!-- <div class="size24 opc6">{{ $t('前方排队人数') }}</div> -->
         </div>
-        <!-- 序列号，前方排队，额度，时间 -->
+        <div class="flex jb ac mt12">
+            <div>
+                <span class="size44 mr10" v-init="item.amount"></span>
+                <span class="size30">BNB</span>
+            </div>
+            <!-- <div class="size30 main bold">3</div> -->
+        </div>
         <div class="flex jb ac mt30">
             <div class="size24 opc5">{{ $t('参与时间') }} {{ item.created_at }}</div>
         </div>
@@ -28,8 +31,8 @@ import { apiGet } from '@/utils/request';
 
 const list = ref<any[]>([])
 const loadList = () => {
-    apiGet('/api/index/queue_list').then((res:any)=>{
-        list.value = res.queues
+    apiGet('/api/index/donate_list').then((res:any)=>{
+        list.value = res.list
     })
 }
 

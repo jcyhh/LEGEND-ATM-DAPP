@@ -150,5 +150,6 @@
     "请输入新地址":"Veuillez saisir une nouvelle adresse",
     "更换成功":"Modification reussie",
     "单笔最低":"Minimum par transaction",
-    "同步关系":"Synchroniser la relation"
+    "同步关系":"Synchroniser la relation",
+    "排队中":"En file d'attente"
 }

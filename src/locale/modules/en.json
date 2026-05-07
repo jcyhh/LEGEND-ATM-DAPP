@@ -150,5 +150,6 @@
     "请输入新地址":"Please enter a new address",
     "更换成功":"Changed successfully",
     "单笔最低":"Minimum per transaction",
-    "同步关系":"Sync Relationship"
+    "同步关系":"Sync Relationship",
+    "排队中":"In Queue"
 }
