@@ -83,7 +83,6 @@ import Invite from '@/views/home/Invite.vue';
 import { openLink } from '@/utils';
 import { apiGet } from '@/utils/request';
 import { message } from '@/utils/message';
-import { homePath } from '@/dapp/config';
 
 const useStore = useAppStore()
 const { lang } = storeToRefs(useStore)

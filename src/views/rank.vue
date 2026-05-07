@@ -41,7 +41,7 @@
                     cell2: index==1,
                     cell3: index==2,
                     cell4: index>2
-                }" v-for="(item,index) in 10" :key="index">
+                }" v-for="(_item,index) in 10" :key="index">
                     <div class="flex ac">
                         <img src="@/assets/img/57.png" class="img40 mr10" v-if="index==0">
                         <img src="@/assets/img/58.png" class="img40 mr10" v-else-if="index==1">

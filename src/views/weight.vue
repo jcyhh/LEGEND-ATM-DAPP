@@ -45,7 +45,7 @@
         <div class="size30 mt40">记录明细</div>
 
         <div class="list mt30">
-            <div class="cell" v-for="(item,index) in 10" :key="index">
+            <div class="cell" v-for="(_item,index) in 10" :key="index">
                 <div class="flex jb ac size28">
                     <div>备注</div>
                     <div class="bold6 greenish">

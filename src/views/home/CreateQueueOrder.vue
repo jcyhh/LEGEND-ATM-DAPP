@@ -2,11 +2,11 @@
     <van-popup v-model:show="show" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
         <div class="pop">
             <div class="size32 font2 tc">{{ $t('参与额度') }}</div>
-            <div class="size24 mt50" v-if="!isBindReferral">
+            <!-- <div class="size24 mt50" v-if="!isBindReferral">
                 <div class="inp flex">
                     <input type="text" v-model="refAddress" :placeholder="$t('请输入邀请人地址')" class="flex1 size26">
                 </div>
-            </div>
+            </div> -->
             <div class="inp flex mt30">
                 <input type="number" v-model="inputAmount" :placeholder="`${$t('单笔最低')} ${minStakeAmount} BNB`" class="flex1 size26">
             </div>
@@ -39,7 +39,7 @@
 import { computed, ref } from 'vue';
 import { formatEther, parseEther } from 'viem';
 import { getBnbBalance } from '@/dapp';
-import { getRef } from '@/dapp/config';
+// import { getRef } from '@/dapp/config';
 import { useReferral } from '@/dapp/contract/referral';
 import bus from '@/bus'
 import { useDonation } from '@/dapp/contract/donation';
@@ -70,22 +70,22 @@ const loadBalance = async () => {
 // 是否绑定上级
 const isBindReferral = ref(true)
 const loadRefAddress = async () => {
-    isBindReferral.value = true
-    return;
+
+    // 查询是否绑定上级
+    isBindReferral.value = await readIsBindReferrer();
     
-    isBindReferral.value = await readIsBindReferrer()
     // 已绑定
-    if(isBindReferral.value)return console.log('用户已绑定上级');
+    // if(isBindReferral.value)return;
+
     // 未绑定 - 赋值绑定地址为：邀请地址 || 根地址
-    const storageRef = getRef()
-    if(storageRef){
-        refAddress.value = storageRef
-        console.log('有邀请码：', storageRef);
-    }else{
-        // refAddress.value = await readRootAddress()
-        refAddress.value = ''
-        console.log('无邀请码取根地址：', refAddress.value);
-    }
+    // const storageRef = getRef()
+    // if(storageRef){
+    //     refAddress.value = storageRef
+    //     console.log('有邀请码：', storageRef);
+    // }else{
+    //     refAddress.value = ''
+    //     console.log('无邀请码取根地址：', refAddress.value);
+    // }
 }
 
 /**
@@ -127,17 +127,21 @@ const loadMaxStakeAmount = async () => {
     console.log('最大数量：', maxStakeAmount.value);
 }
 
+// 按钮是否点的动
 const isEnable = computed(()=>{
-    if(!isBindReferral.value && !refAddress.value)return false
-    if(!inputAmount.value)return false
-    if(isWhite.value){
-        return true
-    }else{
-        // 剩余数量
-        const surAmount = computedSub(maxStakeAmount.value, donatedAmount.value)
-        if(Number(inputAmount.value) < minStakeAmount.value || Number(inputAmount.value) > surAmount)return false
-        else return true
-    }
+    // 未绑定上级 && 未输入绑定地址
+    // if(!isBindReferral.value && !refAddress.value)return false
+
+    // 未输入数量
+    if(!inputAmount.value)return false;
+
+    // 白名单
+    if(isWhite.value) return true;
+        
+    // 最小数量 ～ 剩余数量
+    const surAmount = computedSub(maxStakeAmount.value, donatedAmount.value)
+    if(Number(inputAmount.value) < minStakeAmount.value || Number(inputAmount.value) > surAmount)return false
+    else return true
 })
 
 // 打开弹窗
@@ -165,11 +169,12 @@ const open = () => {
 const submit = async () => {
 
     const amount = parseEther(`${inputAmount.value}`)
-
-    console.log(amount, refAddress.value);
     
-    if(isBindReferral.value)await writeDonated(amount)
-    else await writeDonated(amount, refAddress.value)
+    // if(isBindReferral.value)await writeDonated(amount)
+    // else await writeDonated(amount, refAddress.value)
+
+    // 固定调：要传value的合约
+    await writeDonated(amount, import.meta.env.VITE_DONATION_REFERRAL);
     
     // 关闭下单弹窗
     show.value = false

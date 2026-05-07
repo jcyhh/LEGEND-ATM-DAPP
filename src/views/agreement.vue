@@ -34,7 +34,7 @@
         </div>
 
         <div class="size30 mt40 bold6 mb30">订单列表</div>
-        <div class="box mb16" v-for="(item,index) in 3" :key="index">
+        <div class="box mb16" v-for="(_item,index) in 3" :key="index">
             <div class="flex jb ac">
                 <div>
                     <div class="size28">
