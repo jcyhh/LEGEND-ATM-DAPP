@@ -24,12 +24,12 @@
         <div class="gap200"></div>
         <div class="gap76"></div>
 
-        <div class="card">
+        <div class="card flex col jb">
             <div class="flex ac">
-                <img src="@/assets/img/1.png" class="img60 mr10">
+                <img src="@/assets/img/1.png" class="img60 mr10 icon">
                 <div class="size32 bold">{{ $t('添加ATM池') }}</div>
             </div>
-            <div class="flex jb ac mt30">
+            <div class="flex jb ac">
                 <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
                     <span v-init="atm_pool"></span>
@@ -38,29 +38,29 @@
             </div>
         </div>
 
-        <div class="card mt30">
+        <div class="card mt30 flex col jb">
             <div class="flex ac">
-                <img src="@/assets/img/bub.jpeg" class="img60 mr10 avatar">
-                <div class="size32 bold">BUB {{ $t('留存池') }}</div>
+                <img src="@/assets/img/bub.jpeg" class="img60 mr10 icon">
+                <div class="size32 bold">DAO {{ $t('生态池') }}</div>
             </div>
-            <div class="flex jb ac mt40">
+            <div class="flex jb ac">
                 <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
-                    <span v-init="atm_burn"></span>
+                    <span v-init="dao_eco_pool"></span>
                     <span class="ml10">TOKEN</span>
                 </div>
             </div>
         </div>
 
-        <div class="card mt30">
+        <div class="card mt30 flex col jb">
             <div class="flex ac">
-                <img src="@/assets/img/bub.jpeg" class="img60 mr10 avatar">
-                <div class="size32 bold">BUB {{ $t('销毁池') }}</div>
+                <img src="@/assets/xo.png" class="img60 mr10 icon">
+                <div class="size32 bold">XO {{ $t('算力池') }}</div>
             </div>
-            <div class="flex jb ac mt40">
+            <div class="flex jb ac">
                 <div class="size28 opc5">{{ $t('池子总额') }}</div>
                 <div class="size40 bold">
-                    <span v-init="bub_burn"></span>
+                    <span v-init="xo_power_pool"></span>
                     <span class="ml10">TOKEN</span>
                 </div>
             </div>
@@ -76,13 +76,13 @@ import { routerGo } from '@/router';
 import { apiGet } from '@/utils/request';
 import { ref } from 'vue';
 
-const atm_burn = ref()
+const dao_eco_pool = ref()
 const atm_pool = ref()
-const bub_burn = ref()
+const xo_power_pool = ref()
 apiGet('/api/football/pools').then((res:any)=>{
-    atm_burn.value = res.atm_burn
+    dao_eco_pool.value = res.dao_eco_pool
     atm_pool.value = res.atm_pool
-    bub_burn.value = res.bub_burn
+    xo_power_pool.value = res.xo_power_pool
 })
 </script>
 
@@ -147,6 +147,10 @@ apiGet('/api/football/pools').then((res:any)=>{
     height: 190px;
     background-image: url("@/assets/img/31.png");
     background-size: 100% 100%;
-    padding: 20px 38px 0 38px;
+    padding: 30px 38px;
+    .icon{
+        border-radius: 50%;
+        border: 2px solid #FFFFFF;
+    }
 }
 </style>

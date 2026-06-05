@@ -66,11 +66,10 @@ const parseGameType = (value: unknown): 1 | 2 | 3 => {
 
 const currentType = computed(() => parseGameType(route.query.type))
 const isWinningResult = (value: number) => {
-    if (currentType.value === 3) return value === 1
-    return value === 2
+    return value === 1
 }
 const isWin = computed(() => isWinningResult(result.value))
-const rewardText = computed(() => currentType.value === 3 ? t('恭喜破门！获得1.2倍BUB奖励') : t('恭喜破门！获得1.5倍BUB奖励'))
+const rewardText = computed(() => currentType.value === 3 ? t('恭喜晋级！一球成名！') : t('未晋级！但是你很棒！加油！'))
 const resultImage = computed(() => (isWin.value ? winImage : failImage))
 const winnerPlayers = computed(() => {
     return players.value.filter(item => isWinningResult(Number(item?.result)))

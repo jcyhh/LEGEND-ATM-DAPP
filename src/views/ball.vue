@@ -17,14 +17,14 @@
             </div>
         </div>
     </div>
-    <div class="recordMenu br" @click="routerPush('/record', { type: currentType })">
+    <div class="awardMenu br" @click="routerPush('/record', { type: currentType })">
         <div>{{ $t('点球') }}</div>
         <div>{{ $t('记录') }}</div>
     </div>
-    <div class="awardMenu br" @click="routerPush('/award')">
+    <!-- <div class="awardMenu br" @click="routerPush('/award')">
         <div>{{ $t('参与奖') }}</div>
         <div>{{ $t('记录') }}</div>
-    </div>
+    </div> -->
     <div class="countdownBox flex jc ac" v-if="showCountdown">
         <div class="countdownText">{{ displayGameTimer }}</div>
     </div>
@@ -253,8 +253,7 @@ const displayGameTimer = computed(() => {
     return value + 1
 })
 const isWinningResult = (result: number) => {
-    if (currentType.value === 3) return result === 1
-    return result === 2
+    return result === 1
 }
 
 const playSettlementAni = async (targetGameId: number) => {

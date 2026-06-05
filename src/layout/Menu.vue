@@ -9,7 +9,7 @@
             </div>
             <Invite></Invite>
             <div class="mt76">{{ $t('服务') }}</div>
-            <div class="flex mt40 nav">
+            <div class="flex mt40 nav tc">
                 <div class="flex1 flex col ac" @click="goPath('/home/index')">
                     <img src="@/assets/menu/stakingHL.png" class="img56" v-if="$route.path=='/home/index'">
                     <img src="@/assets/menu/staking.png" class="img56" v-else>
@@ -26,7 +26,7 @@
                     <div class="size26 mt20">{{ $t('节点') }}</div>
                 </div>
             </div>
-            <div class="flex mt40 nav">
+            <div class="flex mt40 nav tc">
                 <div class="flex1 flex col ac">
                     <img src="@/assets/menu/reportHL.png" class="img56" v-if="$route.path=='/report/index'">
                     <img src="@/assets/menu/report.png" class="img56" v-else>
@@ -35,7 +35,7 @@
                 <div class="flex1 flex col ac" @click="goBall">
                     <img src="@/assets/menu/ballHL.png" class="img56" v-if="$route.path=='/door'">
                     <img src="@/assets/menu/ball.png" class="img56" v-else>
-                    <div class="size26 mt20">{{ $t('点球大战') }}</div>
+                    <div class="size26 mt20 tc">{{ $t('点球大战') }}</div>
                 </div>
                 <div class="flex1"></div>
             </div>

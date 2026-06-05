@@ -32,19 +32,19 @@
     <div class="pl30 pr30 mt80 rel">
         <div class="card animate__animated animate__backInLeft" @click="goGame">
             <div class="title flex jc ac size28 bold">1U {{ $t('球场') }}</div>
-            <div class="size24 bold tc black">{{ $t('100人玩/3人赢') }}</div>
+            <div class="size24 bold tc black">{{ $t('100人玩/100人晋级') }}</div>
             <img src="@/assets/img/46.png" class="pic46 mt20">
         </div>
 
         <div class="card mt50 animate__animated animate__backInRight delay1" @click="routerPush('/game', { type: 2 })">
             <div class="title flex jc ac size28 bold">10U {{ $t('球场') }}</div>
-            <div class="size24 bold tc black">{{ $t('10人玩/1人赢') }}</div>
+            <div class="size24 bold tc black">{{ $t('10人玩/1人晋级') }}</div>
             <img src="@/assets/img/46.png" class="pic46 mt20">
         </div>
 
         <div class="card mt50 animate__animated animate__backInLeft delay2" @click="routerPush('/game', { type: 1 })">
             <div class="title flex jc ac size28 bold">100U {{ $t('球场') }}</div>
-            <div class="size24 bold tc black">{{ $t('10人玩/1人赢') }}</div>
+            <div class="size24 bold tc black">{{ $t('10人玩/1人晋级') }}</div>
             <img src="@/assets/img/46.png" class="pic46 mt20">
         </div>
     </div>

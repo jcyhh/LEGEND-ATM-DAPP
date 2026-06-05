@@ -22,8 +22,8 @@
                             <div class="size28 bold mr20">NO.{{ item.period }}</div>
                             <div class="size24 opc5">{{ item.end_time }}</div>
                         </div>
-                        <div class="size24 success" v-if="isWin(item)">{{ $t('挑战成功') }}</div>
-                        <div class="size24 fail" v-else>{{ $t('挑战失败') }}</div>
+                        <div class="size24 success tr" v-if="isWin(item)">{{ $t('恭喜晋级') }}</div>
+                        <div class="size24 fail tr" v-else>{{ $t('未晋级') }}</div>
                     </div>
                     <div class="flex ac mt70">
                         <div class="flex1">
@@ -36,10 +36,16 @@
                         </div>
                     </div>
                     <div class="flex ac mt30">
-                        <div class="flex1">
+                        <div class="flex1" v-if="isWin(item)">
+                            <span class="size24 opc5 mr10">{{ $t('获得') }}</span>
+                            <span class="size28 bold" v-if="item.type==1">{{ $t('3倍') }}</span>
+                            <span class="size28 bold" v-else-if="item.type==2">{{ $t('2倍') }}</span>
+                            <span class="size28 bold" v-else>{{ $t('1倍') }}</span>
+                            <span class="size28 bold ml5">{{ $t('XO 权重') }}</span>
+                        </div>
+                        <div class="flex1" v-else>
                             <span class="size24 opc5 mr10">{{ $t('获得钻石') }}</span>
-                            <span class="size28 bold" v-if="isWin(item)">{{ rewardText }}</span>
-                            <span class="size28 bold" v-else v-init="item.received"></span>
+                            <span class="size28 bold" v-init="item.received"></span>
                         </div>
                     </div>
                     <div class="flex jc ac mt40" v-if="currentType === 3">
@@ -82,11 +88,9 @@ const parseGameType = (value: unknown): 1 | 2 | 3 => {
     return 2
 }
 const currentType = computed(() => parseGameType(route.query.type))
-const rewardText = computed(() => currentType.value === 3 ? '获得1.2倍钻石BUB' : t('获得1.5倍钻石BUB'))
 const isWin = (item: any) => {
     const result = Number(item?.result)
-    if (currentType.value === 3) return result === 1
-    return result === 2
+    return result === 1
 }
 const requestParams = computed(() => ({
     type: currentType.value
